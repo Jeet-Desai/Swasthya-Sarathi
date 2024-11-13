@@ -1,9 +1,9 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 import DoctorRequestPage from './pages/DoctorRequestPage/DoctorRequestPage';
 import ManagePage from './pages/ManagePage/ManagePage';
+import BottomBar from './pages/Patient_Navbar_and_bottombar/BottomBar';
+import Navbar from './pages/Patient_Navbar_and_bottombar/Navbar';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -12,7 +12,6 @@ function App() {
     <>
     {/* <DoctorRequestPage/> */}
     <ManagePage/>
-    <h1>HEllo</h1>
     </>
   )
 }
