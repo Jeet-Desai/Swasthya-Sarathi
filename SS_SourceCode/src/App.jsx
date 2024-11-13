@@ -12,6 +12,7 @@ function App() {
     <>
     {/* <DoctorRequestPage/> */}
     <ManagePage/>
+    <h1>HEllo</h1>
     </>
   )
 }
