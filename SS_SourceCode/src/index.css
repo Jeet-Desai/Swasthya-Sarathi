@@ -1,3 +1,24 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+/* Resetting margin and padding */
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  font-family: 'Roboto', sans-serif; /* Your preferred font */
+  background-color: #f1f1f1; /* You can set the background color here */
+}
+
+#root {
+  height: 100%;
+  width: 100%;
+}

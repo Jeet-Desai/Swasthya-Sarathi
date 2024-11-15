@@ -6,6 +6,7 @@ import BottomBar from './pages/Patient_Navbar_and_bottombar/BottomBar';
 import Navbar from './pages/Patient_Navbar_and_bottombar/Navbar';
 import AdminLogin from './pages/AdminLoginPage/AdminLogin';
 import AddNewDoctor from './pages/DoctorRegistarionPage/AddNewDoctor';
+import AddMedicalRecord from './pages/AddMedicalRecord/AddMedicalRecord';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -15,7 +16,8 @@ function App() {
     {/* <DoctorRequestPage/> */}
     {/* <ManagePage/> */}
     {/* <AdminLogin/> */}
-    <AddNewDoctor/>
+    {/* <AddNewDoctor/> */}
+    <AddMedicalRecord/>
     </>
   )
 }
