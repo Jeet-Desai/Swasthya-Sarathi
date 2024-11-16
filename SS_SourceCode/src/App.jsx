@@ -15,13 +15,13 @@ import HospitalInfoPage from './pages/HospitalInfopage/HospitalInfoPage';
 import DoctorDashboard from './pages/DoctorDashboard/DoctorDashboard';
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
     {/* <DoctorRequestPage/> */}
     {/* <ManagePage/> */}
     {/* <AdminLogin/> */}
+    {/* <AddNewDoctor/> */}
+    {/* <AddMedicalRecord/> */}
     {/* <AddNewDoctor/> */}
     {/* <AddMedicalRecord/> */}
     {/* <BrowserRouter> */}
