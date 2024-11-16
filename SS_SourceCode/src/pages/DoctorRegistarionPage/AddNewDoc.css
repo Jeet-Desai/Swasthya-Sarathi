@@ -1,136 +1,101 @@
-
+/* Global reset for margin and padding */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Arial', sans-serif;
+}
+
+/* Page layout for Add New Doctor page */
+.add-new-doctor-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #05cdec;
+  min-height: 100vh;
+  padding: 20px; /* Add some padding */
+}
+
+/* Container for the Add New Doctor form */
+.add-new-doctor-container {
+  background-color: rgba(255, 255, 255, 0.9);
+  width: 100%;
+  max-width: 480px;
+  padding: 2.5rem;
+  border-radius: 20px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  text-align: center;
+  align-items: center;
+}
+
+/* Title of the form */
+.add-new-doctor-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+/* Form input fields styling */
+.add-new-doctor-form-wrapper input,
+.add-new-doctor-form-wrapper select {
+  width: 100%;
+  padding: 0.8rem;
+  border-radius: 10px;
+  border: 1px solid #b0bec5;
+  margin-bottom: 1.2rem;
+  font-size: 1rem;
+  background-color: #eceff1;
+  transition: all 0.3s ease;
+}
+
+.add-new-doctor-form-wrapper input:focus,
+.add-new-doctor-form-wrapper select:focus {
+  border-color: #3d8af7;
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(61, 138, 247, 0.2);
+  outline: none;
+}
+
+/* Button to register the new doctor */
+.add-new-doctor-register-btn {
+  width: 100%;
+  padding: 0.9rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #ffffff;
+  background: linear-gradient(135deg, #26c6da, #00acc1);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 150, 136, 0.3);
+}
+
+.add-new-doctor-register-btn:hover {
+  background: linear-gradient(135deg, #00acc1, #00838f);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 15px rgba(0, 150, 136, 0.4);
+}
+
+/* Responsive Design */
+@media (max-width: 767px) {
+  .add-new-doctor-container {
+    width: 80vw; /* Adjust container width for small screens */
   }
-  
-  body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #05cdec;
+}
+
+@media (max-width: 480px) {
+  .add-new-doctor-title {
+    font-size: 1.5rem; /* Reduce title size */
   }
-  
-  .container {
-    text-align: center;
-    width: 400px;
-    padding: 2.5rem;
-    background-color: rgba(255, 255, 255, 0.9);
-    border-radius: 15px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+@media (max-width: 375px) {
+  .add-new-doctor-title {
+    font-size: 1.4rem; /* Further reduce title size */
   }
-  
-  .logo img {
-    width: 80px;
-    margin-bottom: 1rem;
-  }
-  
-  .title {
-    font-size: 1.8rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-    color: #333;
-  }
-  
-  .subtitle {
-    font-size: 0.9rem;
-    color: #888;
-    margin-bottom: 2rem;
-  }
-  
-  .input-group {
-    margin-bottom: 1.2rem;
-  }
-  
-  .input-group input {
-    width: 100%;
-    padding: 0.9rem;
-    border-radius: 10px;
-    border: 1px solid #b0c4de;
-    font-size: 1rem;
-    color: #555;
-    background-color: #f0faff;
-    transition: all 0.3s ease;
-  }
-  
-  .input-group input:focus {
-    border-color: #3d8af7;
-    background-color: #ffffff;
-    box-shadow: 0 4px 8px rgba(61, 138, 247, 0.2);
-    outline: none;
-  }
-  
-  .login-btn {
-    width: 100%;
-    padding: 0.9rem;
-    font-size: 1rem;
-    font-weight: 700;
-    color: #ffffff;
-    background: linear-gradient(135deg, #05a5d1, #0288c2);
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: transform 0.3s ease, background-color 0.3s ease;
-    box-shadow: 0 4px 10px rgba(0, 61, 247, 0.3);
-  }
-  
-  .login-btn:hover {
-    background: linear-gradient(135deg, #0288c2, #016aa7);
-    transform: translateY(-3px);
-    box-shadow: 0 8px 15px rgba(0, 61, 247, 0.4);
-  }
-  
-  /* Styles for the Add Doctor form container */
-  .container.add-doctor-form {
-    width: 480px;
-    padding: 2.5rem;
-    background: rgba(255, 255, 255, 0.9);
-    border-radius: 20px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
-  }
-  
-  /* Adjust logo size for Add Doctor form */
-  .container.add-doctor-form .logo {
-    width: 100px;
-    height: auto;
-    margin-bottom: 1.5rem;
-    filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.2));
-  }
-  
-  /* Widen input fields for Add Doctor form */
-  .add-doctor-form input,
-  .add-doctor-form select {
-    width: 100%;
-    padding: 0.8rem;
-    border-radius: 10px;
-    border: 1px solid #b0bec5;
-    margin-bottom: 1rem;
-    font-size: 1rem;
-    background-color: #eceff1;
-  }
-  
-  /* Styling for the register button */
-  .register-btn {
-    height: 100%;
-    width: 100%;
-    padding: 0.9rem;
-    font-size: 1rem;
-    font-weight: 600;
-    color: #ffffff;
-    background: linear-gradient(135deg, #26c6da, #00acc1);
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: transform 0.3s ease, background-color 0.3s ease;
-    box-shadow: 0 4px 10px rgba(0, 150, 136, 0.3);
-  }
-  
-  .register-btn:hover {
-    background: linear-gradient(135deg, #00acc1, #00838f);
-    transform: translateY(-3px);
-    box-shadow: 0 8px 15px rgba(0, 150, 136, 0.4);
-  }
-  
+}
