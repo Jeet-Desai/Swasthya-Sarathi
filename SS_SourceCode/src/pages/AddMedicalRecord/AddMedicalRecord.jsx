@@ -81,7 +81,7 @@ const AddMedicalRecord = () => {
     department: "",
     doctorId: "",
     diagnosis: "",
-    prescriptions: "",
+    prescriptions: ""
   });
 
   const [uploadedFiles, setUploadedFiles] = useState([]);
@@ -382,7 +382,7 @@ const AddMedicalRecord = () => {
                     <TextField
                       required
                       fullWidth
-                      name="presciptions"
+                      name="prescriptions"
                       label="Prescriptions"
                       variant="outlined"
                       multiline
@@ -395,8 +395,7 @@ const AddMedicalRecord = () => {
                     />
                   </Box>
                 </Grid2>
-              </Grid2>
-              <Button
+                <Button
                 variant="outlined"
                 //   onClick={(e) => e.preventDefault()}
                 type="submit"
@@ -410,7 +409,7 @@ const AddMedicalRecord = () => {
                   fontSize: "0.8rem", // Default font size
                   width: "30%",
                   marginLeft: "auto",
-                  marginTop: "7px",
+                  marginTop: "20px",
                   marginRight: "auto",
                   textTransform: "none",
                   "&:hover": {
@@ -430,6 +429,8 @@ const AddMedicalRecord = () => {
               >
                 Submit
               </Button>
+              </Grid2>
+              
             </form>
           </CardContent>
         </Card>

@@ -3,7 +3,7 @@ import HospitalInfoHeader from './HospitalInfoHeader';
 import HospitalInfoForm from './HospitalInfoForm';
 
 import axios from 'axios';
-import HospitalInfoFooter from './HospitalInfofooter';
+import HospitalInfoFooter from './HospitalInfoFooter';
 
 const HospitalInfoPage = () => {
   const [hospitalInfo, setHospitalInfo] = useState({

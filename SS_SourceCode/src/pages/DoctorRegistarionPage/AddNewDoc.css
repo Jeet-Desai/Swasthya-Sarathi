@@ -53,6 +53,54 @@ body {
 }
 
 .input-group input:focus {
+/* Page layout for Add New Doctor page */
+.add-new-doctor-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #05cdec;
+  min-height: 100vh;
+  padding: 20px; /* Add some padding */
+}
+
+/* Container for the Add New Doctor form */
+.add-new-doctor-container {
+  background-color: rgba(255, 255, 255, 0.9);
+  width: 100%;
+  max-width: 480px;
+  padding: 2.5rem;
+  border-radius: 20px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  text-align: center;
+  align-items: center;
+}
+
+/* Title of the form */
+.add-new-doctor-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+/* Form input fields styling */
+.add-new-doctor-form-wrapper input,
+.add-new-doctor-form-wrapper select {
+  width: 100%;
+  padding: 0.8rem;
+  border-radius: 10px;
+  border: 1px solid #b0bec5;
+  margin-bottom: 1.2rem;
+  font-size: 1rem;
+  background-color: #eceff1;
+  transition: all 0.3s ease;
+}
+
+.add-new-doctor-form-wrapper input:focus,
+.add-new-doctor-form-wrapper select:focus {
   border-color: #3d8af7;
   background-color: #ffffff;
   box-shadow: 0 4px 8px rgba(61, 138, 247, 0.2);
@@ -108,6 +156,11 @@ body {
   width: 100%;
   padding: 0.8rem;
   font-size: 0.95rem;
+/* Button to register the new doctor */
+.add-new-doctor-register-btn {
+  width: 100%;
+  padding: 0.9rem;
+  font-size: 1rem;
   font-weight: 600;
   color: #ffffff;
   background: linear-gradient(135deg, #26c6da, #00acc1);
@@ -119,6 +172,7 @@ body {
 }
 
 .register-btn:hover {
+.add-new-doctor-register-btn:hover {
   background: linear-gradient(135deg, #00acc1, #00838f);
   transform: translateY(-3px);
   box-shadow: 0 8px 15px rgba(0, 150, 136, 0.4);
@@ -177,5 +231,21 @@ body {
   .register-btn {
     font-size: 0.85rem;
     padding: 0.7rem;
+/* Responsive Design */
+@media (max-width: 767px) {
+  .add-new-doctor-container {
+    width: 80vw; /* Adjust container width for small screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .add-new-doctor-title {
+    font-size: 1.5rem; /* Reduce title size */
+  }
+}
+
+@media (max-width: 375px) {
+  .add-new-doctor-title {
+    font-size: 1.4rem; /* Further reduce title size */
   }
 }

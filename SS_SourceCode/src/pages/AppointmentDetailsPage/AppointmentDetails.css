@@ -1,0 +1,155 @@
+/* Namespace the styles with .appointment-details */
+.appointment-details * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Arial, sans-serif';
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.appointment-details body {
+  /* Body styling for centering */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  text-align: center;
+  margin: 0;
+  background-color: #05cdec;
+  padding: 20px;
+}
+
+/* Ensuring the container is centered properly */
+.appointment-details .container {
+  text-align: center;
+  width: 100%;
+  max-width: 500px;
+  padding: clamp(1rem, 5vw, 2.5rem);
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  margin-top: 5vh; /* Ensure a consistent margin-top on larger screens */
+}
+
+.appointment-details h1 {
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  color: #313131;
+  border-bottom: 3px solid #313131;
+  padding-bottom: 5px;
+  margin-bottom: 1.5rem;
+}
+
+/* styles for label */
+.appointment-details label {
+  font-size: clamp(0.875rem, 2vw, 1rem);
+  display: block;
+  width: 100%;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  text-align: left;
+  color: #555;
+  font-weight: bold;
+}
+
+.appointment-details input, .appointment-details textarea {
+  display: block;
+  width: 100%;
+  padding: clamp(6px, 2vw, 8px);
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  background-color: #eceff1;
+  color: #313131;
+  transition: all 0.3s ease;
+}
+
+.appointment-details textarea {
+  resize: none;
+  min-height: clamp(80px, 20vw, 100px);
+  max-height: 150px;
+}
+
+.appointment-details textarea:focus, .appointment-details input:focus {
+  border-color: #4206a3;
+  background-color: #ffffff;
+  color: #000;
+  box-shadow: 0 2px 4px rgba(66, 6, 163, 0.1);
+  outline: none;
+}
+
+/* styles for button */
+.appointment-details button {
+  padding: clamp(8px, 2vw, 10px) clamp(12px, 3vw, 15px);
+  border-radius: 6px;
+  margin: clamp(10px, 2vw, 15px);
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  background-color: #4206a3;
+  width: clamp(120px, 40%, 150px);
+  font-size: clamp(0.875rem, 2vw, 1rem);
+  transition: all 0.3s ease;
+}
+
+.appointment-details .btn-danger {
+  background-color: #d9534f;
+}
+
+.appointment-details .btn-danger:hover {
+  background-color: #c9302c;
+  transform: translateY(-2px);
+}
+
+.appointment-details .btn-success {
+  background-color: #5cb85c;
+}
+
+.appointment-details .btn-success:hover {
+  background-color: #4cae4c;
+  transform: translateY(-2px);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .appointment-details .container {
+    margin-top: 8vh; /* More margin for smaller screens */
+    padding: 1.5rem;
+  }
+  .appointment-details button {
+    width: 100%;
+    margin: 0.5rem 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .appointment-details h1 {
+    font-size: 1.25rem;
+  }
+  .appointment-details .container {
+    padding: 1rem;
+    margin-top: 5vh; /* Keep top margin consistent */
+  }
+  .appointment-details textarea {
+    min-height: 60px;
+  }
+}
+
+@media (max-height: 600px) {
+  .appointment-details body {
+    padding: 10px;
+  }
+  .appointment-details .container {
+    margin-top: 5vh;
+    padding: 1rem;
+  }
+}
+
+@media (hover: none) {
+  .appointment-details input, .appointment-details textarea {
+    font-size: 16px;
+  }
+  .appointment-details button {
+    padding: 12px 20px;
+  }
+}
