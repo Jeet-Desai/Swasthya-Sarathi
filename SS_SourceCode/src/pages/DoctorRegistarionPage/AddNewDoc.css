@@ -1,3 +1,4 @@
+/* Global reset for margin and padding */
 * {
   margin: 0;
   padding: 0;
@@ -5,54 +6,6 @@
   font-family: 'Arial', sans-serif;
 }
 
-body {
-  background-color: #05cdec;
-}
-
-.container {
-  text-align: center;
-  width: 90%;
-  max-width: 400px;
-  margin: 0 auto;
-  padding: 2rem;
-  border-radius: 15px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-}
-
-.logo img {
-  width: 70px;
-  margin-bottom: 1rem;
-}
-
-.title {
-  font-size: 1.6rem;
-  font-weight: 700;
-  margin-bottom: 0.5rem;
-  color: #333;
-}
-
-.subtitle {
-  font-size: 0.85rem;
-  color: #888;
-  margin-bottom: 1.5rem;
-}
-
-.input-group {
-  margin-bottom: 1rem;
-}
-
-.input-group input {
-  width: 100%;
-  padding: 0.8rem;
-  border-radius: 8px;
-  border: 1px solid #b0c4de;
-  font-size: 0.9rem;
-  color: #555;
-  background-color: #f0faff;
-  transition: all 0.3s ease;
-}
-
-.input-group input:focus {
 /* Page layout for Add New Doctor page */
 .add-new-doctor-page {
   display: flex;
@@ -107,55 +60,6 @@ body {
   outline: none;
 }
 
-.login-btn {
-  width: 100%;
-  padding: 0.8rem;
-  font-size: 0.95rem;
-  font-weight: 700;
-  color: #ffffff;
-  background: linear-gradient(135deg, #05a5d1, #0288c2);
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: transform 0.3s ease, background-color 0.3s ease;
-  box-shadow: 0 4px 10px rgba(0, 61, 247, 0.3);
-}
-
-.login-btn:hover {
-  background: linear-gradient(135deg, #0288c2, #016aa7);
-  transform: translateY(-3px);
-  box-shadow: 0 8px 15px rgba(0, 61, 247, 0.4);
-}
-
-.container.add-doctor-form {
-  width: 90%;
-  max-width: 480px;
-  padding: 2rem;
-  background: rgba(255, 255, 255, 0.9);
-  border-radius: 20px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
-}
-
-.container.add-doctor-form .logo img {
-  width: 90px;
-  margin-bottom: 1.5rem;
-}
-
-.add-doctor-form input,
-.add-doctor-form select {
-  width: 100%;
-  padding: 0.7rem;
-  border-radius: 8px;
-  border: 1px solid #b0bec5;
-  margin-bottom: 0.8rem;
-  font-size: 0.95rem;
-  background-color: #eceff1;
-}
-
-.register-btn {
-  width: 100%;
-  padding: 0.8rem;
-  font-size: 0.95rem;
 /* Button to register the new doctor */
 .add-new-doctor-register-btn {
   width: 100%;
@@ -171,66 +75,12 @@ body {
   box-shadow: 0 4px 10px rgba(0, 150, 136, 0.3);
 }
 
-.register-btn:hover {
 .add-new-doctor-register-btn:hover {
   background: linear-gradient(135deg, #00acc1, #00838f);
   transform: translateY(-3px);
   box-shadow: 0 8px 15px rgba(0, 150, 136, 0.4);
 }
 
-@media (max-width: 768px) {
-  .container,
-  .container.add-doctor-form {
-    padding: 1.5rem;
-  }
-
-  .logo img {
-    width: 60px;
-  }
-
-  .title {
-    font-size: 1.4rem;
-  }
-
-  .subtitle {
-    font-size: 0.8rem;
-  }
-
-  .input-group input {
-    padding: 0.7rem;
-    font-size: 0.9rem;
-  }
-
-  .login-btn,
-  .register-btn {
-    padding: 0.8rem;
-    font-size: 0.9rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .container,
-  .container.add-doctor-form {
-    width: 100%;
-    padding: 1rem;
-  }
-
-  .title {
-    font-size: 1.2rem;
-  }
-
-  .subtitle {
-    font-size: 0.75rem;
-  }
-
-  .input-group input {
-    font-size: 0.85rem;
-  }
-
-  .login-btn,
-  .register-btn {
-    font-size: 0.85rem;
-    padding: 0.7rem;
 /* Responsive Design */
 @media (max-width: 767px) {
   .add-new-doctor-container {
