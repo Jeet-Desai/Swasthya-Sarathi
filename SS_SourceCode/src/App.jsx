@@ -16,8 +16,8 @@ function App() {
     {/* <DoctorRequestPage/> */}
     {/* <ManagePage/> */}
     {/* <AdminLogin/> */}
-    {/* <AddNewDoctor/> */}
-    <AddMedicalRecord/>
+    { <AddNewDoctor/> }
+    {/* <AddMedicalRecord/> */}
     </>
   )
 }
