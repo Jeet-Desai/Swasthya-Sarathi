@@ -22,7 +22,7 @@ function App() {
     {/* <AdminLogin/> */}
     {/* <AddNewDoctor/> */}
     {/* <AddMedicalRecord/> */}
-    <AddNewDoctor/>
+    {/* <AddNewDoctor/> */}
     {/* <AddMedicalRecord/> */}
     {/* <BrowserRouter> */}
     {/* <DoctorNavbar/> */}
@@ -30,7 +30,7 @@ function App() {
     {/* <AppointmentDetails/> */}
     {/* <ViewAppointmentRequestsContainer/> */}
     {/* <HospitalInfoPage/> */}
-    {/* <DoctorDashboard/> */}
+    <DoctorDashboard/>
     </>
   )
 }
