@@ -13,6 +13,7 @@ import ViewAppointmentRequests from './pages/AppointmentRequestPage/ViewAppointm
 import AppointmentDetails from './pages/AppointmentDetailsPage/AppointmentDetails';
 import HospitalInfoPage from './pages/HospitalInfopage/HospitalInfoPage';
 import DoctorDashboard from './pages/DoctorDashboard/DoctorDashboard';
+import AdminDashboard from './pages/AdminDashboard/AdminDashboard';
 
 function App() {
   return (
@@ -30,7 +31,8 @@ function App() {
     {/* <AppointmentDetails/> */}
     {/* <ViewAppointmentRequestsContainer/> */}
     {/* <HospitalInfoPage/> */}
-    <DoctorDashboard/>
+    {/* <DoctorDashboard/> */}
+    <AdminDashboard/>
     </>
   )
 }

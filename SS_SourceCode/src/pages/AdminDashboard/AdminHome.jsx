@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Box, Typography } from '@mui/material';
-import log from "/assests/images/SS_logo.png";
 
-const DoctorHome = () => {
+const AdminHome = () => {
   const [text, setText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
   const [loopNum, setLoopNum] = useState(0);
@@ -99,4 +98,4 @@ const DoctorHome = () => {
   );
 };
 
-export default DoctorHome;
+export default AdminHome;

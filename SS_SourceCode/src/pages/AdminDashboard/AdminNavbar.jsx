@@ -4,15 +4,15 @@ import { BiMenu } from "react-icons/bi";
 import { AiOutlineClose } from "react-icons/ai"; // Import Close Icon
 import log from "/assests/images/SS_logo.png"; /* Update all class names to include `doctor-navbar-` prefix */
 
-import "./DoctorNavbar.css";
+import "./AdminNavbar.css";
 
 const navLinks = [
-  { path: "/homedoctor", display: "Home" },
-  { path: "/doctorappointments", display: "View Appointments" },
-  { path: "/addmedicalrecord", display: "Add Medical Record" }
+  { path: "/homeadmin", display: "Home" },
+  { path: "/adminappointments", display: "View Appointments" },
+  { path: "/adddoctor", display: "Add Doctor" }
 ];
 
-const DoctorNavbar = () => {
+const AdminNavbar = () => {
   const headerRef = useRef(null);
   const menuRef = useRef(null);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -47,7 +47,7 @@ const DoctorNavbar = () => {
           </span>
 
           {/* Logo */}
-          <Link to="/homedoctor">
+          <Link to="/homeadmin">
             <div className="doctor-navbar-logo">
               <img src={log} alt="Logo" />
             </div>
@@ -87,7 +87,7 @@ const DoctorNavbar = () => {
 
           {/* Nav Right */}
           <div className="doctor-navbar-nav-right">
-            <Link to="/logindoctor">
+            <Link to="/loginadmin">
               <button className="doctor-navbar-login-button">Login</button>
             </Link>
           </div>
@@ -100,4 +100,4 @@ const DoctorNavbar = () => {
   );
 };
 
-export default DoctorNavbar;
+export default AdminNavbar;

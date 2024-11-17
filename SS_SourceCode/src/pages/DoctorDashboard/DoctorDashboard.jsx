@@ -23,10 +23,10 @@ const DoctorDashboard = () => {
         <BrowserRouter>
           <DoctorNavbar/>
             <Routes>
-              <Route path="/" element={<DoctorHome/>}/>
-              <Route path="/appointments" element={<ViewAppointmentRequests/>} />
+              <Route path="/homedoctor" element={<DoctorHome/>}/>
+              <Route path="/doctorappointments" element={<ViewAppointmentRequests/>} />
               <Route path="/addmedicalrecord" element={<AddMedicalRecord />} />
-              <Route path="/appointments/:appointmentID" element={<AppointmentDetails/>} />
+              <Route path="/doctorappointments/:appointmentID" element={<AppointmentDetails/>} />
             </Routes>
           {/* <Footer /> */}
         </BrowserRouter>
