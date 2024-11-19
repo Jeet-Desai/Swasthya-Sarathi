@@ -1,11 +1,10 @@
-const mongoose = require('mongoose');
+import mongoose from "mongoose";
 
 const DoctorModel = new mongoose.Schema({
     name: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     phone: { type: String, required: true },
-    profilePhoto: { type: String, default: null },
     gender: { type: String, required: true },
     specialization: { type: String, required: true },
     qualification: { type: String, required: true },
@@ -19,4 +18,5 @@ const DoctorModel = new mongoose.Schema({
     updatedAt: { type: Date, default: Date.now }
 });
 
-module.exports = mongoose.model('Doctor', DoctorModel);
+
+export default mongoose.model("Doctor", DoctorModel);

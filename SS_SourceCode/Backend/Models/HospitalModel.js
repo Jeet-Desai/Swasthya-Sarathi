@@ -1,21 +1,18 @@
-const mongoose = require('mongoose');
+
+import mongoose from "mongoose";
 
 const HospitalModel = new mongoose.Schema({
-    name: { type: String, required: true },
-    email: { type: String, required: true, unique: true },
-    password: { type: String, required: true },
-    phone: { type: String, required: true },
-    photo: { type: String, default: null },
-    establishmentYear: { type: Number, required: true },
-    address: { type: String, required: true },
-    type: { type: String, enum: ['gov', 'semi-gov', 'private'], required: true },
-    departments: [{ type: String, required: true }],  // Array of departments like cardio, ortho, etc.
-    registrationNo: { type: String, required: true },
-    website: { type: String, default: null },
-    doctors: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Doctor' }],
-    appointments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Appointment' }],
-    createdAt: { type: Date, default: Date.now },
-    updatedAt: { type: Date, default: Date.now }
+  email: { type: String, required: true, unique: true }, // Email is mandatory and unique
+  name: { type: String, required: true }, // Full Name of the hospital
+  password: { type: String, required: true }, // Password
+  confirmPassword: { type: String }, // Optional, used for confirmation
+  contactNo: { type: String, required: true }, // Contact number
+  dof: { type: Date, required: true }, // Date of foundation
+  type: { type: String, required: true, enum: ["Gov", "Semi-Gov", "Private"] }, // Type of hospital
+  registration_no: { type: String, required: true }, // Registration number
+  role: { type: String, default: "hospital" }, // Role defaulted to "hospital"
+  doctors: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Doctor' }],
+  appointments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Appointment' }],
 });
 
-module.exports = mongoose.model('Hospital', HospitalModel);
+export default mongoose.model("Hospital", HospitalModel);
