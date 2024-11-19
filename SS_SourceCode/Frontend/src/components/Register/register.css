@@ -1,0 +1,88 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.register-main-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Full viewport height for centering */
+  background: linear-gradient(135deg, #d4d4d8, #e4e4e7, #f4f4f5, #a1a1aa);
+}
+
+.register-grid {
+  display: flex;
+  flex-direction: row;
+  gap: 80px; /* Space between items */
+}
+
+.register-section-hospital,
+.register-section-patient {
+  background-color: #f4f4f5;
+  padding: 30px 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: center;
+  flex: 1; /* Makes the sections equal in width */
+  max-width: 400px; /* Prevents sections from growing too large */
+}
+
+.register-section-hospital:hover,
+.register-section-patient:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+.register-section-hospital h3,
+.register-section-patient h3 {
+  font-size: 26px;
+  line-height: 36px;
+  color: var(--heading-color);
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.register-section-hospital h3 span,
+.register-section-patient h3 span {
+  color: #007bff;
+}
+
+.register-section-hospital p,
+.register-section-patient p {
+  margin-top: 20px;
+  font-size: 16px;
+  line-height: 28px;
+  color: var(--text-color);
+  margin-bottom: 20px;
+}
+
+/* Button */
+.register-btn {
+  font-size: 16px;
+  line-height: 1.75;
+  padding: 12px 24px;
+  background-color: #007bff;
+  color: white;
+  font-weight: 500;
+  border-radius: 50px;
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.register-btn:hover {
+  transform: scale(1.05);
+}
+
+/* Media Queries for Small Screens */
+@media (max-width: 768px) {
+  .register-grid {
+    flex-direction: column;
+    align-items: center; /* Centers the content vertically */
+    gap: 20px;
+  }
+}
