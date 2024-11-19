@@ -1,0 +1,102 @@
+.appointment-list {
+  width: 90%; /* Full width on mobile */
+  max-width: 600px; /* Limit width on larger screens */
+  margin: 20px auto;
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.appointment-list h2 {
+  text-align: center;
+  color: #333;
+  font-size: 1.5em;
+  margin-bottom: 20px;
+}
+
+.appointments-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.appointment-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  flex-wrap: nowrap; /* Keep elements on the same row */
+}
+
+.appointment-card:hover{
+  transform: translateY(-5px);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+.appointment-details {
+  display: flex;
+  flex-direction: column;
+  flex: 1; /* Expand to fill available space */
+}
+
+.appointment-hospital {
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.appointment-date,
+.appointment-time {
+  font-size: 0.9em;
+  color: #666;
+  margin: 2px 0;
+}
+
+.view-button {
+  background-color: #05cdec; /* Solid blue color */
+  color: #fff;
+  border: none;
+  border-radius: 25px;
+  padding: 5px 20px;
+  cursor: pointer;
+  font-size: 0.9em;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  height: 40px;
+  text-align: center;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  flex-shrink: 0; /* Prevent button from shrinking */
+}
+
+.view-button:hover {
+  background-color: #04b3d1; /* Darker blue on hover */
+  transform: scale(1.1); /* Slightly enlarge on hover */
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); /* Glow effect */
+}
+
+/* Responsive Styles */
+@media only screen and (max-width: 768px) {
+  .appointment-list {
+    padding: 15px; /* Reduce padding on smaller screens */
+  }
+
+  .appointment-card {
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    gap: 10px; /* Add spacing between items */
+  }
+
+  .appointment-details {
+    flex: 1; /* Ensure details take available space */
+    order: 1; /* Keep details first on wrap */
+  }
+
+  .view-button {
+    order: 2; /* Ensure button remains on the same row or wraps below */
+    margin-left: auto; /* Align button to the right */
+    padding: 10px; /* Adjust padding for better usability */
+  }
+}
