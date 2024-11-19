@@ -8,6 +8,7 @@ import { BrowserRouter } from 'react-router-dom';
 import ViewAppointmentRequests from './pages/AppointmentRequestPage/ViewAppointmentRequests';
 import DoctorDashboard from './pages/DoctorDashboard/DoctorDashboard';
 import AdminDashboard from './pages/AdminDashboard/AdminDashboard';
+import Layout from './layout/Layout';
 function App() {
   return (
     <>
@@ -25,6 +26,7 @@ function App() {
     {/* <ViewAppointmentRequestsContainer/> */}
     {/* <HospitalInfoPage/> */}
     <DoctorDashboard/>
+    {/* <Layout/> */}
     {/* <AdminDashboard/> */}
     </>
   )

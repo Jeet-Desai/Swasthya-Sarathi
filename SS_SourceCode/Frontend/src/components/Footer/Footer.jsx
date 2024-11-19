@@ -15,7 +15,7 @@ const socialLinks = [
 ];
 
 const quickLinks01 = [
-  { path: "/home", display: "Home" },
+  { path: "/homepatient", display: "Home" },
   { path: "/about-us", display: "About Us" },
 ];
 

@@ -15,6 +15,7 @@ import AddMedicalRecord from './../AddMedicalRecord/AddMedicalRecord';
 import ViewAppointmentRequests from "../AppointmentRequestPage/ViewAppointmentRequests";
 import AppointmentDetails from "../AppointmentDetailsPage/AppointmentDetails";
 import DoctorHome from "./DoctorHome";
+import AdminHome from "../AdminDashboard/AdminHome";
 
 const DoctorDashboard = () => {
   return (
@@ -23,7 +24,7 @@ const DoctorDashboard = () => {
         <BrowserRouter>
           <DoctorNavbar/>
             <Routes>
-              <Route path="/homedoctor" element={<DoctorHome/>}/>
+              <Route path="/homedoctor" element={<AdminHome/>}/>
               <Route path="/doctorappointments" element={<ViewAppointmentRequests/>} />
               <Route path="/addmedicalrecord" element={<AddMedicalRecord />} />
               <Route path="/doctorappointments/:appointmentID" element={<AppointmentDetails/>} />
