@@ -1,5 +1,5 @@
 import React from 'react';
-import './Dashboard.css';
+import './PDashboard.css';
 
 const Dashboard = () => {
   // Sample data for appointments

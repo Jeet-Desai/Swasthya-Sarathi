@@ -3,8 +3,6 @@ import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
 import Home from "../pages/Home";
 import Contact from "../pages/Contact";
-import Doctors from "../pages/Doctors/Doctors";
-import DoctorsDetails from "../pages/Doctors/DoctorsDetails";
 import About from "../components/About/About";
 import { BrowserRouter } from "react-router-dom";
 import { Routes, Route } from "react-router-dom";
@@ -12,6 +10,8 @@ import Register from "../components/Register/Register";
 import Signup from "../pages/SignupPages/Signup";
 import HospitalSignup from './../pages/SignupPages/HospitalSignup';
 import Login from "../pages/LoginPage/Login";
+import Doctors from "../pages/PatientViewDoctor/Doctors";
+import DoctorsDetails from "../pages/PatientViewDoctor/DoctorsDetails";
 
 const Layout = () => {
   return (

@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
-import "./header.css";
-import MyProfileImage from "../images/MyProfile.jpeg"; // Import the image
-import logo from "../images/rmlogo.png"; 
+import "./DashboardHeader.css";
+import MyProfileImage from "../../../../assets/images/MyProfile.jpg"; // Import the image
+import logo from "../../../../assets/images/rmlogo.png"; 
 
 
 const navLinks = [
@@ -11,7 +11,7 @@ const navLinks = [
   { path: "#about-us", display: "About Us" },
 ];
 
-const Header = () => {
+const DashboardHeader = () => {
   const headerRef = useRef(null);
   const menuRef = useRef(null);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -120,4 +120,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default DashboardHeader;

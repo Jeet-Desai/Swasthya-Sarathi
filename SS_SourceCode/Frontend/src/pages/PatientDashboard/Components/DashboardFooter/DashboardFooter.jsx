@@ -1,10 +1,10 @@
 import React from "react";
-import "./footer.css";
-import logo from "../images/rmlogo.png";
-import youtube from "../images/youtube.webp";
-import github from "../images/github.jpg";
-import instagram from "../images/instagram.png";
-import linkedin from "../images/linkedin.jpg";
+import "./DashboardFooter.css";
+import logo from "../../../../assets/images/rmlogo.png";
+import youtube from "../../../../assets/images/youtube.webp";
+import github from "../../../../assets/images/github.jpg";
+import instagram from "../../../../assets/images/instagram.png";
+import linkedin from "../../../../assets/images/linkedin.jpg";
 
 const socialLinks = [
   { path: "https://youtube.com/", iconSrc: youtube },
@@ -26,7 +26,7 @@ const quickLinks02 = [
 
 const quickLinks03 = [{ path: "/contact", display: "Contact Us" }];
 
-const Footer = () => {
+const DashboardFooter = () => {
   const year = new Date().getFullYear();
 
   return (
@@ -103,4 +103,4 @@ const Footer = () => {
   );
 };
 
-export default Footer;
+export default DashboardFooter;

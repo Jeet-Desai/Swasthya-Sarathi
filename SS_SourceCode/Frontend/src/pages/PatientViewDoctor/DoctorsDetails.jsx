@@ -1,9 +1,10 @@
 import React from "react";
-import SidePanel from "../components/SidePanel";
-import DoctorImg from '../../assets/images/doctor-img01.png';
+// import SidePanel from "../components/SidePanel";
+import DoctorImg from '../../assets/images/doct01.jpg';
 import "./DoctorsDetails.css";
+import SidePanel from "./components/SidePanel";
 
-const DoctorDetails = () => {
+const DoctorsDetails = () => {
     return (
         <section className="docdetp-doctor-details">
             <div className="docdetp-doctor-details__container">
@@ -40,4 +41,4 @@ const DoctorDetails = () => {
     );
 };
 
-export default DoctorDetails;
+export default DoctorsDetails;
