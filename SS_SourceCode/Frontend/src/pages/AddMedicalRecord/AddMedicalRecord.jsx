@@ -147,6 +147,7 @@ const AddMedicalRecord = () => {
             maxWidth: { xs: "90%", sm: "95%", md: "100%" },
             backgroundColor: "white",
             overflowY: "auto",
+            margin:"15vh"
           }}
         >
           <CardContent

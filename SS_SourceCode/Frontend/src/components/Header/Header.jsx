@@ -6,7 +6,7 @@ import log from "../../assets/images/rmlogo.png";
 import "./header.css";
 
 const navLinks = [
-  { path: "/home", display: "Home" },
+  { path: "/homepatient", display: "Home" },
   { path: "/doctors", display: "Doctors" },
   { path: "/about-us", display: "About Us" },
   { path: "/contact", display: "Contact" },

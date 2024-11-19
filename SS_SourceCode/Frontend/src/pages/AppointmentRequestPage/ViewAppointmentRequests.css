@@ -4,7 +4,6 @@
   padding: 0;
   box-sizing: border-box;
 } */
-
 /* Specific styling for the ViewAppointmentRequests page */
 .view-appointment-requests-page {
   display: flex;
@@ -13,6 +12,7 @@
   background-color: #05cdec;
   min-height: 100vh;
   padding: 20px; /* Give some padding to the body */
+  /* margin: 100px; */
 }
 
 /* Container for the content */

@@ -88,7 +88,7 @@ const AdminNavbar = () => {
           {/* Nav Right */}
           <div className="doctor-navbar-nav-right">
             <Link to="/loginadmin">
-              <button className="doctor-navbar-login-button">Login</button>
+              <button className="doctor-navbar-login-button">Logout</button>
             </Link>
           </div>
         </div>
