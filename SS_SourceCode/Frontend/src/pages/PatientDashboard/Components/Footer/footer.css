@@ -1,0 +1,89 @@
+.p-dashboard-footer-container {
+  padding: 40px 20px;
+  background-color: #e4e4e7;
+}
+
+.p-dashboard-footer-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+.p-dashboard-footer-branding {
+  flex: 1;
+  min-width: 200px;
+}
+
+.p-dashboard-footer-logo {
+  max-width: 150px;
+  width: 100px;
+  height: 90px;
+}
+
+.p-dashboard-footer-copyright {
+  margin-top: 15px;
+  font-size: 16px;
+  color: #6b7280;
+}
+
+.p-dashboard-footer-social-links {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.p-dashboard-footer-container .p-dashboard-social-link {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #181a1e;
+  border-radius: 50%;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.p-dashboard-footer-container .p-dashboard-social-link:hover {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.p-dashboard-footer-container .p-dashboard-social-icon {
+  width: 24px;
+  height: 24px;
+}
+
+/* Links section */
+.p-dashboard-footer-links {
+  flex: 1;
+  min-width: 200px;
+}
+
+.p-dashboard-footer-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #181a1e;
+  margin-bottom: 15px;
+}
+
+.p-dashboard-footer-link-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.p-dashboard-footer-link-item {
+  margin-bottom: 10px;
+}
+
+.p-dashboard-footer-link {
+  font-size: 16px;
+  color: #6b7280;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.p-dashboard-footer-link:hover {
+  color: #007bff;
+}

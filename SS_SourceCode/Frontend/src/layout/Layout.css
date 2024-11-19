@@ -1,12 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
 
 
-.layout-container *{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 body{
   font-family: "Manrope", sans-serif;
   background: linear-gradient(135deg, #d4d4d8, #e4e4e7, #f4f4f5, #a1a1aa);

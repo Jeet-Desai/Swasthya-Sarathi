@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./HospitalSignup.css";
-//import signupImg from "../../assets/images/rmlogo.png";
+import signupImg from "../../assets/images/rmlogo.png";
 
 const HospitalSignup = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -50,7 +50,7 @@ const HospitalSignup = () => {
           {/* Image Box */}
           <div className="hospitalsgp-signup-img-box">
             <figure>
-              <img src="/images/rmlogo.png" alt="Sign Up" className="hospitalsgp-signup-img" />
+              <img src={signupImg} alt="Sign Up" className="hospitalsgp-signup-img" />
             </figure>
           </div>
 

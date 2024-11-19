@@ -50,7 +50,7 @@ const AdminHome = () => {
   return (
     <Box sx={{
       minHeight: '100vh',
-      backgroundColor: '#05cdec', // Set background to #38b6ff
+      backgroundColor: "linear-gradient(135deg, #d4d4d8, #e4e4e7, #f4f4f5, #a1a1aa)", // Set background to #38b6ff
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
@@ -59,10 +59,17 @@ const AdminHome = () => {
       {/* Title */}
       <Typography variant="h2" sx={{
         fontWeight: 'bold',
-        color: 'white',
+        color: '#38b6ff',
         mb: 4,
         letterSpacing: 3,
-        textShadow: '2px 2px 5px rgba(0, 0, 0, 0.5)',
+      }}>
+        Welcome to
+      </Typography>
+      <Typography variant="h2" sx={{
+        fontWeight: 'bold',
+        color: '#38b6ff',
+        mb: 4,
+        letterSpacing: 3,
       }}>
         Swasthya Sarathi
       </Typography>
@@ -75,7 +82,7 @@ const AdminHome = () => {
       }}>
         <Typography variant="h4" sx={{
           fontWeight: 500,
-          color: 'white',
+          color: '#38b6ff',
           display: 'inline-block',
           lineHeight: 1, // Ensures cursor aligns properly with text
         }}>

@@ -32,10 +32,6 @@
   z-index: 200;
 } */
 
-/* Add padding to the body to prevent content from hiding behind fixed navbar */
-body {
-  padding-top: 82px;
-}
 
 /* Rest of your CSS remains the same */
 .doctor-navbar-header-wrapper {
