@@ -1,0 +1,347 @@
+/* Global Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Container for the navbar */
+  .header-container {
+    padding-top: 20px;
+    width: 100%;
+    height: 82px;
+    background: linear-gradient(135deg, #d4d4d8, #e4e4e7, #f4f4f5, #a1a1aa);
+  }
+  
+  /* Sticky header */
+  .header-container.sticky-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 200;
+  }
+  
+  /* Flex wrapper for the header */
+  .header-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  /* Main header content */
+  .header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  /* Logo styling */
+  .header-container .logo img {
+    width: 90px;
+    height: 70px;
+    position: absolute;
+    left: 30px;
+    top: 1px;
+  }
+  
+  .header-container .logoname {
+    position: absolute;
+    left: 110px;
+    color: #38b6ff;
+    top: 15px;
+    font-size: 12px;
+  }
+  
+  .header-container .logo-span {
+    position: absolute;
+    color: #38b6ff;
+    top: 30px;
+    left: 80px;
+  }
+  
+  /* Navigation Styles */
+  .navigation {
+    display: flex;
+    align-items: center;
+  }
+  
+  .menu-list {
+    display: flex;
+    gap: 2.7rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+  }
+  
+  /* Menu link styling */
+  .menu-link {
+    font-size: 16px;
+    line-height: 1.75;
+    font-weight: 500;
+    color: black;
+    text-decoration: none;
+    position: relative;
+    display: inline-block;
+    transition: color 0.3s ease;
+    text-align: center; /* Center the text */
+  
+  }
+  
+  /* Hover effect: Underline animation */
+  .menu-link::before {
+    content: "";
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background-color: #38b6ff;
+    transition: width 0.3s ease;
+    transform: translateX(-50%);
+  }
+  
+  .menu-link:hover::before {
+    width: 100%;
+  }
+  
+  .menu-link.active,
+  .menu-link:hover {
+    color: #38b6ff;
+  }
+  
+  /* Login Button Animation - Desktop */
+  .login-button {
+    font-size: 16px; /* Match menu-link font size */
+    line-height: 1.75; /* Match menu-link line height */
+    background-color: transparent;
+    padding: 10px 20px;
+    color: black;
+    font-weight: 500;
+    border-radius: 50px;
+    cursor: pointer;
+    border: none;
+    position: relative;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  .login-button::before {
+    content: "";
+    position: absolute;
+    bottom: -5px; /* Match menu-link */
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background-color: #38b6ff;
+    transition: width 0.3s ease;
+    transform: translateX(-50%);
+  }
+  
+  .login-button:hover::before {
+    width: 100%;
+  }
+  
+  .login-button:hover {
+    color: #38b6ff;
+  }
+
+  .profile-button {
+    display: flex;
+    align-items: center;
+    padding: 8px 16px;
+    background-color: #38b6ff; /* Button color */
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+  }
+  
+  .profile-photo {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+  
+  .profile-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  
+  /* Responsive Navigation for Small Screens (Mobile) */
+  @media (max-width: 1024px) {
+    .navigation {
+      position: fixed;
+      top: 0;
+      left: -250px;
+      width: 250px;
+      height: 100%;
+      background-color: #fff;
+      box-shadow: 2px 0 3px rgba(0, 0, 0, 0.3);
+      flex-direction: column;
+      padding: 20px;
+      z-index: 100;
+      transition: left 0.3s ease-in-out;
+      display: flex !important; /* Ensure it's always flex */
+      transform: translateX(0); /* Reset any transform */
+    }
+  
+    /* Close button styling */
+    .close-icon {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 24px;
+      height: 24px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      color: #333;
+      transition: color 0.3s ease;
+      z-index: 101;
+    }
+  
+    .close-icon:hover {
+      color: #38b6ff;
+    }
+  
+    /* Menu items container */
+    .menu-list {
+      flex-direction: column;
+      gap: 1.5rem;
+      margin-top: 50px;
+      width: 100%;
+    }
+  
+    .menu-list li {
+      width: 100%;
+    }
+  
+    /* Consistent styling for menu items and login */
+    .menu-link,
+    .login-button {
+      font-size: 18px;
+      padding: 10px 15px;
+      width: 100%;
+      display: block;
+      text-align: center;
+      background: transparent;
+      margin: 0;
+      border-radius: 5px;
+    }
+  
+    /* Reset login button specific styles in mobile */
+    .login-button {
+      border: none;
+      padding: 10px 15px;
+      text-align: left;
+      border-radius: 5px;
+      width: 100%;
+      margin: 0;
+    }
+  
+    /* Consistent hover effects */
+    .menu-link:hover,
+    .login-button:hover {
+      color: #38b6ff;
+    }
+  
+    /* Consistent underline animation */
+    .menu-link::before,
+    .login-button::before {
+      bottom: 0;
+    }
+  
+    .menu-link:hover::before,
+    .login-button:hover::before {
+      width: calc(100% - 30px);
+    }
+  
+    /* Show navigation when toggled */
+    .navigation.show-menu {
+      left: 0;
+      transform: translateX(0);
+    }
+  
+    /* Overlay styling */
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 99;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+  
+    .overlay.show {
+      display: block;
+      opacity: 1;
+    }
+  
+    /* Hide standard navigation elements on mobile */
+    .nav-right:not(.mobile-only) {
+      display: none;
+    }
+  }
+  
+  /* Additional nav-right styling */
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  .hidden {
+    display: none;
+  }
+  
+  .profile-picture {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+  
+  .profile-picture img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .menu-icon {
+    cursor: pointer;
+    font-size: 2rem;
+    color:#38b6ff;
+    position: relative;
+    left: 6px;
+    top : 6px;  
+  }
+  
+  /* Mobile menu visibility */
+  .mobile-only {
+    display: none;
+  }
+  
+  @media (max-width: 1024px) {
+    .mobile-only {
+      display: inline-block;
+    }
+  
+    .navigation:not(.show-menu) {
+      left: -700px;
+    }
+  }
+  
