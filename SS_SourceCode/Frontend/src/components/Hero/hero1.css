@@ -1,0 +1,137 @@
+/* Hero Section */
+.hero1-section {
+  padding: 60px 20px;
+  background: linear-gradient(135deg, #d4d4d8, #e4e4e7, #f4f4f5, #a1a1aa);
+}
+
+.hero1-section .hero1-container {
+  max-width: 1440px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.hero1-intro-text {
+  max-width: 600px;
+  margin: 0 auto 50px;
+}
+
+.hero1-section .hero1-section-heading {
+  font-size: 44px;
+  line-height: 54px;
+  font-weight: 700;
+  color: var(--heading-color);
+}
+
+.hero1-section .hero1-section-description {
+  font-size: 18px;
+  line-height: 30px;
+  color: var(--text-color);
+  margin-top: 18px;
+}
+
+/* Hero Grid */
+.hero1-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+
+/* Hero Items */
+.hero1-item {
+  position: relative;
+  background-color: #f4f4f5;
+  padding: 30px 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: center;
+}
+
+.hero1-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+.hero1-icon-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+/* Hero Title and Description */
+.hero1-title {
+  font-size: 26px;
+  line-height: 36px;
+  color: var(--heading-color);
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.hero1-description {
+  margin-top: 30px;
+  font-size: 16px;
+  line-height: 28px;
+  color: var(--text-color);
+  margin-bottom: 30px;
+}
+
+
+
+/* Responsive Grid for Larger Screens */
+@media (min-width: 768px) {
+  .hero1-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero1-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 375px) {
+  .hero1-section {
+    padding: 40px 10px; 
+    
+  }
+
+  .hero1-section .hero1-section-heading {
+    font-size: 32px; 
+    line-height: 42px;
+  }
+
+  .hero1-section .hero1-section-description {
+    font-size: 14px; 
+    line-height: 24px;
+    margin-top: 12px;
+  }
+
+  .hero1-intro1-text {
+    max-width: 100%; 
+    margin-bottom: 30px; 
+  }
+
+  .hero1-grid {
+    gap: 8px; 
+  }
+
+  .hero1-item {
+    padding: 20px 15px; 
+    position: relative;
+    right: 20px;
+  }
+
+  .hero1-title {
+    font-size: 20px; 
+    line-height: 28px;
+    margin-bottom: 12px;
+  }
+
+  .hero1-description {
+    font-size: 14px; 
+    line-height: 22px;
+    margin-bottom: 20px;
+  }
+}
