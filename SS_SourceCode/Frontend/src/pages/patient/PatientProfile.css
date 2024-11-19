@@ -1,0 +1,109 @@
+/* Set background color for the body or outer container */
+body {
+  background-color: linear-gradient(135deg, #d4d4d8, #e4e4e7, #f4f4f5, #a1a1aa); /* Light gray background for the entire page */
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Form container styles */
+.patient-profile-container {
+  font-family: Arial, sans-serif;
+  max-width: 600px;
+  margin: 50px auto; /* Adds some spacing from the top */
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #fff; /* White background for the form */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Slight shadow to lift the form */
+}
+
+/* Heading for the form */
+h2 {
+  text-align: center;
+  color: #333;
+}
+
+/* Styling for form groups */
+.patient-profile-form-group {
+  margin-bottom: 15px;
+}
+
+/* Resetting input and select styling */
+input, select {
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  color: #333 !important; /* Force the text color to #333 */
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  width: 100%;
+  margin-top: 5px;
+  box-sizing: border-box; /* Ensures padding and borders don't affect the width */
+}
+
+/* Ensures consistent styling for input placeholders */
+input::placeholder {
+  color: #aaa;
+}
+
+/* Button styling */
+button.patient-profile-submit-button {
+  width: 100%;
+  padding: 12px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button.patient-profile-submit-button:hover {
+  background-color: #007bff;
+}
+
+/* Ensures text color for select options is the same */
+select option {
+  color: #333;
+}
+
+.patient-profile-form-group {
+  position: relative;
+  width: 100%; /* Adjust as per your layout */
+}
+
+.dob-input {
+  width: 100%;
+  padding: 12px 10px 12px 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  outline: none;
+}
+
+.dob-input:focus {
+  border-color: black;
+}
+
+.dob-label {
+  position: absolute;
+  top: 10%;
+  left: 10px;
+  transform: translateY(-50%);
+  background-color: white; /* Matches input background */
+  padding: 0 5px;
+  font-size: 14px;
+  color: #aaa;
+  pointer-events: none;
+  transition: all 0.2s ease;
+}
+
+.dob-input:focus + .dob-label,
+.dob-input:not(:placeholder-shown):not(:focus) + .dob-label {
+  top: 10px; /* Moves label above input field */
+  font-size: 12px;
+  color: #333;
+}

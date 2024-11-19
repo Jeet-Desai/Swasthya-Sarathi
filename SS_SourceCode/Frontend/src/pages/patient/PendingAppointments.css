@@ -1,0 +1,75 @@
+body {
+  margin: 0;
+  background-color: linear-gradient(135deg, #d4d4d8, #e4e4e7, #f4f4f5, #a1a1aa);
+  font-family: 'Arial', sans-serif;
+}
+
+.new-pending-appointments {
+  width: 40%;
+  margin: 20px auto;
+  background-color: #f4f4f5;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.new-pending-appointments h2 {
+  text-align: center;
+  color: #333;
+  font-size: 1.5em;
+  margin-bottom: 20px;
+}
+
+.new-appointments-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.new-appointment-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.new-appointment-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.new-appointment-hospital {
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.new-appointment-date,
+.new-appointment-time {
+  font-size: 0.9em;
+  color: #666;
+  margin: 2px 0;
+}
+
+.new-view-button {
+  background-color: #007bff; /* Solid blue color */
+  color: #fff;
+  border: none;
+  border-radius: 25px;
+  padding: 5px 20px;
+  cursor: pointer;
+  font-size: 0.9em;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  height: 40px;
+  text-align: center;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.new-view-button:hover {
+  background-color: #007bff; /* Darker blue on hover */
+  transform: scale(1.1); /* Slightly enlarge on hover */
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); /* Glow effect */
+}

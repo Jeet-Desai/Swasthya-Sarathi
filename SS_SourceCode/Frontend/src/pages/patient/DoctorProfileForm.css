@@ -1,0 +1,117 @@
+/* Wrapper for the entire form container */
+.doctor-form-wrapper {
+  background: linear-gradient(135deg, #d4d4d8, #e4e4e7, #f4f4f5, #a1a1aa); /* Light blue background color for the entire form section */
+  padding: 20px;
+  min-height: 100vh; /* Ensure the background covers the entire screen height */
+}
+
+/* Container for the form */
+.doctor-form-container {
+  background-color: #f4f6f8;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px white;
+  align-content: center;
+}
+
+/* Title */
+.doctor-form-title {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Form and input fields */
+.doctor-profile-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Styling for form group (label and input) */
+.doctor-form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+input, select {
+  padding: 8px;
+  font-size: 16px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+input[type="date"], input[type="tel"], input[type="email"], input[type="number"] {
+  width: 100%;
+}
+
+select {
+  width: 100%;
+  padding: 8px;
+}
+
+/* Button */
+.doctor-form-submit-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.doctor-form-submit-btn:hover {
+  background-color:#007bff;
+}
+
+.doctor-form-group {
+  position: relative;
+  margin-bottom: 15px;
+}
+
+.doctor-form-dob-input {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+}
+
+.doctor-form-dob-label {
+  position: absolute;
+  left: 10px; /* Aligns label to the left */
+  top: -10px; /* Moves label above the input field */
+  background: #fff; /* Adds white background to the label */
+  padding: 0 5px;
+  font-size: 14px;
+  color: #666262;
+  font-family: 'Arial'; /* Handwriting font */
+}
+/* Submit Button Styles */
+.doctor-form-submit {
+  background-color: #007bff; /* Green background */
+  color: white; /* White text */
+  padding: 12px 20px; /* Padding inside the button */
+  border: none; /* Remove default border */
+  border-radius: 20px; /* Rounded corners */
+  font-size: 16px; /* Font size */
+  cursor: pointer; /* Cursor pointer on hover */
+  transition: background-color 0.3s ease; /* Smooth transition on hover */
+}
+
+.doctor-form-submit:hover {
+  background-color: #007bff; /* Darker green on hover */
+}
+
+.doctor-form-submit:active {
+  background-color: #007bff; /* Even darker green when clicked */
+}

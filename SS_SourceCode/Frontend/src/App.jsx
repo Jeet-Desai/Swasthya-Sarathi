@@ -8,6 +8,7 @@ import { BrowserRouter } from 'react-router-dom';
 import ViewAppointmentRequests from './pages/AppointmentRequestPage/ViewAppointmentRequests';
 import DoctorDashboard from './pages/DoctorDashboard/DoctorDashboard';
 import AdminDashboard from './pages/AdminDashboard/AdminDashboard';
+import AdminProfile from './components/Patient/AdminProfile';
 import Layout from './layout/Layout';
 function App() {
   return (
@@ -25,9 +26,11 @@ function App() {
     {/* <AppointmentDetails/> */}
     {/* <ViewAppointmentRequestsContainer/> */}
     {/* <HospitalInfoPage/> */}
+    {/* <DoctorDashboard/> */}
     <DoctorDashboard/>
     {/* <Layout/> */}
     {/* <AdminDashboard/> */}
+    <AdminProfile/>
     </>
   )
 }

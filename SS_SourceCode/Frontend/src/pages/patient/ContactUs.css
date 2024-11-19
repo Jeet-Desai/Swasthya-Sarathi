@@ -1,0 +1,92 @@
+/* Global font style */
+* {
+    font-family: Arial, sans-serif; /* Apply Arial font style globally */
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Full-page background styling */
+  .contact-page-wrapper {
+    min-height: 300vh; /* Full height of the viewport */
+    background-color: linear-gradient(135deg, #d4d4d8, #e4e4e7, #f4f4f5, #a1a1aa); /* Light gray-blue background */
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+  }
+  
+  /* Styling for the contact form container */
+  .contact-page {
+    width: 100%;
+    max-width: 650px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+    background-color: #f4f4f5; /* White form background */
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    height: 500px;
+  }
+  
+  /* Heading style */
+  .contact-page h1 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+  }
+  
+  /* Description paragraph style */
+  .contact-page p {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 20px;
+  }
+  
+  /* Form styles */
+  .contact-form {
+    width: 100%;
+  }
+  
+  .form-group-contact {
+    margin-bottom: 20px;
+    text-align: left;
+  }
+  
+  .form-group-contact label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .form-group-contact input,
+  .form-group-contact textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+    outline: none;
+  }
+  
+  .form-group-contact textarea {
+    height: 100px;
+    resize: none;
+  }
+  
+  /* Submit button styles */
+  .submit-btn-contact {
+    width: 100%;
+    background-color: #007bff; /* Blue button */
+    color: white;
+    padding: 10px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+  }
+  
+  .submit-btn-contact:hover {
+    background-color: #007bff; /* Keep same blue shade for hover */
+  }
+  
