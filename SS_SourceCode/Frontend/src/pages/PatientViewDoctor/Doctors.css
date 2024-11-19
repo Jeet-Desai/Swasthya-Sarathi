@@ -1,0 +1,96 @@
+/* General Styles for the Doctors Component */
+
+.docp-doctor-search-section {
+    background-color: #fff9ea;
+    padding: 20px 0;
+  }
+  
+  .docp-heading {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .docp-search-container {
+    height: 50px;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .docp-search-bar {
+    max-width: 570px;
+    margin: 30px auto 0;
+    background-color: #0066ff2c;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0;
+    height: 100%;
+  }
+  
+  .docp-search-input {
+    padding: 16px;
+    flex-grow: 1;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    color: #333;
+    cursor: pointer;
+    height: 100%;
+  }
+  
+  .docp-search-button {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #0066ff;
+    padding: 0 24px;
+    border: none;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .docp-search-button:hover {
+    background-color: #0052cc;
+  }
+  
+  .docp-search-icon {
+    height: 20px;
+    width: 20px;
+    stroke: white;
+  }
+  
+  .docp-search-input::placeholder {
+    color: #888;
+  }
+  
+  .docp-doctor-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 20px;
+    padding: 20px 0;
+  }
+  
+  @media (min-width: 640px) {
+    .docp-doctor-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (min-width: 768px) {
+    .docp-doctor-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .docp-doctor-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+  

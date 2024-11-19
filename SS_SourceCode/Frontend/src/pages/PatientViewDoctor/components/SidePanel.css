@@ -1,0 +1,32 @@
+
+.spp-side-panel {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    padding: 0.75rem;
+    border-radius: 0.375rem;
+}
+
+@media (min-width: 1024px) {
+    .spp-side-panel {
+        padding: 1.25rem;
+    }
+}
+
+.spp-side-panel__title {
+    margin-top: 0;
+    font-weight: 700;
+}
+
+.spp-booking-button {
+    width: 100%;
+    padding: 0.5rem;
+    border-radius: 0.375rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.spp-booking-button:hover {
+    background-color: #0056b3;
+}

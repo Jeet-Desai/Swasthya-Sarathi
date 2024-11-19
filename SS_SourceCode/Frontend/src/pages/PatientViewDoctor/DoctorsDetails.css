@@ -1,0 +1,95 @@
+.docdetp-doctor-details__container {
+    max-width: 1170px;
+    padding: 0 1.25rem;
+    margin: 0 auto;
+  }
+  
+  .docdetp-doctor-details__grid {
+    display: grid;
+    gap: 3.125rem;
+  }
+  
+  @media (min-width: 768px) {
+    .docdetp-doctor-details__grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+  
+    .docdetp-doctor-details__main {
+        grid-column: span 2;
+    }
+  }
+  
+  .docdetp-doctor-details__header {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+  }
+  
+  .docdetp-doctor-details__image {
+    max-width: 200px;
+    max-height: 200px;
+  }
+  
+  .docdetp-doctor-details__image img {
+    width: 100%;
+    height: auto;
+  }
+  
+  .docdetp-doctor-details__specialty {
+    display: inline-block;
+    background-color: #CCF0F3;
+    color: var(--iris-blue-color, #01B5C5);
+    padding: 0.25rem 1.5rem;
+    font-size: 0.75rem;
+    line-height: 1rem;
+    border-radius: 0.25rem;
+  }
+  
+  @media (min-width: 1024px) {
+    .docdetp-doctor-details__specialty {
+        padding: 0.5rem 1.5rem;
+        font-size: 1rem;
+        line-height: 1.75rem;
+    }
+  }
+  
+  .docdetp-doctor-details__name {
+    color: var(--heading-color, #181A1E);
+    font-size: 1.375rem;
+    line-height: 2.25rem;
+    margin-top: 0.75rem;
+    font-weight: 700;
+  }
+  
+  .docdetp-doctor-details__description {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+  
+  @media (min-width: 768px) {
+    .docdetp-doctor-details__description {
+        font-size: 0.9375rem;
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .docdetp-doctor-details__description {
+        max-width: 390px;
+    }
+  }
+  
+  /* Commented Navigation Styles
+  .docdetp-doctor-details__nav {
+    margin-top: 3.125rem;
+    border-bottom: 1px solid #0066f34;
+  }
+  
+  .docdetp-doctor-details__nav-button {
+    padding: 0.5rem 1.25rem;
+    margin-right: 1.25rem;
+    font-size: 1rem;
+    line-height: 1.75rem;
+    color: var(--heading-color);
+    font-weight: 600;
+  }
+  */
