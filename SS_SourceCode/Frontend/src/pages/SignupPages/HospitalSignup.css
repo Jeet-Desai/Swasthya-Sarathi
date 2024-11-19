@@ -1,0 +1,154 @@
+/* General Styles for Form */
+.hospitalsgp-signup-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    background-color: #f8f9fa;
+  }
+  
+  .hospitalsgp-signup-container {
+    max-width: 800px;
+    width: 100%;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+  }
+  
+  .hospitalsgp-form-helper-text {
+    font-size: 12px; 
+    color: #6c757d; 
+    line-height: 1.5;
+    display: block; 
+  }
+
+  .hospitalsgp-signup-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+  }
+  
+  .hospitalsgp-signup-img-box {
+    background-color: #fff;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .hospitalsgp-signup-img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+  }
+  
+  .hospitalgp-signup-form-container {
+    padding: 2rem;
+  }
+  
+  .hospitalsgp-signup-heading {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+  
+  .hospitalsgp-signup-heading .hospitalsgp-highlight {
+    color: #007bff;
+  }
+  
+  /* Form Group */
+  .hospitalsgp-form-group {
+    margin-bottom: 1.5rem;
+  }
+  
+  .hospitalsgp-field-instruction {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    font-size: 0.9rem;
+    color: #333;
+  }
+  
+  .hospitalsgp-form-input {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  
+  .hospitalsgp-form-input:focus {
+    border-color: #007bff;
+  }
+  
+  /* OTP Button */
+  .hospitalsgp-otp-btn, .hospitalsgp-verify-otp-btn {
+    margin-top: 0.5rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .hospitalsgp-otp-btn:disabled, .hospitalsgp-verify-otp-btn:disabled {
+    background-color: #ddd;
+    cursor: not-allowed;
+  }
+  
+  .hospitalsgp-otp-btn:hover:not(:disabled), .hospitalsgp-verify-otp-btn:hover:not(:disabled) {
+    background-color: #0056b3;
+  }
+  
+  /* Password Field Visibility Button */
+  .hospitalsgp-toggle-password-btn {
+    margin-top: 0.5rem;
+    font-size: 0.8rem;
+    color: #007bff;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .hospitalsgp-toggle-password-btn:hover {
+    text-decoration: underline;
+  }
+  
+  /* Responsive Design */
+  @media screen and (max-width: 768px) {
+    .hospitalsgp-signup-grid {
+      grid-template-columns: 1fr;
+    }
+  
+    .hospitalsgp-signup-img-box {
+      display: none;
+    }
+  
+    .hospitalsgp-signup-form-container {
+      padding: 2.0rem;
+    }
+  }
+
+  .hospitalsgp-form-submit-btn {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .hospitalsgp-form-submit-btn:hover {
+    background-color: #0056b3;
+  }
+  

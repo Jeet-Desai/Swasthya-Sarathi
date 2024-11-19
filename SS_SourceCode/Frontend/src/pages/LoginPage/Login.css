@@ -1,0 +1,133 @@
+/* Section styling */
+
+.logp-login-section {
+    padding: 0 20px;
+    background: linear-gradient(135deg, #d4d4d8, #e4e4e7, #f4f4f5, #a1a1aa);
+
+  }
+  
+  @media (min-width: 1024px) {
+    .logp-login-section {
+      padding: 0;
+    }
+  }
+  
+  /* Container styling */
+  .logp-login-container {
+    width: 100%;
+    max-width: 570px;
+    margin: 0 auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    background-color: #f4f4f5;
+  }
+  
+  /* Heading styles */
+  .logp-login-heading {
+    font-size: 22px;
+    font-weight: bold;
+    color: var(--heading-color, #000);
+    margin-bottom: 40px;
+  }
+  
+  .logp-login-heading .highlight {
+    color: var(--primary-color, #0066ff);
+  }
+  
+  /* Form styles */
+  .logp-login-form {
+    padding: 16px 0;
+  }
+  
+  /* Input styles */
+  .logp-input-group {
+    margin-bottom: 20px;
+  }
+  
+  .logp-input-field {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid rgba(0, 102, 255, 0.38);
+    border-radius: 8px;
+    font-size: 16px;
+    line-height: 1.75;
+    color: var(--heading-color, #000);
+    background-color: #fff;
+    outline: none;
+    transition: border-color 0.2s ease;
+  }
+  
+  .logp-input-field::placeholder {
+    color: var(--text-color, #888);
+  }
+  
+  .logp-input-field:focus {
+    border-color: var(--primary-color, #0066ff);
+  }
+  
+  /* Gender label and select styles */
+  .logp-gender-label {
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 1.75;
+    color: var(--heading-color, #000);
+  }
+  
+  .logp-gender-select {
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 1.75;
+    padding: 12px 16px;
+    margin-left: 8px;
+    border: 1px solid rgba(0, 102, 255, 0.38);
+    border-radius: 8px;
+    background-color: #fff;
+    color: var(--heading-color, #000);
+    outline: none;
+    cursor: pointer;
+  }
+  
+  .logp-gender-select:focus {
+    border-color: var(--primary-color, #0066ff);
+  }
+  
+  /* Button styles */
+  .logp-btn-group {
+    margin-top: 28px;
+  }
+  
+  .logp-login-button {
+    width: 100%;
+    background-color: var(--primary-color, #0066ff);
+    color: #fff;
+    font-size: 18px;
+    line-height: 1.67;
+    border-radius: 10px;
+    padding: 12px 16px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .logp-login-button:hover {
+    background-color: #0052cc;
+  }
+  
+  /* Sign up text */
+  .logp-signup-text {
+    margin-top: 20px;
+    text-align: center;
+    color: var(--text-color, #888);
+  }
+  
+  .logp-signup-link {
+    color: var(--primary-color, #0066ff);
+    font-weight: 500;
+    margin-left: 5px;
+    text-decoration: none;
+  }
+  
+  .logp-signup-link:hover {
+    text-decoration: underline;
+  }
+  
