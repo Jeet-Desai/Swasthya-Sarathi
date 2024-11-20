@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./PatientProfile.css";
 
 const PatientProfile = () => {
@@ -15,7 +15,7 @@ const PatientProfile = () => {
     password: "", // Added password field to formData
   });
 
-  const handleInputChange = (e) => {
+  const handleInputChange = e => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };

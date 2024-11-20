@@ -1,5 +1,5 @@
 /* Main Container */
-.appointment-container {
+.past-appointment-container {
   width: 90%;
   max-width: 600px;
   margin: 20px auto;
@@ -10,7 +10,7 @@
 }
 
 /* Heading */
-.appointment-container h2 {
+.past-appointment-container h2 {
   text-align: center;
   color: #333;
   font-size: 1.5em;
@@ -18,12 +18,12 @@
 }
 
 /* Paragraph Styling */
-.appointment-container p {
+.past-appointment-container p {
   margin: 10px 0;
   color: #333;
 }
 
-.appointment-container ul {
+.past-appointment-container ul {
   padding-left: 20px;
   margin: 10px 0;
   color: #333;
@@ -37,7 +37,7 @@
   gap: 10px;
 }
 
-.prescription-button {
+.past-prescription-button {
   background-color: #05cdec;
   width: 120px;
   height: 50px;
@@ -52,13 +52,13 @@
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.prescription-button:hover {
+.past-prescription-button:hover {
   background-color: #04b3d1;
   transform: scale(1.05);
 }
 
 /* Return Button */
-.return-button {
+.past-return-button {
   margin-top: 20px;
   background-color: #f05a5a;
   color: #fff;
@@ -70,31 +70,31 @@
   transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-.return-button:hover {
+.past-return-button:hover {
   background-color: #d04444;
   transform: scale(1.05);
 }
 
 /* Responsive Styles */
 @media only screen and (max-width: 768px) {
-  .appointment-container {
+  .past-appointment-container {
     padding: 15px; /* Reduce padding for smaller screens */
   }
 
-  .prescription-buttons {
+  .past-prescription-buttons {
     gap: 8px; /* Reduce spacing between buttons */
   }
 
-  .prescription-button, .return-button {
+  .past-prescription-button, .return-button {
     font-size: 0.85em; /* Adjust font size */
     padding: 8px 10px; /* Reduce padding */
   }
 
-  .appointment-container h2 {
+  .past-appointment-container h2 {
     font-size: 1.3em; /* Adjust heading size */
   }
 
-  .appointment-container p {
+  .past-appointment-container p {
     font-size: 0.95em; /* Adjust paragraph font size */
   }
 }
