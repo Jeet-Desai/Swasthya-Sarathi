@@ -40,7 +40,7 @@ const Header = () => {
             <BiMenu />
           </span>
           {/* Logo */}
-          <Link to="/home">
+          <Link to="/homepatient">
             <div className="logo">
               <img src={log} alt="Logo" />
             </div>

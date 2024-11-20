@@ -9,7 +9,7 @@ export const Login = () => {
     gender: "",
   });
 
-  const handleInputChange = (e) => {
+  const handleInputChange = e => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 

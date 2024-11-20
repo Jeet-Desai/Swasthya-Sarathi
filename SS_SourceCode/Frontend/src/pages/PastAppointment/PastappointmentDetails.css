@@ -29,30 +29,29 @@
   color: #333;
 }
 
-/* Prescription Buttons */
-.prescription-buttons {
-  margin: 15px 0;
+/* Report Buttons */
+
+.past-report-button {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-}
-
-.past-prescription-button {
+  gap: 15px;
+  align-items: center;
   background-color: #05cdec;
   width: 120px;
   height: 50px;
   color: #fff;
   border: none;
   border-radius: 25px;
-  padding: 10px 15px;
+  padding: 12px 15px;
   cursor: pointer;
   font-size: 0.9em;
   transition: background-color 0.3s ease, transform 0.3s ease;
   text-align: center;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  margin: 10px 0;
 }
 
-.past-prescription-button:hover {
+.past-report-button:hover {
   background-color: #04b3d1;
   transform: scale(1.05);
 }
@@ -81,11 +80,11 @@
     padding: 15px; /* Reduce padding for smaller screens */
   }
 
-  .past-prescription-buttons {
+  .past-report-buttons {
     gap: 8px; /* Reduce spacing between buttons */
   }
 
-  .past-prescription-button, .return-button {
+  .past-report-button, .return-button {
     font-size: 0.85em; /* Adjust font size */
     padding: 8px 10px; /* Reduce padding */
   }

@@ -16,16 +16,17 @@ const appointments = [
     diagnoses: ["Mild Angina", "High Cholesterol"], // Multiple diagnoses
     date: "22 Aug 2024",
     time: "10:00 AM",
-    prescriptions: [
+    Prescriptions: ["Prescription 1", "Prescription 2"], // Multiple prescriptions
+    Reports: [
       {
-        label: "Prescription 1",
+        label: "Report 1",
         link: "https://www.delhimedicalcouncil.org/pdf/modalprescription.pdf",
       },
       {
-        label: "Prescription 2",
+        label: "Report 2",
         link: "https://example.com/prescriptions/prescription2.pdf",
       },
-    ], // Multiple prescriptions
+    ], // Multiple Report
   },
   {
     id: 2,
@@ -41,14 +42,22 @@ const appointments = [
     diagnoses: ["Migraine"], // Single diagnosis
     date: "23 Aug 2024",
     time: "11:00 AM",
-    prescriptions: [
+    Prescriptions: ["Prescription 1"], // Single prescription
+    Reports: [
       {
-        label: "Main Prescription",
-        link: "https://example.com/prescriptions/prescription3.pdf",
+        label: "Report 1",
+        link: "https://www.delhimedicalcouncil.org/pdf/modalprescription.pdf",
       },
-    ], // Single prescription
+      {
+        label: "Report 2",
+        link: "https://example.com/prescriptions/prescription2.pdf",
+      },
+      {
+        label: "Report 3",
+        link: "https://example.com/prescriptions/prescription2.pdf",
+      },
+    ],
   },
-  // Add more appointments as needed
 ];
 
 const PastAppointmentDetails = () => {
@@ -109,15 +118,25 @@ const PastAppointmentDetails = () => {
       <p>
         <strong>Time:</strong> {appointment.time}
       </p>
-      <div className="past-prescription-buttons">
-        <strong>Prescriptions:</strong>
-        {appointment.prescriptions.map((prescription, index) => (
+
+      <p>
+        <strong>Presctiption:</strong>
+        <ul>
+          {appointment.Prescriptions.map((Pres, index) => (
+            <li key={index}>{Pres}</li>
+          ))}
+        </ul>
+      </p>
+
+      <div className="past-report-buttons">
+        <strong>Reports:</strong>
+        {appointment.Reports.map((Reports, index) => (
           <button
             key={index}
-            className="past-prescription-button"
-            onClick={() => window.open(prescription.link, "_blank")}
+            className="past-report-button"
+            onClick={() => window.open(Reports.link, "_blank")}
           >
-            {prescription.label}
+            {Reports.label}
           </button>
         ))}
       </div>

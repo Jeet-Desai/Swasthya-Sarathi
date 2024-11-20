@@ -16,11 +16,12 @@
   .logp-login-container {
     width: 100%;
     max-width: 570px;
-    margin: 0 auto;
+    margin: 80px auto;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     padding: 40px;
     background-color: #f4f4f5;
+    
   }
   
   /* Heading styles */
