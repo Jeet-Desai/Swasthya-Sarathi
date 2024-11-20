@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { BsArrowRight } from "react-icons/bs";
-import starIcon from "../../assets/images/Star.png";
 import "./DoctorCard.css";
 
 const DoctorCard = ({ doctor }) => {

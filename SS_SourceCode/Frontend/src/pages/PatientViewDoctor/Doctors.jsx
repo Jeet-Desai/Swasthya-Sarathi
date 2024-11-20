@@ -1,6 +1,6 @@
 import React from "react";
-// import { doctors } from "./../../assets/data/doctors";
-// import DoctorCard from "../components/DoctorCard";
+import { doctors } from "./../../assets/data/doctors";
+import DoctorCard from "./components/DoctorCard"
 import "./Doctors.css";
 
 const Doctors = () => {

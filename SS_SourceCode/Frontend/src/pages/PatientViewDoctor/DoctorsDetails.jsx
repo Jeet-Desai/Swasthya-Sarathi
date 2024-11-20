@@ -1,5 +1,4 @@
 import React from "react";
-// import SidePanel from "../components/SidePanel";
 import DoctorImg from '../../assets/images/doct01.jpg';
 import "./DoctorsDetails.css";
 import SidePanel from "./components/SidePanel";
