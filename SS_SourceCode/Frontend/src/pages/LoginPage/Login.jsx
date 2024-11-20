@@ -63,7 +63,7 @@ const submitHandler = async (e) => {
       localStorage.setItem("role", data.role);
 
       toast.success(data.message); // Display success message
-      navigate("/home"); // Navigate to the home page after successful login
+      navigate("/patient-dashBoard"); // Navigate to the home page after successful login
     } catch (err) {
       toast.error(err.message); // Show error if login fails
     } finally {

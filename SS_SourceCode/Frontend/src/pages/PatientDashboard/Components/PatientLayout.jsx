@@ -18,7 +18,7 @@ const PatientLayout = () => {
         <DashboardHeader />
         <main>
           <Routes>
-            <Route path="/" element={<PDashboard />} />
+          <Route path="/" element={<PDashboard />} />
             <Route path="/patient-dashBoard" element={<PDashboard />} />
             <Route path="/doctor/:id" element={<DoctorsDetails />} />
             <Route path="/patient-bookDoctor" element={<Doctors />} />

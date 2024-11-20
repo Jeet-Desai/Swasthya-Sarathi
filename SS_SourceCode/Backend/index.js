@@ -6,7 +6,7 @@ import dotenv from 'dotenv'
 import authRoute from './Routes/auth.js'
 import patRoute from './Routes/pat.js'
 import docRoute from './Routes/doc.js'
-
+import hosRoute from './Routes/hos.js'
 
 dotenv.config();
 
@@ -48,6 +48,7 @@ app.use(cors(corseOption));
 app.use('/api/v1/auth',authRoute);
 app.use('/api/v1/patients',patRoute);
 app.use('/api/v1/doctors',docRoute);
+app.use('/api/v1/hospitals',hosRoute);
 
 
 app.listen(port,()=>{

@@ -1,167 +1,121 @@
-import { useState } from "react";
-import "./PatientProfile.css";
+import React, { useState, useEffect } from 'react';
+import './PatientProfile.css';
 
 const PatientProfile = () => {
-  const [formData, setFormData] = useState({
-    email: "",
-    firstName: "",
-    middleName: "",
-    lastName: "",
-    gender: "",
-    contactNumber: "",
-    nationality: "",
-    dateOfBirth: "",
-    bloodGroup: "",
-    password: "", // Added password field to formData
+  const [profileData, setProfileData] = useState({
+    email: '',
+    firstName: '',
+    gender: '',
+    contactNumber: '',
+    nationality: '',
+    dateOfBirth: '',
+    bloodGroup: '',
   });
 
-  const handleInputChange = e => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
+  useEffect(() => {
+    // Retrieve the user's profile data from local storage
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user) {
+      setProfileData({
+        email: user.email || '',
+        firstName: user.name || '',
+        gender: user.gender || '',
+        contactNumber: user.contactNo || '',
+        nationality: user.nationality || '',
+        dateOfBirth: user.dob ? new Date(user.dob).toISOString().split('T')[0] : '',
+        bloodGroup: user.bloodGroup || '',
+      });
+    }
+  }, []);
 
   return (
     <div className="patient-profile-container">
-      <h2 style={{ textAlign: "center" }}>PATIENT PROFILE</h2>
+      <h2 style={{ textAlign: 'center' }}>PATIENT PROFILE</h2>
       <form className="form">
-        {/* First Name */}
+        {/* Email */}
         <div className="patient-profile-form-group">
+          <label>Email</label>
           <input
             type="email"
             name="email"
-            value={formData.email}
-            onChange={handleInputChange}
+            value={profileData.email}
+            readOnly
             placeholder="Email"
-            required
           />
         </div>
 
         {/* First Name */}
         <div className="patient-profile-form-group">
+          <label>Name</label>
           <input
             type="text"
             name="firstName"
-            value={formData.firstName}
-            onChange={handleInputChange}
-            placeholder="First Name"
-            required
-          />
-        </div>
-
-        {/* Middle Name */}
-        <div className="patient-profile-form-group">
-          <input
-            type="text"
-            name="middleName"
-            value={formData.middleName}
-            onChange={handleInputChange}
-            placeholder="Middle Name"
-          />
-        </div>
-
-        {/* Last Name */}
-        <div className="patient-profile-form-group">
-          <input
-            type="text"
-            name="lastName"
-            value={formData.lastName}
-            onChange={handleInputChange}
-            placeholder="Last Name"
-            required
-          />
-        </div>
-
-        {/* Password */}
-        <div className="patient-profile-form-group">
-          <input
-            type="password"
-            name="password"
-            value={formData.password}
-            onChange={handleInputChange}
-            placeholder="Password"
-            required
+            value={profileData.firstName}
+            readOnly
+            placeholder=" Name"
           />
         </div>
 
         {/* Gender */}
         <div className="patient-profile-form-group">
-          <select
+          <label>Gender</label>
+          <input
+            type="text"
             name="gender"
-            value={formData.gender}
-            onChange={handleInputChange}
-            required
-          >
-            <option value="">Gender</option>
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-            <option value="other">Other</option>
-          </select>
+            value={profileData.gender}
+            readOnly
+            placeholder="Gender"
+          />
         </div>
 
         {/* Contact Number */}
         <div className="patient-profile-form-group">
+          <label>Contact Number</label>
           <input
             type="tel"
             name="contactNumber"
-            value={formData.contactNumber}
-            onChange={handleInputChange}
+            value={profileData.contactNumber}
+            readOnly
             placeholder="Contact Number"
-            required
           />
         </div>
 
         {/* Nationality */}
         <div className="patient-profile-form-group">
+          <label>Nationality</label>
           <input
             type="text"
             name="nationality"
-            value={formData.nationality}
-            onChange={handleInputChange}
+            value={profileData.nationality}
+            readOnly
             placeholder="Nationality"
-            required
           />
         </div>
 
         {/* Date of Birth */}
-        <div className="patient-profile-form-group floating-label">
+        <div className="patient-profile-form-group">
+          <label>Date of Birth</label>
           <input
             type="date"
             id="dateOfBirth"
             name="dateOfBirth"
-            value={formData.dateOfBirth}
-            onChange={handleInputChange}
-            required
+            value={profileData.dateOfBirth}
+            readOnly
             className="dob-input"
           />
-          <label htmlFor="dateOfBirth" className="dob-label">
-            Date of Birth
-          </label>
         </div>
 
         {/* Blood Group */}
         <div className="patient-profile-form-group">
-          <select
+          <label>Blood Group</label>
+          <input
+            type="text"
             name="bloodGroup"
-            value={formData.bloodGroup}
-            onChange={handleInputChange}
-            required
-          >
-            <option value="">Blood Group</option>
-            <option value="A+">A+</option>
-            <option value="A-">A-</option>
-            <option value="B+">B+</option>
-            <option value="B-">B-</option>
-            <option value="O+">O+</option>
-            <option value="O-">O-</option>
-            <option value="AB+">AB+</option>
-            <option value="AB-">AB-</option>
-          </select>
+            value={profileData.bloodGroup}
+            readOnly
+            placeholder="Blood Group"
+          />
         </div>
-
-        {/* Submit Button */}
-        <button type="submit" className="patient-profile-submit-button">
-          Save Profile
-        </button>
       </form>
     </div>
   );
