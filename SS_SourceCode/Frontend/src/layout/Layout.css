@@ -4,6 +4,8 @@
 body{
   font-family: "Manrope", sans-serif;
   background: linear-gradient(135deg, #d4d4d8, #e4e4e7, #f4f4f5, #a1a1aa);
+  background-size: 100% 100%;
+  background-attachment: fixed;
 }
 
 

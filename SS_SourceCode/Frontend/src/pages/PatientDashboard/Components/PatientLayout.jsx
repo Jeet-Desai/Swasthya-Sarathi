@@ -9,6 +9,8 @@ import PendingAppointments from "../../patient/PendingAppointments";
 import PendingAppointmentDetail from "../../patient/PendingAppointmentDetail";
 import PatientProfile from "../../patient/PatientProfile";
 import DoctorBooking from "../../Booking/DoctorBooking";
+import DoctorsDetails from "../../PatientViewDoctor/DoctorsDetails";
+import Doctors from "../../PatientViewDoctor/Doctors";
 const PatientLayout = () => {
   return (
     <div>
@@ -16,8 +18,10 @@ const PatientLayout = () => {
         <DashboardHeader />
         <main>
           <Routes>
+            <Route path="/" element={<PDashboard />} />
             <Route path="/patient-dashBoard" element={<PDashboard />} />
-            <Route path="/patient-bookDoctor" element={<DoctorBooking />} />
+            <Route path="/doctor/:id" element={<DoctorsDetails />} />
+            <Route path="/patient-bookDoctor" element={<Doctors />} />
             <Route
               path="/patient-pending-appointment-list"
               element={<PendingAppointments />}

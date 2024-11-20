@@ -52,7 +52,7 @@ const DoctorCard = ({ doctor }) => {
           <p className="dcp-hospital-name">At {hospital}</p>
         </div>
         
-        <Link to="/doctors" className="dcp-doctor-card__link">
+        <Link to="/doctor/01" className="dcp-doctor-card__link">
           <BsArrowRight className="dcp-arrow-icon" />
         </Link>
       </div>
