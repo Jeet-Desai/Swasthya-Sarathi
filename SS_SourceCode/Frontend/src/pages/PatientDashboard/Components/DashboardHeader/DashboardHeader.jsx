@@ -2,7 +2,9 @@ import { useState, useEffect, useRef } from "react";
 import "./DashboardHeader.css";
 import MyProfileImage from "../../../../assets/images/MyProfile.jpg"; // Import the image
 import logo from "../../../../assets/images/rmlogo.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from 'react-router-dom';
+
+
 
 const navLinks = [
   { path: "/patient-dashBoard", display: "Dashboard" },
@@ -14,22 +16,42 @@ const navLinks = [
   { path: "/patient-pastappointment-list", display: "Past Appointments" },
 ];
 
+
 const DashboardHeader = () => {
   const headerRef = useRef(null);
   const menuRef = useRef(null);
   const [menuOpen, setMenuOpen] = useState(false);
-
+  const [userName, setUserName] = useState('');
+  
+const navigate = useNavigate();
   // Close menu when clicking outside (for mobile)
-  useEffect(() => {
-    const handleClickOutside = event => {
-      if (menuRef.current && !menuRef.current.contains(event.target)) {
-        setMenuOpen(false);
-      }
-    };
+  // useEffect(() => {
+  //   const handleClickOutside = event => {
+  //     if (menuRef.current && !menuRef.current.contains(event.target)) {
+  //       setMenuOpen(false);
+  //     }
+  //   };
 
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+  //   document.addEventListener("mousedown", handleClickOutside);
+  //   return () => document.removeEventListener("mousedown", handleClickOutside);
+  // }, []);
+  useEffect(() => {
+    // Retrieve the user's name from local storage
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user && user.name) {
+      setUserName(user.name);
+    }
   }, []);
+  const handleLogout = () => {
+    alert("Logging out...");
+    // Clear user data from local storage
+    localStorage.removeItem('user');
+    localStorage.removeItem('token');
+    localStorage.removeItem('role');
+    // Navigate to the home page
+    navigate('/');
+  };
+
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
 
@@ -59,7 +81,7 @@ const DashboardHeader = () => {
 
               {/* Desktop Navigation (always visible) */}
               <nav
-                className={`navigation ${menuOpen ? "show-menu" : "hide-menu"}`}
+                className={navigation ${menuOpen ? "show-menu" : "hide-menu"}}
                 ref={menuRef}
               >
                 <div className="nav-mid">
@@ -85,7 +107,7 @@ const DashboardHeader = () => {
                         className="menu-link"
                         onClick={toggleMenu}
                       >
-                        My profile
+                        <span className="user-name">{userName}</span>
                       </Link>
                     </li>
                     <li className="mobile-only">
@@ -110,12 +132,12 @@ const DashboardHeader = () => {
                       {/* Use the imported image */}
                       <img src={MyProfileImage} alt="User Profile" />
                     </div>
-                    My Profile
+                    <span className="user-name">{userName}</span>
                   </button>
                 </Link>
                 <button
                   className="logout-button"
-                  onClick={() => alert("Logging out...")}
+                  onClick={handleLogout}
                 >
                   Logout
                 </button>
