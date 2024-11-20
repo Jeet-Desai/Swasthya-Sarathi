@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import "./DashboardHeader.css";
 import MyProfileImage from "../../../../assets/images/MyProfile.jpg"; // Import the image
 import logo from "../../../../assets/images/rmlogo.png";
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 const navLinks = [
   { path: "/patient-dashBoard", display: "Dashboard" },
@@ -14,12 +14,12 @@ const navLinks = [
   { path: "/patient-pastappointment-list", display: "Past Appointments" },
 ];
 
+
 const DashboardHeader = () => {
   const headerRef = useRef(null);
   const menuRef = useRef(null);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [userName, setUserName] = useState('');
-const navigate = useNavigate();
+
   // Close menu when clicking outside (for mobile)
   // useEffect(() => {
   //   const handleClickOutside = event => {
@@ -77,7 +77,7 @@ const navigate = useNavigate();
 
               {/* Desktop Navigation (always visible) */}
               <nav
-                className={`navigation ${menuOpen ? "show-menu" : "hide-menu"}`}
+                className={navigation ${menuOpen ? "show-menu" : "hide-menu"}}
                 ref={menuRef}
               >
                 <div className="nav-mid">
