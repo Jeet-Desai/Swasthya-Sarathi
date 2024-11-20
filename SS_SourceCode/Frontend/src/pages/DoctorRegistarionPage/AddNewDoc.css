@@ -19,6 +19,7 @@
 /* Container for the Add New Doctor form */
 .add-new-doctor-container {
   background-color: rgba(255, 255, 255, 0.9);
+  margin: 100px auto;
   width: 100%;
   max-width: 480px;
   padding: 2.5rem;
