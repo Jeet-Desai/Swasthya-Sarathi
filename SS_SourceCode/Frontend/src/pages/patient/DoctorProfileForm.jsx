@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./DoctorProfileForm.css";
 
 const DoctorProfileForm = () => {
@@ -7,7 +7,7 @@ const DoctorProfileForm = () => {
     middleName: "",
     lastName: "",
     email: "",
-    password: "",  // State for password
+    password: "", // State for password
     phone: "",
     medicalLicense: "",
     yearsOfExperience: "",
@@ -16,21 +16,23 @@ const DoctorProfileForm = () => {
     dateOfBirth: "",
     registrationNumber: "",
     qualification: "",
-    about: "",  // Added about field
-    associatedHospital: "",  // Added associated hospital field
-    field: "",  // Added field field
+    about: "", // Added about field
+    associatedHospital: "", // Added associated hospital field
+    field: "", // Added field field
   });
 
-  const handleInputChange = (e) => {
+  const handleInputChange = e => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({
+    setFormData(prevData => ({
       ...prevData,
       [name]: value,
     }));
   };
 
   return (
-    <div className="doctor-form-wrapper"> {/* Background color wrapper */}
+    <div className="doctor-form-wrapper">
+      {" "}
+      {/* Background color wrapper */}
       <div className="doctor-form-container">
         <h2 className="doctor-form-title">DOCTOR PROFILE</h2>
         <form className="doctor-profile-form">

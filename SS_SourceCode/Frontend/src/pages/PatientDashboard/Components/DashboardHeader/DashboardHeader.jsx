@@ -1,14 +1,17 @@
 import { useState, useEffect, useRef } from "react";
 import "./DashboardHeader.css";
 import MyProfileImage from "../../../../assets/images/MyProfile.jpg"; // Import the image
-import logo from "../../../../assets/images/rmlogo.png"; 
-
+import logo from "../../../../assets/images/rmlogo.png";
+import { Link } from "react-router-dom";
 
 const navLinks = [
-  { path: "#Book-an-Appointment", display: "Book an Appointment" },
-  { path: "#pending-appointments", display: "Pending Appointments" },
-  { path: "#past-appointments", display: "Past Appointments" },
-  { path: "#about-us", display: "About Us" },
+  { path: "/patient-dashBoard", display: "Dashboard" },
+  { path: "/patient-bookDoctor", display: "Book an Appointment" },
+  {
+    path: "/patient-pending-appointment-list",
+    display: "Pending Appointments",
+  },
+  { path: "/patient-pastappointment-list", display: "Past Appointments" },
 ];
 
 const DashboardHeader = () => {
@@ -16,27 +19,9 @@ const DashboardHeader = () => {
   const menuRef = useRef(null);
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const handleStickyHeader = () => {
-    window.addEventListener("scroll", () => {
-      if (
-        document.body.scrollTop > 80 ||
-        document.documentElement.scrollTop > 80
-      ) {
-        headerRef.current.classList.add("sticky-header");
-      } else {
-        headerRef.current.classList.remove("sticky-header");
-      }
-    });
-  };
-
-  useEffect(() => {
-    handleStickyHeader();
-    return () => window.removeEventListener("scroll", handleStickyHeader);
-  }, []);
-
   // Close menu when clicking outside (for mobile)
   useEffect(() => {
-    const handleClickOutside = (event) => {
+    const handleClickOutside = event => {
       if (menuRef.current && !menuRef.current.contains(event.target)) {
         setMenuOpen(false);
       }
@@ -50,8 +35,8 @@ const DashboardHeader = () => {
 
   return (
     <>
-    <div className="p-dashboard-head">
-      <header className="header-container" ref={headerRef}>
+      <div className="p-dashboard-head">
+        <header className="header-container" ref={headerRef}>
           <div className="header-wrapper">
             <div className="header-content">
               {/* Toggle Menu Icon - Visible on mobile */}
@@ -59,11 +44,12 @@ const DashboardHeader = () => {
                 ☰
               </span>
               {/* Logo */}
-              <a href="#home">
+              <Link to="/patient-dashBoard">
                 <div className="logo">
-                  <img src={logo} alt="Logo" /> {/* Corrected to use imported logo */}
+                  <img src={logo} alt="Logo" />{" "}
+                  {/* Corrected to use imported logo */}
                 </div>
-              </a>
+              </Link>
 
               <div className="logoname">
                 <h1>
@@ -76,29 +62,49 @@ const DashboardHeader = () => {
                 className={`navigation ${menuOpen ? "show-menu" : "hide-menu"}`}
                 ref={menuRef}
               >
-                {/* Close Button (Mobile only) */}
-                <span className="close-icon mobile-only" onClick={toggleMenu}>
-                  ✕
-                </span>
-                <ul className="menu-list">
-                  {navLinks.map((link, index) => (
-                    <li key={index}>
-                      <a
-                        href={link.path}
+                <div className="nav-mid">
+                  {/* Close Button (Mobile only) */}
+                  <span className="close-icon mobile-only" onClick={toggleMenu}>
+                    ✕
+                  </span>
+                  <ul className="menu-list">
+                    {navLinks.map((link, index) => (
+                      <li key={index}>
+                        <a
+                          href={link.path}
+                          className="menu-link"
+                          onClick={toggleMenu} // Close menu on link click
+                        >
+                          {link.display}
+                        </a>
+                      </li>
+                    ))}
+                    <li className="mobile-only">
+                      <Link
+                        to="/patient-profile"
                         className="menu-link"
-                        onClick={toggleMenu} // Close menu on link click
+                        onClick={toggleMenu}
                       >
-                        {link.display}
-                      </a>
+                        My profile
+                      </Link>
                     </li>
-                  ))}
-                </ul>
+                    <li className="mobile-only">
+                      <Link
+                        to="/login"
+                        className="menu-link"
+                        onClick={toggleMenu}
+                      >
+                        Logout
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
               </nav>
 
               {/* Nav Right */}
               <div className="nav-right">
                 {/* Profile Button with Circle for Profile Image */}
-                <a href="#profile">
+                <Link to="/patient-profile">
                   <button className="profile-button">
                     <div className="profile-photo">
                       {/* Use the imported image */}
@@ -106,17 +112,21 @@ const DashboardHeader = () => {
                     </div>
                     My Profile
                   </button>
-                </a>
+                </Link>
+                <button
+                  className="logout-button"
+                  onClick={() => alert("Logging out...")}
+                >
+                  Logout
+                </button>
               </div>
             </div>
           </div>
           {/* Overlay for Mobile Menu */}
           {menuOpen && <div className="overlay" onClick={toggleMenu}></div>}
         </header>
-
-    </div>        
+      </div>
     </>
-
   );
 };
 

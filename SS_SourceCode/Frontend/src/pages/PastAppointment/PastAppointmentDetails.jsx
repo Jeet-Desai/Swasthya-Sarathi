@@ -1,5 +1,5 @@
 import { useParams, useNavigate } from "react-router-dom";
-import "./appointmentDetails.css";
+import "./PastappointmentDetails.css";
 
 const appointments = [
   {
@@ -51,7 +51,7 @@ const appointments = [
   // Add more appointments as needed
 ];
 
-const AppointmentDetails = () => {
+const PastAppointmentDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -66,7 +66,7 @@ const AppointmentDetails = () => {
   };
 
   return (
-    <div className="appointment-container">
+    <div className="past-appointment-container">
       <h2>Appointment Details</h2>
       <p>
         <strong>Hospital:</strong> {appointment.hospital}
@@ -109,23 +109,23 @@ const AppointmentDetails = () => {
       <p>
         <strong>Time:</strong> {appointment.time}
       </p>
-      <div className="prescription-buttons">
+      <div className="past-prescription-buttons">
         <strong>Prescriptions:</strong>
         {appointment.prescriptions.map((prescription, index) => (
           <button
             key={index}
-            className="prescription-button"
+            className="past-prescription-button"
             onClick={() => window.open(prescription.link, "_blank")}
           >
             {prescription.label}
           </button>
         ))}
       </div>
-      <button className="return-button" onClick={handleReturnClick}>
+      <button className="past-return-button" onClick={handleReturnClick}>
         Return
       </button>
     </div>
   );
 };
 
-export default AppointmentDetails;
+export default PastAppointmentDetails;

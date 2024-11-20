@@ -1,0 +1,54 @@
+
+
+.booking-container {
+  max-width: 500px;
+  margin: 50px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.booking-container
+h1 {
+  text-align: center;
+  color: #333;
+}
+
+.booking-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.booking-container label {
+  font-weight: bold;
+  color: #555;
+}
+
+.booking-container input,
+.booking-container select,
+.booking-container button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.booking-container input:focus,
+.booking-container select:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.booking-container button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.booking-container button:hover {
+  background-color: #0056b3;
+}

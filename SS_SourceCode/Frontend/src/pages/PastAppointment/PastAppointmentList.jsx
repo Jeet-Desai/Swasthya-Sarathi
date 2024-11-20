@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
-import "./appointmentList.css";
+import "./PastappointmentList.css";
 
-const AppointmentList = () => {
+const PastAppointmentList = () => {
   const navigate = useNavigate();
 
   const appointments = [
@@ -26,29 +26,34 @@ const AppointmentList = () => {
   ];
 
   const handleViewClick = id => {
-    navigate(`/appointment/${id}`);
+    navigate(`/patient-pastappointmentdetails/${id}`);
   };
 
   return (
     <div
       style={{
-        backgroundColor: "#f3f8fc",
         minHeight: "100vh",
         padding: "20px",
       }}
     >
-      <div className="appointment-list">
+      <div className="past-appointment-list">
         <h2>Past Appointments</h2>
-        <div className="appointments-container">
+        <div className="past-appointments-container">
           {appointments.map(appointment => (
-            <div key={appointment.id} className="appointment-card">
-              <div className="appointment-details">
-                <p className="appointment-hospital">{appointment.hospital}</p>
-                <p className="appointment-date">Date: {appointment.date}</p>
-                <p className="appointment-time">Time: {appointment.time}</p>
+            <div key={appointment.id} className="past-appointment-card">
+              <div className="past-appointment-details">
+                <p className="past-appointment-hospital">
+                  {appointment.hospital}
+                </p>
+                <p className="past-appointment-date">
+                  Date: {appointment.date}
+                </p>
+                <p className="past-appointment-time">
+                  Time: {appointment.time}
+                </p>
               </div>
               <button
-                className="view-button"
+                className="past-view-button"
                 onClick={() => handleViewClick(appointment.id)}
               >
                 View
@@ -61,4 +66,4 @@ const AppointmentList = () => {
   );
 };
 
-export default AppointmentList;
+export default PastAppointmentList;
