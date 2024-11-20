@@ -1,6 +1,12 @@
 import React, { useState } from "react";
 import "./Signup.css";
 import signupImg from "../../assets/images/rmlogo.png";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { BASE_URL } from "../../config";
+import { Link, useNavigate } from "react-router-dom";
+import {toast} from 'react-toastify';
+// import HashLoader from 'react-spinners/HashLoader';
 
 const Signup = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -9,6 +15,20 @@ const Signup = () => {
   const [otp, setOtp] = useState("");
   const [generatedOtp, setGeneratedOtp] = useState("");
   const [isVerified, setIsVerified] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [formData, setFormData] = useState({
+    email: "",
+    name: "",
+    password: "",
+    confirmPassword: "",
+    contactNo: "",
+    nationality: "",
+    dob: "",
+    gender: "",
+    bloodGroup: "",
+    role:"patient",
+  });
+
 
   // Toggle visibility of password fields
   const togglePasswordVisibility = () => {
@@ -34,14 +54,61 @@ const Signup = () => {
   };
 
   // Verify OTP
-  const verifyOtp = () => {
-    if (otp === generatedOtp) {
-      setIsVerified(true);
-      alert("Email verified successfully!");
-    } else {
-      alert("Incorrect OTP. Please try again.");
-    }
+
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
   };
+
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    // Check if passwords match on the client side
+    if (formData.password !== formData.confirmPassword) {
+        toast.error("Passwords do not match!");
+        setLoading(false);
+        return;
+    }
+
+    try {
+        const res = await fetch(`${BASE_URL}/api/v1/auth/register`, {
+            method: "post",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            credentials: "include",
+            body: JSON.stringify(formData)
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+            throw new Error(data.message);
+        }
+
+        toast.success(data.message);
+        navigate("/login");
+    } catch (err) {
+        toast.error(err.message);
+    } finally {
+        setLoading(false);
+    }
+};
+
+const verifyOtp = () => {
+  if (otp === generatedOtp) {
+    setIsVerified(true);
+    alert("Email verified successfully!");
+  } else {
+    alert("Incorrect OTP. Please try again.");
+  }
+};
+
 
   return (
     <section className="patientsgp-signup-section">
@@ -60,7 +127,7 @@ const Signup = () => {
               Create an <span className="patientsgp-highlight">account</span>
             </h3>
 
-            <form className="patientsgp-signup-form">
+            <form className="patientsgp-signup-form"  onSubmit={submitHandler}>
               {/* Email Address with OTP Verification */}
               <div className="patientsgp-form-group">
                 <label className="patientsgp-field-instruction">Email Address:</label>
@@ -69,8 +136,11 @@ const Signup = () => {
                   placeholder="Enter Your Email"
                   name="email"
                   className="patientsgp-form-input"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  value={formData.email}
+                  onChange={(e) => {
+                    setEmail(e.target.value); // Update email state for OTP
+                    handleInputChange(e); // Update form data
+                  }}
                   required
                 />
                 <button
@@ -109,6 +179,8 @@ const Signup = () => {
                   placeholder="Full Name"
                   name="name"
                   className="patientsgp-form-input"
+                  value={formData.name}
+                  onChange={handleInputChange}
                   required
                 />
               </div>
@@ -121,6 +193,8 @@ const Signup = () => {
                   placeholder="Enter Your Password"
                   name="password"
                   className="patientsgp-form-input"
+                  value={formData.password}
+                  onChange={handleInputChange}
                   required
                 />
                 <button
@@ -140,6 +214,8 @@ const Signup = () => {
                   placeholder="Confirm Your Password"
                   name="confirmPassword"
                   className="patientsgp-form-input"
+                  value={formData.confirmPassword}
+                  onChange={handleInputChange}
                   required
                 />
                 <button
@@ -159,6 +235,8 @@ const Signup = () => {
                   placeholder="Contact No."
                   name="contactNo"
                   className="patientsgp-form-input"
+                  value={formData.contactNo}
+                  onChange={handleInputChange}
                   required
                 />
               </div>
@@ -171,6 +249,8 @@ const Signup = () => {
                   placeholder="Nationality"
                   name="nationality"
                   className="patientsgp-form-input"
+                  alue={formData.nationality}
+                  onChange={handleInputChange}
                   required
                 />
               </div>
@@ -183,6 +263,8 @@ const Signup = () => {
                   placeholder="Date of Birth"
                   name="dob"
                   className="patientsgp-form-input"
+                  value={formData.dob}
+                  onChange={handleInputChange}
                   required
                 />
               </div>
@@ -196,6 +278,8 @@ const Signup = () => {
                   placeholder="Select Gender"
                   name="gender"
                   className="patientsgp-form-input"
+                  value={formData.gender}
+                  onChange={handleInputChange}
                   required
                 />
                 <datalist id="gender-options">
@@ -214,6 +298,8 @@ const Signup = () => {
                   placeholder="Select Blood Group"
                   name="bloodGroup"
                   className="patientsgp-form-input"
+                  value={formData.bloodGroup}
+                  onChange={handleInputChange}
                   required
                 />
                 <datalist id="blood-group-options">

@@ -85,3 +85,58 @@ export const Register = async (req, res) => {
     res.status(500).json({ success: false, message: "Server Error" });
   }
 };
+
+export const Login = async (req, res) => {
+    try {
+        const { email, password: pass, type} = req.body;
+
+        // Check if email, password, and type are provided
+        if (!email || !pass) {
+            return res.status(400).json({ message: "Email, password, and type are required" });
+        }
+        console.log(req.body);
+        let user = null;
+
+        // Check user type and find user accordingly
+        if (type === "patient") {
+            user = await Patient.findOne({ email });
+        } else if (type === "hospital") {
+            user = await Hospital.findOne({ email });
+        } 
+        else if (type === "doctor") {
+          user = await Doctor.findOne({ email });
+        } 
+        else {
+            return res.status(400).json({ message: "Invalid user type" });
+        }
+
+        // User not found
+        if (!user) {
+            return res.status(404).json({ message: "User account does not exist, you might consider registering" });
+        }
+
+        // Authenticate user by comparing password
+        const isPasswordCorrect = await bcrypt.compare(pass, user.password);
+
+        if (!isPasswordCorrect) {
+            return res.status(400).json({ status: false, message: "Invalid password. Try again." });
+        }
+
+        // Generate JWT token
+        const token = await jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SEC, { expiresIn: '30d' });
+
+        // Exclude the password and send user data along with the token
+        const { password, role, appointments, ...rest } = user._doc;
+        res.status(200).json({
+            status: true,
+            message: `Login successful, Welcome ${user?.name}`,
+            token,
+            user: { ...rest },
+            role,
+        });
+        
+    } catch (err) {
+        console.error("Error during user login:", err);
+        res.status(500).json({ status: 500, message: "Login failed, sorry." });
+    }
+};

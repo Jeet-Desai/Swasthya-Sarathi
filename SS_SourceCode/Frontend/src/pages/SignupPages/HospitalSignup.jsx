@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import "./HospitalSignup.css";
 import signupImg from "../../assets/images/rmlogo.png";
+import { BASE_URL } from "../../config";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const HospitalSignup = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -9,6 +12,22 @@ const HospitalSignup = () => {
   const [otp, setOtp] = useState("");
   const [generatedOtp, setGeneratedOtp] = useState("");
   const [isVerified, setIsVerified] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const [formData, setFormData] = useState({
+    email: "",
+    name: "",
+    password: "",
+    confirmPassword: "",
+    contactNo: "",
+    dof: "",
+    type: "",
+    registration_no: "",
+    role:"hospital",
+  });
+
+  
+  const navigate = useNavigate()
 
   // Toggle visibility of password fields
   const togglePasswordVisibility = () => {
@@ -21,7 +40,7 @@ const HospitalSignup = () => {
 
   // Simulate OTP sending (replace this with an API call)
   const sendOtp = async () => {
-    if (!email) {
+    if (!formData.email) {
       alert("Please enter your email first.");
       return;
     }
@@ -32,6 +51,52 @@ const HospitalSignup = () => {
     // Simulate sending OTP (use backend in production)
     alert(`OTP sent to your email: ${generated}`);
   };
+
+
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
+  };
+
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    // Check if passwords match on the client side
+    if (formData.password !== formData.confirmPassword) {
+        toast.error("Passwords do not match!");
+        setLoading(false);
+        return;
+    }
+
+    try {
+        const res = await fetch(`${BASE_URL}/api/v1/auth/register`, {
+            method: "post",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            credentials: "include",
+            body: JSON.stringify(formData)
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+            throw new Error(data.message);
+        }
+
+        toast.success(data.message);
+        navigate("/login");
+    } catch (err) {
+        toast.error(err.message);
+    } finally {
+        setLoading(false);
+    }
+};
 
   // Verify OTP
   const verifyOtp = () => {
@@ -53,14 +118,14 @@ const HospitalSignup = () => {
               <img src={signupImg} alt="Sign Up" className="hospitalsgp-signup-img" />
             </figure>
           </div>
-
+  
           {/* Signup Form */}
           <div className="hospitalsgp-signup-form-container">
             <h3 className="hospitalsgp-signup-heading">
               Create an <span className="hospitalsgp-highlight">account</span>
             </h3>
-
-            <form className="hospitalsgp-signup-form">
+  
+            <form className="hospitalsgp-signup-form" onSubmit={submitHandler}>
               {/* Email Address with OTP Verification */}
               <div className="hospitalsgp-form-group">
                 <label className="hospitalsgp-field-instruction">Hospital Email Address:</label>
@@ -69,8 +134,8 @@ const HospitalSignup = () => {
                   placeholder="Enter Hospital Email"
                   name="email"
                   className="hospitalsgp-form-input"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  value={formData.email}
+                  onChange={handleInputChange}
                   required
                 />
                 <button
@@ -82,7 +147,7 @@ const HospitalSignup = () => {
                   {isVerified ? "Verified" : "Send OTP"}
                 </button>
               </div>
-
+  
               {generatedOtp && !isVerified && (
                 <div className="hospitalsgp-form-group">
                   <label className="hospitalsgp-field-instruction">Enter OTP:</label>
@@ -100,7 +165,7 @@ const HospitalSignup = () => {
                   </button>
                 </div>
               )}
-
+  
               {/* Hospital Name */}
               <div className="hospitalsgp-form-group">
                 <label className="hospitalsgp-field-instruction">Hospital Name:</label>
@@ -109,10 +174,12 @@ const HospitalSignup = () => {
                   placeholder="Hospital Name"
                   name="name"
                   className="hospitalsgp-form-input"
+                  value={formData.name}
+                  onChange={handleInputChange}
                   required
                 />
               </div>
-
+  
               {/* Password Field */}
               <div className="hospitalsgp-form-group password-field">
                 <label className="hospitalsgp-field-instruction">Password:</label>
@@ -121,6 +188,8 @@ const HospitalSignup = () => {
                   placeholder="Enter Your Password"
                   name="password"
                   className="hospitalsgp-form-input"
+                  value={formData.password}
+                  onChange={handleInputChange}
                   required
                 />
                 <button
@@ -131,7 +200,7 @@ const HospitalSignup = () => {
                   {passwordVisible ? "Hide" : "Show"}
                 </button>
               </div>
-
+  
               {/* Confirm Password */}
               <div className="hospitalsgp-form-group password-field">
                 <label className="hospitalsgp-field-instruction">Confirm Password:</label>
@@ -140,6 +209,8 @@ const HospitalSignup = () => {
                   placeholder="Confirm Your Password"
                   name="confirmPassword"
                   className="hospitalsgp-form-input"
+                  value={formData.confirmPassword}
+                  onChange={handleInputChange}
                   required
                 />
                 <button
@@ -150,7 +221,7 @@ const HospitalSignup = () => {
                   {confirmPasswordVisible ? "Hide" : "Show"}
                 </button>
               </div>
-
+  
               {/* Contact Number */}
               <div className="hospitalsgp-form-group">
                 <label className="hospitalsgp-field-instruction">Contact Number:</label>
@@ -159,10 +230,13 @@ const HospitalSignup = () => {
                   placeholder="Contact No."
                   name="contactNo"
                   className="hospitalsgp-form-input"
+                  value={formData.contactNo}
+                  onChange={handleInputChange}
                   required
                 />
               </div>
-
+  
+              {/* Other Fields (Address, Registration Number, Ownership Type, etc.)
               {/* Address */}
               <div className="hospitalsgp-form-group">
                 <label className="hospitalsgp-field-instruction">Address:</label>
@@ -171,96 +245,58 @@ const HospitalSignup = () => {
                   placeholder="Address"
                   name="address"
                   className="hospitalsgp-form-input"
+                  value={formData.address}
+                  onChange={handleInputChange}
                   required
                 />
-              </div>
-
+              </div> 
+  
               {/* Registration Number */}
               <div className="hospitalsgp-form-group">
                 <label className="hospitalsgp-field-instruction">Registration Number:</label>
                 <input
                   type="text"
                   placeholder="Registration No."
-                  name="registerNo"
+                  name="registration_no"
                   className="hospitalsgp-form-input"
+                  value={formData.registration_no}
+                  onChange={handleInputChange}
                   required
                 />
               </div>
 
+              
+              <div className="form-group">
+  <label className="field-instruction">Date of Foundation:</label>
+  <input
+    type="date"
+    name="dof"  // Ensure this matches with formData key
+    className="form-input"
+    value={formData.dof}  // Ensure the value is linked to formData
+    onChange={handleInputChange}  // Update state on change
+    required
+  />
+</div>
               {/* Ownership Type */}
               <div className="hospitalsgp-form-group">
                 <label className="hospitalsgp-field-instruction">Ownership Type:</label>
-                <input
-                  list="owner-options"
-                  type="text"
-                  placeholder="Select Ownership Type"
-                  name="owner"
-                  className="hospitalsgp-form-input"
-                  required
-                />
-                <datalist id="owner-options">
-                  <option value="Private" />
-                  <option value="Semi-Government" />
-                  <option value="Government" />
-                </datalist>
-              </div>
-
-              <div className="hospitalsgp-form-group">
-                <label className="hospitalsgp-field-instruction">Departments:</label>
                 <select
-                  name="departments"
+                  name="type"
                   className="hospitalsgp-form-input"
-                  multiple
+                  value={formData.type}
+                  onChange={handleInputChange}
                   required
                 >
-                  <option value="Neurology">Neurology</option>
-                  <option value="Orthopaedic">Orthopaedic</option>
-                  <option value="Paediatric">Paediatric</option>
-                  <option value="Cardiology">Cardiology</option>
-                  <option value="Psychiatrist">Psychiatrist</option>
-                  <option value="ENT">ENT</option>
+                  <option value="" disabled>
+                    Select Ownership Type
+                  </option>
+                  <option value="Private">Private</option>
+                  <option value="Semi-Government">Semi-Government</option>
+                  <option value="Government">Government</option>
                 </select>
-                <small className="hospitalsgp-form-helper-text">
-                  Hold down the Ctrl (Windows) or Command (Mac) key to select multiple options.
-                </small>
               </div>
-
-              <div className="hospitalsgp-form-group">
-                {/* Website Link */}
-                <label className="hospitalsgp-field-instruction">Website:</label>
-                <input
-                  type="url"
-                  placeholder="https://example.com"
-                  name="website"
-                  className="hospitalsgp-form-input"
-                  required
-                />
-              </div>
-
-              <div className="hospitalsgp-form-group">
-                {/* Image Upload */}
-                <label className="hospitalsgp-field-instruction">Upload Image:</label>
-                <input
-                  type="file"
-                  name="image"
-                  accept="image/*"
-                  className="hospitalsgp-form-input"
-                  required
-                />
-                <small className="hospitalsgp-form-helper-text">Supported formats: JPG, PNG, GIF.</small>
-              </div>
-
-              <div className="hospitalsgp-form-group">
-                <label className="hospitalsgp-field-instruction">Description:</label>
-                <textarea
-                  name="description"
-                  placeholder="Enter a detailed description here..."
-                  className="hospitalsgp-form-input"
-                  rows="5"
-                  required
-                ></textarea>
-              </div>
-
+  
+              {/* Submit Button */}
               <div className="hospitalsgp-form-group">
                 <button type="submit" className="hospitalsgp-form-submit-btn">
                   Submit
