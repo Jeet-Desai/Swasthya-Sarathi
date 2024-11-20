@@ -17,7 +17,13 @@ const DoctorCard = ({ doctor }) => {
   return (
     <div className="dcp-doctor-card">
       <div className="dcp-doctor-card__image">
-        <img src={photo} alt={name} />
+        <img src={photo} alt={name}
+          style={{
+            width: "330px",
+            height: "330px",
+            objectFit: "cover",
+            borderRadius: "8px",
+          }} />
       </div>
       
       <h2 className="dcp-doctor-card__name">{name}</h2>
