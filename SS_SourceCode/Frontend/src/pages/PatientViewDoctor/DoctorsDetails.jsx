@@ -11,7 +11,13 @@ const DoctorDetails = () => {
                     <div className="docdetp-doctor-details__main">
                         <div className="docdetp-doctor-details__header">
                             <figure className="docdetp-doctor-details__image">
-                                <img src={DoctorImg} alt="Doctor profile" />
+                                <img src={DoctorImg} alt="Doctor profile"  
+                                    style={{
+                                        width: "330px",
+                                        height: "330px",
+                                        objectFit: "cover",
+                                        borderRadius: "8px",
+                                    }}/>
                             </figure>
 
                             <div className="docdetp-doctor-details__info">
