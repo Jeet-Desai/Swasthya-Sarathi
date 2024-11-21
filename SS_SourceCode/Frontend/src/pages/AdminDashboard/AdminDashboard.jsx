@@ -15,10 +15,10 @@ const AdminDashboard = () => {
           <AdminNavbar/>
             <Routes>
               <Route path="/" element={<AdminHome/>}/>
-              <Route path="/homeadmin" element={<AdminHome/>}/>
-              <Route path="/adminappointments" element={<AdminViewAppointmentRequests/>} />
-              <Route path="/adddoctor" element={<AddNewDoctor/>} />
-              <Route path="/adminappointments/:appointmentID" element={<AdminAppointmentDetails/>} />
+              <Route path="/admin/home" element={<AdminHome/>}/>
+              <Route path="/admin/appointments" element={<AdminViewAppointmentRequests/>} />
+              <Route path="/admin/adddoctor" element={<AddNewDoctor/>} />
+              <Route path="/admin//appointments/:appointmentID" element={<AdminAppointmentDetails/>} />
             </Routes>
           {/* <Footer /> */}
         </BrowserRouter>

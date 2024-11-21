@@ -1,9 +1,10 @@
 import React from "react";
-import { doctors } from "./../../assets/data/doctors";
+import { useDoctors } from "./../../assets/data/doctors.jsx";
 import DoctorCard from "./components/DoctorCard"
 import "./Doctors.css";
 
 const Doctors = () => {
+  const doctors = useDoctors(); 
   return (
     <>
       <section className="docp-doctor-search-section">

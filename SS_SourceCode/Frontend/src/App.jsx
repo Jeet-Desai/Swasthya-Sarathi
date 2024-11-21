@@ -19,6 +19,7 @@ import PDashboard from "./pages/PatientDashboard/Components/PDashboard/PDashboar
 import DashboardHeader from "./pages/PatientDashboard/Components/DashboardHeader/DashboardHeader";
 import DashboardFooter from "./pages/PatientDashboard/Components/DashboardFooter/DashboardFooter";
 // import AppointmentDetail from "./pages/patient/AppointmentDetail";
+
 function App() {
   return (
     <>
@@ -38,9 +39,9 @@ function App() {
       {/* <DoctorDashboard/> */}
       {/* <DoctorDashboard/> */}
       {/* <h1>Hello</h1> */}
-      {/* <Layout /> */}
-      <AdminDashboard/>
-      {/* <PatientLayout /> */}
+      <Layout />
+      {/* <AdminDashboard/> */}
+      {/* <PatientLayout />  */}
       {/* <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} closeOnClick pauseOnFocusLoss pauseOnHover />; */}
 <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} closeOnClick pauseOnFocusLoss pauseOnHover />
     </>

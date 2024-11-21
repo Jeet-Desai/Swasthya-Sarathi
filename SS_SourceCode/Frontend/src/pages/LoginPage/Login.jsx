@@ -63,7 +63,20 @@ const submitHandler = async (e) => {
       localStorage.setItem("role", data.role);
 
       toast.success(data.message); // Display success message
-      navigate("/patient-dashBoard"); // Navigate to the home page after successful login
+      if (data.role === "patient") {
+        navigate("/patient/");
+        window.location.href = "/patient/"; // Force a page reload
+      } else if (data.role === "hospital") {
+        navigate("/admin/");
+        window.location.href = "/admin/"; // Force a page reload
+      } else if (data.role === "doctor") {
+        navigate("/doctor/");
+        window.location.href = "/doctor/"; // Force a page reload
+      }
+        // Navigate to the home page after successful login if selected patient
+       // Navigate to the home page after successful login if selected patient
+      // navigate("/admin/"); // Navigate to the home page after successful login if selected hospital
+      // navigate("/doctor/"); // Navigate to the home page after successful login if selected doctor
     } catch (err) {
       toast.error(err.message); // Show error if login fails
     } finally {
@@ -126,7 +139,7 @@ const submitHandler = async (e) => {
 
           <p className="logp-signup-text">
             Don&apos;t have an account?
-            <Link to="/register" className="logp-signup-link">
+            <Link to="/register" className="logp-signup-link" >
               Sign Up
             </Link>
           </p>

@@ -6,7 +6,7 @@ import log from "../../assets/images/rmlogo.png";
 import "./header.css";
 
 const navLinks = [
-  { path: "/homepatient", display: "Home" },
+  { path: "/", display: "Home" },
   { path: "/doctors", display: "Doctors" },
   { path: "/about-us", display: "About Us" },
   { path: "/contact", display: "Contact" },
@@ -69,7 +69,10 @@ const Header = () => {
                     className={({ isActive }) =>
                       isActive ? "menu-link active" : "menu-link"
                     }
-                    onClick={toggleMenu}
+                    onClick={(e) => {
+                      toggleMenu(); // Close menu
+                      window.location.href = link.path; // Navigate to the link and trigger page reload
+                    }}
                   >
                     {link.display}
                   </NavLink>
@@ -77,12 +80,18 @@ const Header = () => {
               ))}
               {/* Mobile view added register and login on navbar*/}
               <li className="mobile-only">
-                <Link to="/register" className="menu-link" onClick={toggleMenu}>
+                <Link to="/register" className="menu-link" onClick={(e) => {
+                      toggleMenu(); // Close menu
+                      window.location.href = link.path; // Navigate to the link and trigger page reload
+                    }}>
                   Register
                 </Link>
               </li>
               <li className="mobile-only">
-                <Link to="/login" className="menu-link" onClick={toggleMenu}>
+                <Link to="/login" className="menu-link" onClick={(e) => {
+                      toggleMenu(); // Close menu
+                      window.location.href = link.path; // Navigate to the link and trigger page reload
+                    }}>
                   Login
                 </Link>
               </li>
@@ -91,10 +100,16 @@ const Header = () => {
 
           {/* Nav Right */}
           <div className="nav-right">
-            <Link to="/register">
+            <Link to="/register"  onClick={(e) => {
+                      toggleMenu(); // Close menu
+                      window.location.href = link.path; // Navigate to the link and trigger page reload
+                    }}>
               <button className="login-button">Register</button>
             </Link>
-            <Link to="/login">
+            <Link to="/login"  onClick={(e) => {
+                      toggleMenu(); // Close menu
+                      window.location.href = link.path; // Navigate to the link and trigger page reload
+                    }}>
               <button className="login-button">Login</button>
             </Link>
           </div>

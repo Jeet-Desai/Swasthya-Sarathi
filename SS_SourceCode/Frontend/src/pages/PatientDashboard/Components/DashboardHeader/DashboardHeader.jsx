@@ -2,24 +2,24 @@ import { useState, useEffect, useRef } from "react";
 import "./DashboardHeader.css";
 import MyProfileImage from "../../../../assets/images/MyProfile.jpg"; // Import the image
 import logo from "../../../../assets/images/rmlogo.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from 'react-router-dom';
 
 const navLinks = [
-  { path: "/patient-dashBoard", display: "Dashboard" },
-  { path: "/patient-bookDoctor", display: "Book an Appointment" },
+  { path: "/patient/dashboard", display: "Dashboard" },
+  { path: "/patient/bookdoctor", display: "Book an Appointment" },
   {
-    path: "/patient-pending-appointment-list",
+    path: "/patient/pending-appointment-list",
     display: "Pending Appointments",
   },
-  { path: "/patient-pastappointment-list", display: "Past Appointments" },
+  { path: "/patient/pastappointment-list", display: "Past Appointments" },
 ];
-
 
 const DashboardHeader = () => {
   const headerRef = useRef(null);
   const menuRef = useRef(null);
   const [menuOpen, setMenuOpen] = useState(false);
-
+  const [userName, setUserName] = useState('');
+const navigate = useNavigate();
   // Close menu when clicking outside (for mobile)
   // useEffect(() => {
   //   const handleClickOutside = event => {
@@ -62,7 +62,7 @@ const DashboardHeader = () => {
                 ☰
               </span>
               {/* Logo */}
-              <Link to="/patient-dashBoard">
+              <Link to="/patient/dashboard">
                 <div className="logo">
                   <img src={logo} alt="Logo" />{" "}
                   {/* Corrected to use imported logo */}
@@ -77,7 +77,7 @@ const DashboardHeader = () => {
 
               {/* Desktop Navigation (always visible) */}
               <nav
-                className={navigation ${menuOpen ? "show-menu" : "hide-menu"}}
+                className={`navigation ${menuOpen ? "show-menu" : "hide-menu"}`}
                 ref={menuRef}
               >
                 <div className="nav-mid">
@@ -99,7 +99,7 @@ const DashboardHeader = () => {
                     ))}
                     <li className="mobile-only">
                       <Link
-                        to="/patient-profile"
+                        to="/patient/profile"
                         className="menu-link"
                         onClick={toggleMenu}
                       >
@@ -122,7 +122,7 @@ const DashboardHeader = () => {
               {/* Nav Right */}
               <div className="nav-right">
                 {/* Profile Button with Circle for Profile Image */}
-                <Link to="/patient-profile">
+                <Link to="/patient/profile">
                   <button className="profile-button">
                     <div className="profile-photo">
                       {/* Use the imported image */}

@@ -7,9 +7,9 @@ import log from "/assests/images/SS_logo.png"; /* Update all class names to incl
 import "./AdminNavbar.css";
 
 const navLinks = [
-  { path: "/homeadmin", display: "Home" },
-  { path: "/adminappointments", display: "View Appointments" },
-  { path: "/adddoctor", display: "Add Doctor" }
+  { path: "/admin/home", display: "Home" },
+  { path: "/admin/appointments", display: "View Appointments" },
+  { path: "/admin/adddoctor", display: "Add Doctor" }
 ];
 
 const AdminNavbar = () => {
@@ -47,7 +47,7 @@ const AdminNavbar = () => {
           </span>
 
           {/* Logo */}
-          <Link to="/homeadmin">
+          <Link to="/admin/home">
             <div className="doctor-navbar-logo">
               <img src={log} alt="Logo" />
             </div>
@@ -76,7 +76,10 @@ const AdminNavbar = () => {
                     className={({ isActive }) =>
                       isActive ? "doctor-navbar-menu-link active" : "doctor-navbar-menu-link"
                     }
-                    onClick={toggleMenu} // Close menu on link click
+                    onClick={(e) => {
+                      toggleMenu(); // Close menu
+                      window.location.href = link.path; // Navigate to the link and trigger page reload
+                    }} // Close menu on link click
                   >
                     {link.display}
                   </NavLink>
@@ -87,7 +90,7 @@ const AdminNavbar = () => {
 
           {/* Nav Right */}
           <div className="doctor-navbar-nav-right">
-            <Link to="/loginadmin">
+            <Link to="/login">
               <button className="doctor-navbar-login-button">Logout</button>
             </Link>
           </div>

@@ -1,5 +1,5 @@
 import React from "react";
-import { doctors } from "./../../assets/data/doctors";
+import { doctors } from "./../../assets/data/doctors.jsx";
 import DoctorCard from "./DoctorCard";
 import "./DoctorList.css";
 

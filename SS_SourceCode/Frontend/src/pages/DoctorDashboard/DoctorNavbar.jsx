@@ -7,9 +7,9 @@ import log from "/assests/images/SS_logo.png"; /* Update all class names to incl
 import "./DoctorNavbar.css";
 
 const navLinks = [
-  { path: "/homedoctor", display: "Home" },
-  { path: "/doctorappointments", display: "View Appointments" },
-  { path: "/addmedicalrecord", display: "Add Medical Record" }
+  { path: "/doctor/home", display: "Home" },
+  { path: "/doctor/appointments", display: "View Appointments" },
+  { path: "/doctor/addmedicalrecord", display: "Add Medical Record" }
 ];
 
 const DoctorNavbar = () => {
@@ -76,7 +76,10 @@ const DoctorNavbar = () => {
                     className={({ isActive }) =>
                       isActive ? "doctor-navbar-menu-link active" : "doctor-navbar-menu-link"
                     }
-                    onClick={toggleMenu} // Close menu on link click
+                    onClick={(e) => {
+                      toggleMenu(); // Close menu
+                      window.location.href = link.path; // Navigate to the link and trigger page reload
+                    }}
                   >
                     {link.display}
                   </NavLink>
@@ -87,7 +90,7 @@ const DoctorNavbar = () => {
 
           {/* Nav Right */}
           <div className="doctor-navbar-nav-right">
-            <Link to="/logindoctor">
+            <Link to="/login">
               <button className="doctor-navbar-login-button">Logout</button>
             </Link>
           </div>
