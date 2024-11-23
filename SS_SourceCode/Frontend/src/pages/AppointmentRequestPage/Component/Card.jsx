@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom'; // Import the useNavigate hook
-import "./Card.css"
+// import "./Card.css"
 export default function Card({appointmentID }) {
   const navigate = useNavigate();  // Initialize the navigate hook
 

@@ -17,7 +17,7 @@
 
 /* Container for the content */
 .view-appointment-requests-container {
-  background-color: #fff;
+  background-color: #f4f4f5;
   width: 100%; /* Full width of the parent container */
   max-width: 1000px; /* Maximum width for large screens */
   min-height: 100vh; /* Take the full viewport height */

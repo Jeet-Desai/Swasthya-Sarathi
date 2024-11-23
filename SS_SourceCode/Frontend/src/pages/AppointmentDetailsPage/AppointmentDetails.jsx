@@ -1,6 +1,6 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom'; // Import useLocation
-import "./AppointmentDetails.css"; // Import the updated CSS
+// import "./AppointmentDetails.css"; // Import the updated CSS
 
 export default function AppointmentDetails() {
   // Get the state passed from the Card component
