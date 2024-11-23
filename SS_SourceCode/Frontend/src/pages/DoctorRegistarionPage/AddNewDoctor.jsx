@@ -1,235 +1,317 @@
 import React, { useState, useContext } from "react";
-import './AddNewDoc.css';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { AuthContext } from '../../Context/AuthContext';
-import { useNavigate } from 'react-router-dom';
+import {
+  ThemeProvider,
+  createTheme,
+  Card,
+  CardContent,
+  TextField,
+  Button,
+  Box,
+  Typography,
+  Grid,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+} from "@mui/material";
+import { Upload as UploadIcon } from "@mui/icons-material";
+import { AuthContext } from "../../Context/AuthContext";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#05cdec",
+    },
+  },
+  typography: {
+    h5: {
+      fontSize: "1.5rem",
+      "@media (max-width:900px)": {
+        fontSize: "1.3rem",
+      },
+      "@media (max-width:600px)": {
+        fontSize: "1.1rem",
+      },
+      "@media (max-width:400px)": {
+        fontSize: "0.75rem",
+      },
+    },
+  },
+  components: {
+    MuiCard: {
+      styleOverrides: {
+        root: {
+          borderRadius: 16,
+          boxShadow: "0 10px 30px rgba(0, 0, 0, 0.2)",
+          overflow: "hidden",
+        },
+      },
+    },
+  },
+});
 
 const AddNewDoctor = () => {
   const { user } = useContext(AuthContext);
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [phone, setPhone] = useState("");
-  const [gender, setGender] = useState("");
-  const [specialization, setSpecialization] = useState("");
-  const [qualification, setQualification] = useState("");
-  const [experience, setExperience] = useState("");
-  const [about, setAbout] = useState("");
-  const [dob, setDob] = useState("");
-  const [nationality, setNationality] = useState("");
   const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+    phone: "",
+    gender: "",
+    specialization: "",
+    qualification: "",
+    experience: "",
+    about: "",
+    dob: "",
+    nationality: "",
+  });
+
   const departmentsArray = [
-    "Pediatrics", "Orthopedics", "Cardiology", "Neurology", "Oncology",
-    "Radiology", "Physical Therapy", "Dermatology", "ENT",
+    "Pediatrics",
+    "Orthopedics",
+    "Cardiology",
+    "Neurology",
+    "Oncology",
+    "Radiology",
+    "Physical Therapy",
+    "Dermatology",
+    "ENT",
   ];
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (password !== confirmPassword) {
-      toast.error('Passwords do not match.');
+    if (formData.password !== formData.confirmPassword) {
+      toast.error("Passwords do not match.");
       return;
     }
 
     const hospitalId = user ? user._id : null;
     if (!hospitalId) {
-      toast.error('Hospital ID not found in local storage.');
+      toast.error("Hospital ID not found in local storage.");
       return;
     }
-    console.log(hospitalId);
 
     const doctorData = {
-      name,
-      email,
-      password,
-      confirmPassword,
-      phone,
-      gender,
-      specialization,
-      qualification,
-      experience,
-      about,
-      dob,
-      nationality,
-      hospitalId: hospitalId,
+      ...formData,
+      hospitalId,
     };
 
     try {
-      const response = await fetch('http://localhost:5000/api/v1/hospitals/register-doctor', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(doctorData),
-      });
+      const response = await fetch(
+        "http://localhost:5000/api/v1/hospitals/register-doctor",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(doctorData),
+        }
+      );
 
       const data = await response.json();
 
       if (response.ok) {
-        toast.success('Doctor registered successfully!');
-        // Clear form fields
-        setName('');
-        setEmail('');
-        setPassword('');
-        setConfirmPassword('');
-        setPhone('');
-        setGender('');
-        setSpecialization('');
-        setQualification('');
-        setExperience('');
-        setAbout('');
-        setDob('');
-        setNationality('');
-        navigate('/homeadmin');
+        toast.success("Doctor registered successfully!");
+        setFormData({
+          name: "",
+          email: "",
+          password: "",
+          confirmPassword: "",
+          phone: "",
+          gender: "",
+          specialization: "",
+          qualification: "",
+          experience: "",
+          about: "",
+          dob: "",
+          nationality: "",
+        });
+        navigate("/homeadmin");
       } else {
-        toast.error(data.message || 'Failed to register doctor.');
+        toast.error(data.message || "Failed to register doctor.");
       }
     } catch (error) {
-      toast.error('An error occurred. Please try again.');
+      toast.error("An error occurred. Please try again.");
     }
   };
 
   return (
-    <section className="add-new-doctor-page">
-      <div className="add-new-doctor-container">
-        <h1 className="add-new-doctor-title">REGISTER A NEW DOCTOR</h1>
-        <form onSubmit={handleSubmit}>
-          <div className="add-new-doctor-form-wrapper">
-            <div className="form-group">
-              <label>Name</label>
-              <input
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                required
-                className="add-new-doctor-input"
-              />
-            </div>
-            <div className="form-group">
-              <label>Email</label>
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                className="add-new-doctor-input"
-              />
-            </div>
-            <div className="form-group">
-              <label>Password</label>
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                className="add-new-doctor-input"
-              />
-            </div>
-            <div className="form-group">
-              <label>Confirm Password</label>
-              <input
-                type="password"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                required
-                className="add-new-doctor-input"
-              />
-            </div>
-            <div className="form-group">
-              <label>Phone</label>
-              <input
-                type="tel"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-                required
-                className="add-new-doctor-input"
-              />
-            </div>
-            <div className="form-group">
-              <label>Gender</label>
-              <select
-                value={gender}
-                onChange={(e) => setGender(e.target.value)}
-                required
-                className="add-new-doctor-select"
+    <ThemeProvider theme={theme}>
+      <Box
+        sx={{
+          background: "linear-gradient(135deg, #d4d4d8, #e4e4e7, #f4f4f5, #a1a1aa)",
+          padding: 3,
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "center",
+          minHeight: "100vh",
+        }}
+      >
+        <Card
+          sx={{
+            width: "100%",
+            maxWidth: { xs: "90%", sm: "95%", md: "100%" },
+            backgroundColor: "white",
+            margin: "0",
+          }}
+        >
+          <CardContent
+            sx={{
+              padding: { xs: "16px", sm: "24px", md: "32px" },
+            }}
+          >
+            <Typography
+              variant="h5"
+              component="h1"
+              align="center"
+              sx={{
+                mb: { xs: 2, sm: 3, md: 4 },
+                fontWeight: "bold",
+                color: "#333",
+                textTransform: "uppercase",
+              }}
+            >
+              Register New Doctor
+            </Typography>
+
+            <form onSubmit={handleSubmit}>
+              <Grid container spacing={2}>
+                <Grid item xs={12} md={6}>
+                  <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+                    {[
+                      { name: "name", label: "Name" },
+                      { name: "email", label: "Email", type: "email" },
+                      { name: "password", label: "Password", type: "password" },
+                      {
+                        name: "confirmPassword",
+                        label: "Confirm Password",
+                        type: "password",
+                      },
+                      { name: "phone", label: "Phone" },
+                      { name: "nationality", label: "Nationality" },
+                    ].map((field) => (
+                      <TextField
+                        key={field.name}
+                        required
+                        fullWidth
+                        name={field.name}
+                        label={field.label}
+                        type={field.type || "text"}
+                        value={formData[field.name]}
+                        onChange={handleChange}
+                        variant="outlined"
+                      />
+                    ))}
+                  </Box>
+                </Grid>
+
+                <Grid item xs={12} md={6}>
+                  <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+                    <FormControl fullWidth required>
+                      <InputLabel>Gender</InputLabel>
+                      <Select
+                        name="gender"
+                        value={formData.gender}
+                        onChange={handleChange}
+                        label="Gender"
+                      >
+                        <MenuItem value="Male">Male</MenuItem>
+                        <MenuItem value="Female">Female</MenuItem>
+                        <MenuItem value="Other">Other</MenuItem>
+                      </Select>
+                    </FormControl>
+
+                    <FormControl fullWidth required>
+                      <InputLabel>Specialization</InputLabel>
+                      <Select
+                        name="specialization"
+                        value={formData.specialization}
+                        onChange={handleChange}
+                        label="Specialization"
+                      >
+                        {departmentsArray.map((dept) => (
+                          <MenuItem key={dept} value={dept}>
+                            {dept}
+                          </MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
+
+                    {[
+                      { name: "qualification", label: "Qualification" },
+                      { name: "experience", label: "Experience" },
+                      { name: "dob", label: "Date of Birth", type: "date" },
+                    ].map((field) => (
+                      <TextField
+                        key={field.name}
+                        required
+                        fullWidth
+                        name={field.name}
+                        label={field.label}
+                        type={field.type || "text"}
+                        value={formData[field.name]}
+                        onChange={handleChange}
+                        variant="outlined"
+                        InputLabelProps={
+                          field.type === "date" ? { shrink: true } : undefined
+                        }
+                      />
+                    ))}
+
+                    <TextField
+                      required
+                      fullWidth
+                      name="about"
+                      label="About"
+                      multiline
+                      rows={4}
+                      value={formData.about}
+                      onChange={handleChange}
+                      variant="outlined"
+                    />
+                  </Box>
+                </Grid>
+              </Grid>
+
+              <Button
+                type="submit"
+                variant="contained"
+                sx={{
+                  mt: 4,
+                  width: "30vw",
+                  margin: "20px auto",
+                  display: "block",
+                  fontSize: {
+                    xs: '0.6rem',  // for small screens (tablet)
+                    sm : '0.7rem',
+                    md: '1rem',    // for medium screens (laptops/tablets and above)
+                  },
+                  backgroundColor: "#05cdec",
+                  "&:hover": {
+                    backgroundColor: "#039bbd",
+                  },
+                }}
               >
-                <option value="">Select Gender</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-                <option value="Other">Other</option>
-              </select>
-            </div>
-            <div className="form-group">
-              <label>Specialization</label>
-              <select
-                value={specialization}
-                onChange={(e) => setSpecialization(e.target.value)}
-                required
-                className="add-new-doctor-select"
-              >
-                <option value="">Select Specialization</option>
-                {departmentsArray.map((dept, index) => (
-                  <option value={dept} key={index}>{dept}</option>
-                ))}
-              </select>
-            </div>
-            <div className="form-group">
-              <label>Qualification</label>
-              <input
-                type="text"
-                value={qualification}
-                onChange={(e) => setQualification(e.target.value)}
-                required
-                className="add-new-doctor-input"
-              />
-            </div>
-            <div className="form-group">
-              <label>Experience</label>
-              <input
-                type="text"
-                value={experience}
-                onChange={(e) => setExperience(e.target.value)}
-                required
-                className="add-new-doctor-input"
-              />
-            </div>
-            <div className="form-group">
-              <label>About</label>
-              <input
-                type="text"
-                value={about}
-                onChange={(e) => setAbout(e.target.value)}
-                required
-                className="add-new-doctor-input"
-              />
-            </div>
-            <div className="form-group">
-              <label>Date of Birth</label>
-              <input
-                type="date"
-                value={dob}
-                onChange={(e) => setDob(e.target.value)}
-                required
-                className="add-new-doctor-input"
-              />
-            </div>
-            <div className="form-group">
-              <label>Nationality</label>
-              <input
-                type="text"
-                value={nationality}
-                onChange={(e) => setNationality(e.target.value)}
-                required
-                className="add-new-doctor-input"
-              />
-            </div>
-            <button type="submit" className="add-new-doctor-register-btn">Register New Doctor</button>
-          </div>
-        </form>
-      </div>
-    </section>
+                Register
+              </Button>
+            </form>
+          </CardContent>
+        </Card>
+      </Box>
+    </ThemeProvider>
   );
 };
 

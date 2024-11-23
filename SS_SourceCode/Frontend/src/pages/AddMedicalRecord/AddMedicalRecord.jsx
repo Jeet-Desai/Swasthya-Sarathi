@@ -133,7 +133,7 @@ const AddMedicalRecord = () => {
       <Box
         sx={{
           //   minHeight: '100vh',
-          backgroundColor: "#05cdec",
+          background: "linear-gradient(135deg, #d4d4d8, #e4e4e7, #f4f4f5, #a1a1aa)",
           padding: 3,
           display: "flex",
           flexDirection: "row",
@@ -147,7 +147,7 @@ const AddMedicalRecord = () => {
             maxWidth: { xs: "90%", sm: "95%", md: "100%" },
             backgroundColor: "white",
             overflowY: "auto",
-            margin:"15vh"
+            margin:"0"
           }}
         >
           <CardContent
