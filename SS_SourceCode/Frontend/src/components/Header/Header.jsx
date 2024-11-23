@@ -40,7 +40,13 @@ const Header = () => {
             <BiMenu />
           </span>
           {/* Logo */}
-          <Link to="/homepatient">
+          <Link
+            to="/"
+            onClick={e => {
+              toggleMenu(); // Close menu
+              window.location.href = link.path; // Navigate to the link and trigger page reload
+            }}
+          >
             <div className="logo">
               <img src={log} alt="Logo" />
             </div>
@@ -69,7 +75,7 @@ const Header = () => {
                     className={({ isActive }) =>
                       isActive ? "menu-link active" : "menu-link"
                     }
-                    onClick={(e) => {
+                    onClick={e => {
                       toggleMenu(); // Close menu
                       window.location.href = link.path; // Navigate to the link and trigger page reload
                     }}
@@ -80,18 +86,26 @@ const Header = () => {
               ))}
               {/* Mobile view added register and login on navbar*/}
               <li className="mobile-only">
-                <Link to="/register" className="menu-link" onClick={(e) => {
-                      toggleMenu(); // Close menu
-                      window.location.href = link.path; // Navigate to the link and trigger page reload
-                    }}>
+                <Link
+                  to="/register"
+                  className="menu-link"
+                  onClick={e => {
+                    toggleMenu(); // Close menu
+                    window.location.href = link.path; // Navigate to the link and trigger page reload
+                  }}
+                >
                   Register
                 </Link>
               </li>
               <li className="mobile-only">
-                <Link to="/login" className="menu-link" onClick={(e) => {
-                      toggleMenu(); // Close menu
-                      window.location.href = link.path; // Navigate to the link and trigger page reload
-                    }}>
+                <Link
+                  to="/login"
+                  className="menu-link"
+                  onClick={e => {
+                    toggleMenu(); // Close menu
+                    window.location.href = link.path; // Navigate to the link and trigger page reload
+                  }}
+                >
                   Login
                 </Link>
               </li>
@@ -100,16 +114,22 @@ const Header = () => {
 
           {/* Nav Right */}
           <div className="nav-right">
-            <Link to="/register"  onClick={(e) => {
-                      toggleMenu(); // Close menu
-                      window.location.href = link.path; // Navigate to the link and trigger page reload
-                    }}>
+            <Link
+              to="/register"
+              onClick={e => {
+                toggleMenu(); // Close menu
+                window.location.href = link.path; // Navigate to the link and trigger page reload
+              }}
+            >
               <button className="login-button">Register</button>
             </Link>
-            <Link to="/login"  onClick={(e) => {
-                      toggleMenu(); // Close menu
-                      window.location.href = link.path; // Navigate to the link and trigger page reload
-                    }}>
+            <Link
+              to="/login"
+              onClick={e => {
+                toggleMenu(); // Close menu
+                window.location.href = link.path; // Navigate to the link and trigger page reload
+              }}
+            >
               <button className="login-button">Login</button>
             </Link>
           </div>

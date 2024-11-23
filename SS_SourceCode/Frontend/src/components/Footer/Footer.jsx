@@ -15,13 +15,13 @@ const socialLinks = [
 ];
 
 const quickLinks01 = [
-  { path: "/homepatient", display: "Home" },
+  { path: "/", display: "Home" },
   { path: "/about-us", display: "About Us" },
 ];
 
 const quickLinks02 = [
   { path: "/doctors", display: "Find a Doctor" },
-  { path: "/", display: "Request an Appointment" },
+  { path: "/login", display: "Request an Appointment" },
 ];
 
 const quickLinks03 = [{ path: "/contact", display: "Contact Us" }];
@@ -39,7 +39,15 @@ const Footer = () => {
           </p>
           <div className="footer-social-links">
             {socialLinks.map((link, index) => (
-              <Link to={link.path} key={index} className="social-link">
+              <Link
+                to={link.path}
+                key={index}
+                className="social-link "
+                onClick={e => {
+                  toggleMenu(); // Close menu
+                  window.location.href = link.path; // Navigate to the link and trigger page reload
+                }}
+              >
                 {link.icon}
               </Link>
             ))}
@@ -51,7 +59,14 @@ const Footer = () => {
           <ul className="footer-link-list">
             {quickLinks01.map((item, index) => (
               <li key={index} className="footer-link-item">
-                <Link to={item.path} className="footer-link">
+                <Link
+                  to={item.path}
+                  className="footer-link"
+                  onClick={e => {
+                    toggleMenu(); // Close menu
+                    window.location.href = link.path; // Navigate to the link and trigger page reload
+                  }}
+                >
                   {item.display}
                 </Link>
               </li>
@@ -64,7 +79,14 @@ const Footer = () => {
           <ul className="footer-link-list">
             {quickLinks02.map((item, index) => (
               <li key={index} className="footer-link-item">
-                <Link to={item.path} className="footer-link">
+                <Link
+                  to={item.path}
+                  className="footer-link"
+                  onClick={e => {
+                    toggleMenu(); // Close menu
+                    window.location.href = link.path; // Navigate to the link and trigger page reload
+                  }}
+                >
                   {item.display}
                 </Link>
               </li>
@@ -77,7 +99,14 @@ const Footer = () => {
           <ul className="footer-link-list">
             {quickLinks03.map((item, index) => (
               <li key={index} className="footer-link-item">
-                <Link to={item.path} className="footer-link">
+                <Link
+                  to={item.path}
+                  className="footer-link"
+                  onClick={e => {
+                    toggleMenu(); // Close menu
+                    window.location.href = link.path; // Navigate to the link and trigger page reload
+                  }}
+                >
                   {item.display}
                 </Link>
               </li>

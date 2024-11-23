@@ -16,7 +16,7 @@ const PendingAppointments = () => {
   ];
 
   const handleViewClick = id => {
-    navigate(`/patient-pending-appointmentdetails/${id}`); // Fixed template literal syntax
+    navigate(`/patient/pending-appointmentdetails/${id}`); // Fixed template literal syntax
   };
 
   return (

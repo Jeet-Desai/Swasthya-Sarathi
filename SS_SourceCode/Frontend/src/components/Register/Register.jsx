@@ -10,9 +10,10 @@ const Register = () => {
             For <span>Hospital</span>
           </h3>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
-            nec est sit amet erat posuere pulvinar. Pellentesque habitant morbi
-            tristique senectus et netus et malesuada fames ac turpis egestas.
+            Join Us to Transform Healthcare! Register your hospital with
+            Swaasthya Sarathi and expand your reach to thousands of patients.
+            Simplify appointment management, showcase your top doctors, and
+            provide seamless care like never before.
           </p>
           <Link to="/signup-hos">
             <button className="register-btn">Register</button>
@@ -24,9 +25,11 @@ const Register = () => {
             For <span>Patient</span>
           </h3>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
-            nec est sit amet erat posuere pulvinar. Pellentesque habitant morbi
-            tristique senectus et netus et malesuada fames ac turpis egestas.
+            Your Gateway to Smarter Healthcare! Sign up to experience healthcare
+            like never before. Discover top-rated doctors, book appointments
+            instantly, and keep your medical history at your fingertips. Your
+            journey to better health starts here—because you deserve the best
+            care!
           </p>
           <Link to="/signup-patient">
             <button className="register-btn">Register</button>

@@ -26,7 +26,7 @@ const PastAppointmentList = () => {
   ];
 
   const handleViewClick = id => {
-    navigate(`/patient-pastappointmentdetails/${id}`);
+    navigate(`/patient/pastappointmentdetails/${id}`);
   };
 
   return (
