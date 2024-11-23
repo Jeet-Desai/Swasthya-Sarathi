@@ -30,6 +30,7 @@
   border-radius: 15px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
   margin-top: 5vh; /* Ensure a consistent margin-top on larger screens */
+  margin-bottom: 5vh;
 }
 
 .appointment-details h1 {

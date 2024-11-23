@@ -41,8 +41,8 @@ export default function AppointmentDetails() {
           <label htmlFor="time">Time:</label>
           <input type="time" id="time" name="time" value={initialData.time} disabled />
 
-          <button type="submit" className="btn-danger">Discard Appointment</button>
-          <button type="submit" className="btn-success">Confirm Appointment</button>
+          {/* <button type="submit" className="btn-danger">Discard Appointment</button>
+          <button type="submit" className="btn-success">Confirm Appointment</button> */}
         </form>
       </div>
     </div>

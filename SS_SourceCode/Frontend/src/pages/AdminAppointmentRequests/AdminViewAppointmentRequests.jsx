@@ -1,6 +1,6 @@
 import React from "react";
 import Card from "./Component/Card"; // for importing card (request component)
-import "./AdminViewAppointmentRequests.css"; // Import the updated CSS
+// import "./AdminViewAppointmentRequests.css"; // Import the updated CSS
 
 export default function AdminViewAppointmentRequests() {
   return (

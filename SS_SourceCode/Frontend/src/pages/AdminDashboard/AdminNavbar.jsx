@@ -4,7 +4,7 @@ import { BiMenu } from "react-icons/bi";
 import { AiOutlineClose } from "react-icons/ai"; // Import Close Icon
 import log from "/assests/images/SS_logo.png"; /* Update all class names to include `doctor-navbar-` prefix */
 
-import "./AdminNavbar.css";
+// import "./AdminNavbar.css";
 
 const navLinks = [
   { path: "/admin/home", display: "Home" },

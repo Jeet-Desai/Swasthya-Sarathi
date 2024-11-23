@@ -6,7 +6,7 @@ export default function Card({appointmentID }) {
 
   const handleClick = () => {
     // Navigate to AppointmentDetails and pass the appointmentId via state
-    navigate(`/adminappointments/${appointmentID}`);
+    navigate(`/admin/appointments/${appointmentID}`);
   };
 
   return (
