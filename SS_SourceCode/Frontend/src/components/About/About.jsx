@@ -2,6 +2,11 @@ import "./about.css";
 import teamImage from "../../assets/images/Photo1.jpg";
 import profile1 from "../../assets/images/MyPhoto.jpg";
 import jeetPhoto from "../../assets/images/JeetProfile.jpg";
+import harshPhoto from "../../assets/images/HarshProfile.jpg";
+import jeminiPhoto from "../../assets/images/jeminiProfile.jpg";
+import mayankPhoto from "../../assets/images/MaynakProfile.jpg";
+import anujPhoto from "../../assets/images/AnujProfile.jpg";
+import aryanPhoto from "../../assets/images/AryanProfile.jpg";
 
 // Sample team data
 const teamMembers = [
@@ -10,22 +15,22 @@ const teamMembers = [
     img: `${jeetPhoto}`,
   },
   {
-    name: "Member2",
-    img: `${profile1}`,
+    name: "Jemini Chaudhari",
+    img: `${jeminiPhoto}`,
   },
   {
-    name: "Member3",
-    img: `${profile1}`,
+    name: "Mayank Parmar",
+    img: `${mayankPhoto}`,
   },
   {
-    name: "Member4",
-    img: `${profile1}`,
+    name: "Anuj Valambhiya",
+    img: `${anujPhoto}`,
   },
-  { name: "Member 5", role: "Role 5", id: "202201522", img: `${profile1}` },
-  { name: "Member 6", role: "Role 6", id: "202201522", img: `${profile1}` },
-  { name: "Member 7", role: "Role 7", id: "202201522", img: `${profile1}` },
-  { name: "Member 8", role: "Role 8", id: "202201522", img: `${profile1}` },
-  { name: "Member 9", role: "Role 9", id: "202201522", img: `${profile1}` },
+  { name: "Arnold Mochahari", img: `${profile1}` },
+  { name: "Harsh Lad", img: `${harshPhoto}` },
+  { name: "Aryan Patel", img: `${aryanPhoto}` },
+  { name: "", img: `${profile1}` },
+  { name: "Member 9", img: `${profile1}` },
   {
     name: "Member 10",
     img: `${profile1}`,
@@ -47,16 +52,17 @@ const About = () => {
           </div>
           <div className="about-us-text">
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris
-              tincidunt varius metus, vitae facilisis felis. Sed vitae varius
-              justo. Maecenas faucibus lectus quam, id ornare velit euismod
-              vel.Nunc tempor laoreet ullamcorper.
-            </p>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris
-              tincidunt varius metus, vitae facilisis felis. Sed vitae varius
-              justo. Maecenas faucibus lectus quam, id ornare velit euismod
-              vel.Nunc tempor laoreet ullamcorper.
+              Building our Swasthya Sarathi System was a journey of dedication
+              and innovation. We worked tirelessly to design a user-friendly
+              website where patients and doctors can seamlessly interact. The
+              system allows patients to register, book appointments, and access
+              medical records, while doctors can manage schedules, view patient
+              histories, and update prescriptions. Our team focused on intuitive
+              interfaces, secure data handling, and smooth functionality,
+              spending countless hours coding, testing, and refining to ensure
+              every feature operates flawlessly. It was a challenging but
+              rewarding experience that reflects our commitment to enhancing
+              healthcare accessibility and efficiency.
             </p>
           </div>
         </div>
@@ -64,19 +70,7 @@ const About = () => {
       <div className="our-team">
         <div className="our-team-content">
           <h2 className="our-team-heading">Our team members</h2>
-          <p className="our-team-description">
-            Building our Swasthya Sarathi System was a journey of dedication and
-            innovation. We worked tirelessly to design a user-friendly website
-            where patients and doctors can seamlessly interact. The system
-            allows patients to register, book appointments, and access medical
-            records, while doctors can manage schedules, view patient histories,
-            and update prescriptions. Our team focused on intuitive interfaces,
-            secure data handling, and smooth functionality, spending countless
-            hours coding, testing, and refining to ensure every feature operates
-            flawlessly. It was a challenging but rewarding experience that
-            reflects our commitment to enhancing healthcare accessibility and
-            efficiency.
-          </p>
+          <p className="our-team-description"></p>
         </div>
         <div className="team-grid">
           {teamMembers.map((member, index) => (

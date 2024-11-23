@@ -11,12 +11,18 @@ const HeroSection = () => {
           {/* Hero Text Content */}
           <div className="hero-text">
             <div className="hero-text-wrapper">
-              <h1 className="hero-heading">Welcome! To Swasthya Sarathi.</h1>
+              <h1 className="hero-heading">What Swasthiya Sarathi do.</h1>
               <p className="hero-description">
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has been the standard dummy text ever
-                since the 1500s, when an unknown printer took a galley of type
-                and scrambled it.
+                At Swasthya Sarathi, we are committed to revolutionizing
+                healthcare with seamless management solutions. Our platform
+                simplifies patient care by providing easy access to medical
+                records, appointments, and personalized health recommendations.
+                Whether you are a patient, doctor, or healthcare professional,
+                Swasthya Sarathi ensures efficiency, transparency, and care like
+                never before.
+                <br />
+                Discover a smarter way to manage health—because your well-being
+                is our priority.
               </p>
             </div>
 
