@@ -94,7 +94,7 @@ export const Login = async (req, res) => {
         if (!email || !pass) {
             return res.status(400).json({ message: "Email, password, and type are required" });
         }
-        console.log(req.body);
+        
         let user = null;
 
         // Check user type and find user accordingly
@@ -121,9 +121,9 @@ export const Login = async (req, res) => {
         if (!isPasswordCorrect) {
             return res.status(400).json({ status: false, message: "Invalid password. Try again." });
         }
-
+        const typo = req.body.type;
         // Generate JWT token
-        const token = await jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SEC, { expiresIn: '30d' });
+        const token = await jwt.sign({ id: user._id, role: typo }, process.env.JWT_SEC, { expiresIn: '30d' });
 
         // Exclude the password and send user data along with the token
         const { password, role, appointments, ...rest } = user._doc;
@@ -132,9 +132,9 @@ export const Login = async (req, res) => {
             message: `Login successful, Welcome ${user?.name}`,
             token,
             user: { ...rest },
-            role,
-        });
-        
+            role:typo,
+        }); 
+         
     } catch (err) {
         console.error("Error during user login:", err);
         res.status(500).json({ status: 500, message: "Login failed, sorry." });

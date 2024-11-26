@@ -1,19 +1,24 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom'; // Import the useNavigate hook
+import { useNavigate } from 'react-router-dom';
 import "./Card.css"
-export default function Card({appointmentID }) {
-  const navigate = useNavigate();  // Initialize the navigate hook
+
+export default function Card({ appointmentID, patientName, doctorName, date, time, status }) {
+  const navigate = useNavigate();
 
   const handleClick = () => {
-    // Navigate to AppointmentDetails and pass the appointmentId via state
-    navigate(`/adminappointments/${appointmentID}`);
-  };
+    navigate(`/admin/appointments/${appointmentID}`);
+  };  
 
   return (
     <div className="card">
       <div className="card-info">
-        <h2>New Appointment</h2>
+        <h2>Appointment Details</h2>
         <p>AppointmentID: {appointmentID}</p>
+        <p>Patient: {patientName}</p>
+        <p>Doctor: {doctorName}</p>
+        <p>Date: {date}</p>
+        <p>Time: {time}</p>
+        <p>Status: {status}</p>
       </div>
       <div>
         <button className="btn" onClick={handleClick}>View</button>

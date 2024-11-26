@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import DoctorImg from '../../assets/images/doct01.jpg';
 import "./DoctorsDetails.css";
 import SidePanel from "./components/SidePanel";
 
 const DoctorsDetails = () => {
+    
+
+
+
     return (
         <section className="docdetp-doctor-details">
             <div className="docdetp-doctor-details__container">

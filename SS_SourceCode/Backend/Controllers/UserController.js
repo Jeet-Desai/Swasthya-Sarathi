@@ -6,12 +6,14 @@ import Hospital from '../Models/HospitalModel.js';
 
 export const getAllDoctors = async (req, res) => {
   try {
-    const doctors = await Doctor.find();
+    const doctors = await Doctor.find().populate('hospital', 'name');
+    
+    
     res.status(200).json({
       success: true,
       doctors,
     });
-    
+
   } catch (error) {
     res.status(500).json({
       success: false,
@@ -21,48 +23,25 @@ export const getAllDoctors = async (req, res) => {
   }
 };
 
-export const requestAppointment = async (req, res) => {
-    const { doctorId, hospitalId, date, time, description, patientId } = req.body;
-    
+export const getDoctorById = async (req, res) => {
+    const { id } = req.params;
     try {
-      // 1. Create a new appointment
-      const newAppointment = new Appointment({
-        patient: patientId, // the patient making the request
-        doctor: doctorId,
-        hospital: hospitalId,
-        date,
-        time,   
-        description,
-        status: 'pending', // Initial status is 'pending'
-      });
-  
-      // Save the appointment
-      const appointment = await newAppointment.save();
-  
-      // 2. Update the Doctor's appointment array
-      await Doctor.findByIdAndUpdate(
-        doctorId,
-        { $push: { appointments: appointment._id } },
-        { new: true }
-      );
-  
-      // 3. Update the Hospital's appointment array
-      await Hospital.findByIdAndUpdate(
-        hospitalId,
-        { $push: { appointments: appointment._id } },
-        { new: true }
-      );
-  
+      const doctor = await Doctor.findById(id).populate('hospital', 'name');
+      if (!doctor) {
+        return res.status(404).json({
+          success: false,
+          message: 'Doctor not found',
+        });
+      }
       res.status(200).json({
         success: true,
-        message: "Appointment requested successfully",
-        appointment,
+        doctor,
       });
     } catch (error) {
-      console.error("Error in requesting appointment:", error);
       res.status(500).json({
         success: false,
-        message: "Something went wrong while requesting the appointment.",
+        message: 'Failed to fetch doctor details.',
+        error: error.message,
       });
     }
   };

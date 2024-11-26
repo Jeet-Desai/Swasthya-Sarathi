@@ -18,7 +18,7 @@ const AdminDashboard = () => {
               <Route path="/admin/home" element={<AdminHome/>}/>
               <Route path="/admin/appointments" element={<AdminViewAppointmentRequests/>} />
               <Route path="/admin/adddoctor" element={<AddNewDoctor/>} />
-              <Route path="/admin//appointments/:appointmentID" element={<AdminAppointmentDetails/>} />
+              <Route path="/admin/appointments/:appointmentID" element={<AdminAppointmentDetails/>} />
             </Routes>
           {/* <Footer /> */}
         </BrowserRouter>

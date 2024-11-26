@@ -45,7 +45,8 @@ const navigate = useNavigate();
     localStorage.removeItem('token');
     localStorage.removeItem('role');
     // Navigate to the home page
-    navigate('/');
+    navigate('/login');
+    window.location.href = "/login/";
   };
 
 

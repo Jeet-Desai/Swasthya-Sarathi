@@ -56,23 +56,46 @@ const submitHandler = async (e) => {
           role: data.role,    // Correct data usage here
         },
       });
-
+      console.log(data.role);
       // Store user data in localStorage (optional)
       localStorage.setItem("user", JSON.stringify(data.user));
       localStorage.setItem("token", data.token);
       localStorage.setItem("role", data.role);
 
-      toast.success(data.message); // Display success message
-      if (data.role === "patient") {
-        navigate("/patient/");
-        window.location.href = "/patient/"; // Force a page reload
-      } else if (data.role === "hospital") {
-        navigate("/admin/");
-        window.location.href = "/admin/"; // Force a page reload
-      } else if (data.role === "doctor") {
-        navigate("/doctor/");
-        window.location.href = "/doctor/"; // Force a page reload
-      }
+      toast.success(data.message, {
+        position: "top-right",
+        autoClose: 800,
+        hideProgressBar: false,
+      });
+      setTimeout(() => {
+        switch (data.role) {
+          case "patient":
+            navigate("/patient/");
+            window.location.href = "/patient/";
+            break;
+          case "hospital":
+            navigate("/admin/");
+            window.location.href = "/admin/";
+            break;
+          case "doctor":
+            navigate("/doctor/");
+            window.location.href = "/doctor";
+            break;
+          default:
+            window.location.href = "/";
+        }
+      }, 1500);
+      // if (data.role === "patient") {
+      //   navigate("/patient/");
+      //   window.location.href = "/patient/"; // Force a page reload
+      // } else if (data.role === "hospital") {
+      //   navigate("/admin/");
+      //   // window.location.href = "/admin/"; // Force a page reload
+      // } else if (data.role === "doctor") {
+      //   navigate("/doctor/");
+      //   window.location.href = "/doctor"; // Force a page reload
+      // }
+      // toast.success(data.message); // Display success message
         // Navigate to the home page after successful login if selected patient
        // Navigate to the home page after successful login if selected patient
       // navigate("/admin/"); // Navigate to the home page after successful login if selected hospital

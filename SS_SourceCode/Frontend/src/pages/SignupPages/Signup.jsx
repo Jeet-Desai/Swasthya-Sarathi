@@ -9,6 +9,7 @@ import {toast} from 'react-toastify';
 // import HashLoader from 'react-spinners/HashLoader';
 
 const Signup = () => {
+  const navigate = useNavigate();   
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
   const [email, setEmail] = useState("");

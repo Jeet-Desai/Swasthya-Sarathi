@@ -29,7 +29,16 @@ const DoctorNavbar = () => {
       }
     });
   };
-
+  const handleLogout = () => {
+    alert("Logging out...");
+    // Clear user data from local storage
+    localStorage.removeItem('user');
+    localStorage.removeItem('token');
+    localStorage.removeItem('role');
+    // Navigate to the home page
+    navigate('/login');
+    window.location.href = "/login/";
+  };
   useEffect(() => {
     handleStickyHeader();
     return () => window.removeEventListener("scroll", handleStickyHeader);
@@ -91,7 +100,7 @@ const DoctorNavbar = () => {
           {/* Nav Right */}
           <div className="doctor-navbar-nav-right">
             <Link to="/login">
-              <button className="doctor-navbar-login-button">Logout</button>
+              <button className="doctor-navbar-login-button" onClick={handleLogout}>Logout</button>
             </Link>
           </div>
         </div>

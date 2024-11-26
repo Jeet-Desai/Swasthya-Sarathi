@@ -291,8 +291,8 @@ const HospitalSignup = () => {
                     Select Ownership Type
                   </option>
                   <option value="Private">Private</option>
-                  <option value="Semi-Government">Semi-Government</option>
-                  <option value="Government">Government</option>
+                  <option value="Semi-Gov">Semi-Government</option>
+                  <option value="Gov">Government</option>
                 </select>
               </div>
   

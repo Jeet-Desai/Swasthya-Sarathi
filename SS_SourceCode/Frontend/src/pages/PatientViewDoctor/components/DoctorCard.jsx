@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { BsArrowRight } from "react-icons/bs";
 import "./DoctorCard.css";
-
+import doctorphoto1 from "../../../assets/images/doct01.jpg";
 const DoctorCard = ({ doctor }) => {
   const {
     name,
@@ -11,13 +11,13 @@ const DoctorCard = ({ doctor }) => {
     photo,
     specialization,
     //totalPatient,
-    hospital,
+    hospital
   } = doctor;
 
   return (
     <div className="dcp-doctor-card">
       <div className="dcp-doctor-card__image">
-        <img src={photo} alt={name}
+        <img src={doctorphoto1} alt={name}
           style={{
             width: "330px",
             height: "330px",
@@ -49,7 +49,7 @@ const DoctorCard = ({ doctor }) => {
           {/* Commented Patient Count for future use
           <h3 className="patient-count">+{totalPatient} patients</h3>
           */}
-          <p className="dcp-hospital-name">At {hospital}</p>
+          <p className="dcp-hospital-name">At {hospital.name}</p>
         </div>
         
         <Link to="/doctor/01" className="dcp-doctor-card__link">

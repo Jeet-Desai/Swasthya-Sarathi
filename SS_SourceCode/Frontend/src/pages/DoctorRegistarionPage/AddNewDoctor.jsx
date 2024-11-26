@@ -82,7 +82,7 @@ const AddNewDoctor = () => {
         setAbout('');
         setDob('');
         setNationality('');
-        navigate('/homeadmin');
+        navigate('/admin/home');
       } else {
         toast.error(data.message || 'Failed to register doctor.');
       }

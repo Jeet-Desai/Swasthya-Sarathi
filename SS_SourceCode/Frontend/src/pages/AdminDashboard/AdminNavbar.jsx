@@ -3,6 +3,10 @@ import { NavLink, Link } from "react-router-dom";
 import { BiMenu } from "react-icons/bi";
 import { AiOutlineClose } from "react-icons/ai"; // Import Close Icon
 import log from "/assests/images/SS_logo.png"; /* Update all class names to include `doctor-navbar-` prefix */
+import { useNavigate } from "react-router-dom"; // Add useNavigate
+import { toast } from "react-toastify";
+
+
 
 import "./AdminNavbar.css";
 
@@ -13,9 +17,19 @@ const navLinks = [
 ];
 
 const AdminNavbar = () => {
+  const navigate = useNavigate();
   const headerRef = useRef(null);
   const menuRef = useRef(null);
   const [menuOpen, setMenuOpen] = useState(false);
+
+  const handleLogout = () => {
+    // Clear all stored data
+    localStorage.clear();
+    // Show success message
+    toast.success("Logged out successfully");
+    // Navigate to login page
+    window.location.href = "/login";
+    };
 
   const handleStickyHeader = () => {
     window.addEventListener("scroll", () => {
@@ -90,9 +104,9 @@ const AdminNavbar = () => {
 
           {/* Nav Right */}
           <div className="doctor-navbar-nav-right">
-            <Link to="/login">
-              <button className="doctor-navbar-login-button">Logout</button>
-            </Link>
+            
+              <button className="doctor-navbar-login-button" onClick={handleLogout}>Logout</button>
+            
           </div>
         </div>
       </div>
