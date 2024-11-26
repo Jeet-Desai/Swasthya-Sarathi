@@ -13,7 +13,7 @@ export default function AdminAppointmentDetails() {
   useEffect(() => {
     const fetchAppointmentData = async () => {
       try {
-        const response = await fetch(http://localhost:5000/api/v1/hospitals/get-appointment-detail/${appointmentID});
+        const response = await fetch("http://localhost:5000/api/v1/hospitals/get-appointment-detail/${appointmentID}");
         if (!response.ok) {
           throw new Error('Failed to fetch appointment data');
         }
@@ -36,7 +36,7 @@ export default function AdminAppointmentDetails() {
 
   const handleUpdateStatus = async (status) => {
     try {
-      const response = await fetch(http://localhost:5000/api/v1/hospitals/${appointmentID}/status, {
+      const response = await fetch("http://localhost:5000/api/v1/hospitals/${appointmentID}/status", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
