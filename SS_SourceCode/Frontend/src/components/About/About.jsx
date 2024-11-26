@@ -3,7 +3,7 @@ import teamImage from "../../assets/images/Photo1.jpg";
 import profile1 from "../../assets/images/MyPhoto.jpg";
 import jeetPhoto from "../../assets/images/JeetProfile.jpg";
 import harshPhoto from "../../assets/images/HarshProfile.jpg";
-import jeminiPhoto from "../../assets/images/jeminiProfile.jpg";
+import jeminiPhoto from "../../assets/images/JeminiProfile.jpg";
 import mayankPhoto from "../../assets/images/MaynakProfile.jpg";
 import anujPhoto from "../../assets/images/AnujProfile.jpg";
 import aryanPhoto from "../../assets/images/AryanProfile.jpg";
