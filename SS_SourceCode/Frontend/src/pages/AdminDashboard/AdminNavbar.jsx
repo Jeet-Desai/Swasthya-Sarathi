@@ -23,6 +23,7 @@ const AdminNavbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const handleLogout = () => {
+    alert("Logging out...");
     // Clear all stored data
     localStorage.clear();
     // Show success message

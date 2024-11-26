@@ -1,5 +1,6 @@
-import { useState, useEffect, useRef } from "react";
-import { NavLink, Link } from "react-router-dom";
+import { useState, useEffect, useRef} from "react";
+import { NavLink, Link, useNavigate} from "react-router-dom";
+
 import { BiMenu } from "react-icons/bi";
 import { AiOutlineClose } from "react-icons/ai"; // Import Close Icon
 import log from "/assests/images/SS_logo.png"; /* Update all class names to include `doctor-navbar-` prefix */
@@ -16,6 +17,7 @@ const DoctorNavbar = () => {
   const headerRef = useRef(null);
   const menuRef = useRef(null);
   const [menuOpen, setMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
   const handleStickyHeader = () => {
     window.addEventListener("scroll", () => {

@@ -124,21 +124,13 @@ const AddNewDoctor = () => {
       const data = await response.json();
 
       if (response.ok) {
-        toast.success('Doctor registered successfully!');
-        // Clear form fields
-        setName('');
-        setEmail('');
-        setPassword('');
-        setConfirmPassword('');
-        setPhone('');
-        setGender('');
-        setSpecialization('');
-        setQualification('');
-        setExperience('');
-        setAbout('');
-        setDob('');
-        setNationality('');
+        toast.success(data.message, { autoClose: 700 });  
         navigate('/admin/home');
+        setTimeout(() => {  
+          window.location.href = "/admin/home";
+        }, 1100);
+        
+        
       } else {
         toast.error(data.message || "Failed to register doctor.");
       }
