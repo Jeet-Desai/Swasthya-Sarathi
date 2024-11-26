@@ -26,8 +26,10 @@ const Hero1 = () => {
             <div className="hero1-content">
               <h3 className="hero1-title">Find a Doctor</h3>
               <p className="hero1-description">
-                World-class care for everyone. Our health system offers
-                unmatched, expert health care, from the lab to the clinic.
+                Connect with the best healthcare professionals effortlessly. Our
+                platform helps you search and filter top-rated doctors based on
+                specialization, location, and reviews, ensuring you get the care
+                you deserve. Your health is in the best hands!
               </p>
             </div>
           </div>
@@ -40,8 +42,10 @@ const Hero1 = () => {
             <div className="hero1-content">
               <h3 className="hero1-title">Get Your Medical History</h3>
               <p className="hero1-description">
-                World-class care for everyone. Our health system offers
-                unmatched, expert health care, from the lab to the clinic.
+                Access your complete medical history anytime, anywhere. With
+                Swaasthya Sarathi, securely store all your health records in one
+                place, making it easy to share with doctors and stay informed
+                about your health journey.
               </p>
             </div>
           </div>
@@ -54,8 +58,10 @@ const Hero1 = () => {
             <div className="hero1-content">
               <h3 className="hero1-title">Book Appointment</h3>
               <p className="hero1-description">
-                World-class care for everyone. Our health system offers
-                unmatched, expert health care, from the lab to the clinic.
+                Skip the queues and book appointments with just a few clicks.
+                Choose your preferred doctor, time, and date, and manage your
+                health schedule with ease. Healthcare has never been this
+                convenient!
               </p>
             </div>
           </div>

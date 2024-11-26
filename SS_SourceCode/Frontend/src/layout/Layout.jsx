@@ -28,6 +28,9 @@ import AppointmentDetails from "../pages/AppointmentDetailsPage/AppointmentDetai
 import AdminViewAppointmentRequests from "../pages/AdminAppointmentRequests/AdminViewAppointmentRequests";
 import AddNewDoctor from "../pages/DoctorRegistarionPage/AddNewDoctor";
 import AdminAppointmentDetails from "../pages/AdminAppointmentDetails/AdminAppointmentDetails";
+import PatientFooter from "../components/Footer/PatientFooter";
+import AdminFooter from "../components/Footer/AdminFooter";
+import DoctorFooter from "../components/Footer/DoctorFooter";
 
 const Layout = () => {
   return (
@@ -36,14 +39,14 @@ const Layout = () => {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Header />} />
-            <Route path="/doctors" element={<Header/>} />
-              {/* <Route path="/doctor/:id" element={<Header />} /> */}
-              <Route path="/login" element={<Header />} />
-              <Route path="/register" element={<Header />} />
-              <Route path="/contact" element={<Header />} />
-              <Route path="/about-us" element={<Header />} />
-              <Route path="/signup-patient" element={<Header />} />
-              <Route path="/signup-hos" element={<Header />} />
+            <Route path="/doctors" element={<Header />} />
+            {/* <Route path="/doctor/:id" element={<Header />} /> */}
+            <Route path="/login" element={<Header />} />
+            <Route path="/register" element={<Header />} />
+            <Route path="/contact" element={<Header />} />
+            <Route path="/about-us" element={<Header />} />
+            <Route path="/signup-patient" element={<Header />} />
+            <Route path="/signup-hos" element={<Header />} />
             <Route path="/patient/*" element={<DashboardHeader />} />
             <Route path="/doctor/*" element={<DoctorNavbar />} />
             <Route path="/admin/*" element={<AdminNavbar />} />
@@ -58,7 +61,13 @@ const Layout = () => {
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
               <Route path="/contact" element={<Contact />} />
+              <Route path="/patient/contact" element={<Contact />} />
+              <Route path="/admin/contact" element={<Contact />} />
+              <Route path="/doctor/contact" element={<Contact />} />
               <Route path="/about-us" element={<About />} />
+              <Route path="/patient/about-us" element={<About />} />
+              <Route path="/admin/about-us" element={<About />} />
+              <Route path="/doctor/about-us" element={<About />} />
               <Route path="/signup-patient" element={<Signup />} />
               <Route path="/signup-hos" element={<HospitalSignup />} />
               <Route path="/patient/dashboard" element={<PDashboard />} />
@@ -88,7 +97,10 @@ const Layout = () => {
                 path="/doctor/appointments/"
                 element={<ViewAppointmentRequests />}
               />
-              <Route path="/doctor/addmedicalrecord/" element={<AddMedicalRecord />} />
+              <Route
+                path="/doctor/addmedicalrecord/"
+                element={<AddMedicalRecord />}
+              />
               <Route
                 path="/doctor/appointments/:appointmentID/"
                 element={<AppointmentDetails />}
@@ -101,12 +113,31 @@ const Layout = () => {
               />
               <Route path="/admin/adddoctor" element={<AddNewDoctor />} />
               <Route
+                path="/doctor/addmedicalrecord"
+                element={<AddNewDoctor />}
+              />
+              <Route
                 path="/admin/appointments/:appointmentID"
                 element={<AdminAppointmentDetails />}
               />
             </Routes>
           </main>
-          <Footer />
+        </BrowserRouter>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Footer />} />
+            <Route path="/doctors" element={<Footer />} />
+            {/* <Route path="/doctor/:id" element={<Footer />} /> */}
+            <Route path="/login" element={<Footer />} />
+            <Route path="/register" element={<Footer />} />
+            <Route path="/contact" element={<Footer />} />
+            <Route path="/about-us" element={<Footer />} />
+            <Route path="/signup-patient" element={<Footer />} />
+            <Route path="/signup-hos" element={<Footer />} />
+            <Route path="/patient/*" element={<PatientFooter />} />
+            <Route path="/doctor/*" element={<DoctorFooter />} />
+            <Route path="/admin/*" element={<AdminFooter />} />
+          </Routes>
         </BrowserRouter>
       </div>
     </>

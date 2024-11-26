@@ -33,7 +33,7 @@ const PastAppointmentList = () => {
 
   console.log(appointments);
   const handleViewClick = id => {
-    navigate(`/patient-pastappointmentdetails/${id}`);
+    navigate(`/patient/pastappointmentdetails/${id}`);
   };
 
   return (

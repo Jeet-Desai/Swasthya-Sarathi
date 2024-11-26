@@ -1,6 +1,6 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom'; // Import useLocation
-import "./AppointmentDetails.css"; // Import the updated CSS
+// import "./AppointmentDetails.css"; // Import the updated CSS
 
 export default function AppointmentDetails() {
   // Get the state passed from the Card component
@@ -41,8 +41,8 @@ export default function AppointmentDetails() {
           <label htmlFor="time">Time:</label>
           <input type="time" id="time" name="time" value={initialData.time} disabled />
 
-          <button type="submit" className="btn-danger">Discard Appointment</button>
-          <button type="submit" className="btn-success">Confirm Appointment</button>
+          {/* <button type="submit" className="btn-danger">Discard Appointment</button>
+          <button type="submit" className="btn-success">Confirm Appointment</button> */}
         </form>
       </div>
     </div>

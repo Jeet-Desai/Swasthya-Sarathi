@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 
 
 
-import "./AdminNavbar.css";
+// import "./AdminNavbar.css";
 
 const navLinks = [
   { path: "/admin/home", display: "Home" },

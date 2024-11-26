@@ -1,6 +1,11 @@
 import "./contact.css";
 import profile1 from "../assets/images/MyPhoto.jpg";
 import jeetPhoto from "../assets/images/JeetProfile.jpg";
+import harshPhoto from "../assets/images/HarshProfile.jpg";
+import jeminiPhoto from "../assets/images/JeminiProfile.jpg";
+import mayankPhoto from "../assets/images/MaynakProfile.jpg";
+import anujPhoto from "../assets/images/AnujProfile.jpg";
+import aryanPhoto from "../assets/images/AryanProfile.jpg";
 
 const teamMembers = [
   {
@@ -13,7 +18,33 @@ const teamMembers = [
     img: `${jeetPhoto}`,
   },
   {
-    name: "Member2",
+    name: "Jemini Chaudhari",
+
+    email: "@gmail.com",
+    github: "https//github",
+    contact: "6000649992",
+    img: `${jeminiPhoto}`,
+  },
+  {
+    name: "Mayank Parmar",
+
+    email: "@gmail.com",
+    github: "https//github",
+    contact: "6000649992",
+
+    img: `${mayankPhoto}`,
+  },
+  {
+    name: "Anuj Valambhiya",
+
+    email: "@gmail.com",
+    github: "https//github",
+    contact: "6000649992",
+
+    img: `${anujPhoto}`,
+  },
+  {
+    name: "Arnold Mochahari",
 
     email: "@gmail.com",
     github: "https//github",
@@ -21,53 +52,23 @@ const teamMembers = [
     img: `${profile1}`,
   },
   {
-    name: "Member3",
+    name: "Harsh Lad",
 
     email: "@gmail.com",
     github: "https//github",
     contact: "6000649992",
-
-    img: `${profile1}`,
+    img: `${harshPhoto}`,
   },
   {
-    name: "Member4",
+    name: "Aryan Patel",
 
     email: "@gmail.com",
     github: "https//github",
     contact: "6000649992",
-
-    img: `${profile1}`,
+    img: `${aryanPhoto}`,
   },
   {
-    name: "Member 5",
-    role: "Role 5",
-
-    email: "@gmail.com",
-    github: "https//github",
-    contact: "6000649992",
-    img: `${profile1}`,
-  },
-  {
-    name: "Member 6",
-    role: "Role 6",
-
-    email: "@gmail.com",
-    github: "https//github",
-    contact: "6000649992",
-    img: `${profile1}`,
-  },
-  {
-    name: "Member 7",
-    role: "Role 7",
-
-    email: "@gmail.com",
-    github: "https//github",
-    contact: "6000649992",
-    img: `${profile1}`,
-  },
-  {
-    name: "Member 8",
-    role: "Role 8",
+    name: "Harsh",
 
     email: "@gmail.com",
     github: "https//github",
@@ -76,7 +77,6 @@ const teamMembers = [
   },
   {
     name: "Member 9",
-    role: "Role 9",
 
     email: "@gmail.com",
     github: "https//github",
@@ -95,22 +95,24 @@ const teamMembers = [
 
 const Contact = () => {
   return (
-    <div className="our-team">
-      <div className="our-team-content">
-        <h2 className="our-team-heading">Contact Us</h2>
+    <>
+      <div className="our-team">
+        <div className="our-team-content">
+          <h2 className="our-team-heading">Contact Us</h2>
+        </div>
+        <div className="team-grid">
+          {teamMembers.map((member, index) => (
+            <div className="team-member" key={index}>
+              <img src={member.img} alt={member.name} />
+              <h3>{member.name}</h3>
+              <p>email:{member.email}</p>
+              <p>github:{member.github}</p>
+              <p>contact:{member.contact}</p>
+            </div>
+          ))}
+        </div>
       </div>
-      <div className="team-grid">
-        {teamMembers.map((member, index) => (
-          <div className="team-member" key={index}>
-            <img src={member.img} alt={member.name} />
-            <h3>{member.name}</h3>
-            <p>email:{member.email}</p>
-            <p>github:{member.github}</p>
-            <p>contact:{member.contact}</p>
-          </div>
-        ))}
-      </div>
-    </div>
+    </>
   );
 };
 
