@@ -41,3 +41,40 @@ export const updateAppointment = async (req, res) => {
     });
   }
 };
+
+// Get all pending appointments for a specific doctor
+export const getPendingAppointmentsbyDiD = async (req, res) => {
+    const { doctorId } = req.params;
+
+    try {
+        // Find all pending appointments for the doctor
+        const pendingAppointments = await Appointment.find({
+            doctor: doctorId,
+            status: "pending"
+        })
+        .populate('patient', 'name') // Only get patient name
+        .select('_id patient date time description'); // Select required fields
+
+        // Format the response
+        const formattedAppointments = pendingAppointments.map(appointment => ({
+            appointmentId: appointment._id,
+            patientName: appointment.patient.name,
+            date: appointment.date,
+            time: appointment.time,
+            description: appointment.description
+        }));
+
+        res.status(200).json({
+            success: true,
+            count: formattedAppointments.length,
+            appointments: formattedAppointments
+        });
+
+    } catch (error) {
+        console.error("Error fetching pending appointments:", error);
+        res.status(500).json({
+            success: false,
+            message: "Failed to fetch pending appointments"
+        });
+    }
+};
