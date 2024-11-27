@@ -2,8 +2,8 @@ import express from  'express';
 import { getAllDoctors} from '../Controllers/UserController.js';
 import { authenticate, restrict } from '../auth/verifyToken.js';
 import {requestAppointment} from '../Controllers/appointmentController.js';
-import { getPendingAppointments ,getPastAppointments,getAppointmentStats} from '../controllers/appointmentController.js';
-import  { getDoctorById,getHospitalIdbyDoctorId } from '../controllers/UserController.js';
+import { getPendingAppointments ,getPastAppointments,getAppointmentStats} from '../Controllers/appointmentController.js';
+import  { getDoctorById,getHospitalIdbyDoctorId } from '../Controllers/UserController.js';
 import {getAppointmentDetail} from '../Controllers/appointmentController.js';
 
 const router = express.Router();
