@@ -1,150 +1,91 @@
-import { useParams, useNavigate } from "react-router-dom";
-import "./PastappointmentDetails.css";
 
-const appointments = [
-  {
-    id: 1,
-    doctor: "Dr. Alice Johnson",
-    hospital: "City Hospital",
-    department: "Cardiology",
-    patientName: "John Doe",
-    height: "5'8\"",
-    weight: "150 kg",
-    age: 35,
-    gender: "Male",
-    ailment: "Chest Pain",
-    diagnoses: ["Mild Angina", "High Cholesterol"], // Multiple diagnoses
-    date: "22 Aug 2024",
-    time: "10:00 AM",
-    Prescriptions: ["Prescription 1", "Prescription 2"], // Multiple prescriptions
-    Reports: [
-      {
-        label: "Report 1",
-        link: "https://www.delhimedicalcouncil.org/pdf/modalprescription.pdf",
-      },
-      {
-        label: "Report 2",
-        link: "https://example.com/prescriptions/prescription2.pdf",
-      },
-    ], // Multiple Report
-  },
-  {
-    id: 2,
-    doctor: "Dr. Robert Brown",
-    hospital: "County Hospital",
-    department: "Neurology",
-    patientName: "Jane Smith",
-    height: "5'5\"",
-    weight: "135 kg",
-    age: 28,
-    gender: "Female",
-    ailment: "Headaches and Dizziness",
-    diagnoses: ["Migraine"], // Single diagnosis
-    date: "23 Aug 2024",
-    time: "11:00 AM",
-    Prescriptions: ["Prescription 1"], // Single prescription
-    Reports: [
-      {
-        label: "Report 1",
-        link: "https://www.delhimedicalcouncil.org/pdf/modalprescription.pdf",
-      },
-      {
-        label: "Report 2",
-        link: "https://example.com/prescriptions/prescription2.pdf",
-      },
-      {
-        label: "Report 3",
-        link: "https://example.com/prescriptions/prescription2.pdf",
-      },
-    ],
-  },
-];
+import React, { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { BASE_URL } from '../../config';
+import { toast } from 'react-toastify';
+import './PastAppointmentDetails.css';
 
-const PastAppointmentDetails = () => {
-  const { id } = useParams();
-  const navigate = useNavigate();
+const PendingAppointmentDetail = () => {
+    const { appointmentId } = useParams();
+    const navigate = useNavigate();
+    const [appointment, setAppointment] = useState(null);
+    const [loading, setLoading] = useState(true);
+    console.log(appointmentId);
+    useEffect(() => {
+        const fetchAppointmentDetails = async () => {
+            try {
+                const response = await fetch(`${BASE_URL}/api/v1/patients/get-appo-details/${appointmentId}`);
+                const data = await response.json();
+                
+                if (data.success) {
+                    setAppointment(data.appointment);
+                } else {
+                    toast.error('Failed to fetch appointment details');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                toast.error('Error loading appointment details');
+            } finally {
+                setLoading(false);
+            }
+        };
 
-  const appointment = appointments.find(a => a.id === parseInt(id));
+        fetchAppointmentDetails();
+    }, [appointmentId]);
 
-  if (!appointment) {
-    return <div>Appointment not found</div>;
-  }
+    const handleReturnClick = () => {
+        navigate(-1);
+    };
 
-  const handleReturnClick = () => {
-    navigate(-1); // Go back to the previous page
-  };
+    if (loading) {
+        return <div className="loading">Loading appointment details...</div>;
+    }
 
-  return (
-    <div className="past-appointment-container">
-      <h2>Appointment Details</h2>
-      <p>
-        <strong>Hospital:</strong> {appointment.hospital}
-      </p>
-      <p>
-        <strong>Department:</strong> {appointment.department}
-      </p>
-      <p>
-        <strong>Doctor:</strong> {appointment.doctor}
-      </p>
-      <p>
-        <strong>Patient Name:</strong> {appointment.patientName}
-      </p>
-      <p>
-        <strong>Age:</strong> {appointment.age}
-      </p>
-      <p>
-        <strong>Gender:</strong> {appointment.gender}
-      </p>
-      <p>
-        <strong>Height:</strong> {appointment.height}
-      </p>
-      <p>
-        <strong>Weight:</strong> {appointment.weight}
-      </p>
-      <p>
-        <strong>Ailment:</strong> {appointment.ailment}
-      </p>
-      <p>
-        <strong>Diagnoses:</strong>
-        <ul>
-          {appointment.diagnoses.map((diag, index) => (
-            <li key={index}>{diag}</li>
-          ))}
-        </ul>
-      </p>
-      <p>
-        <strong>Date:</strong> {appointment.date}
-      </p>
-      <p>
-        <strong>Time:</strong> {appointment.time}
-      </p>
+    if (!appointment) {
+        return <div className="error">Appointment not found</div>;
+    }
 
-      <p>
-        <strong>Presctiption:</strong>
-        <ul>
-          {appointment.Prescriptions.map((Pres, index) => (
-            <li key={index}>{Pres}</li>
-          ))}
-        </ul>
-      </p>
+    return (
+        <div className="pending-appointment-detail">
+            <div className="appointment-header">
+                <h2>Appointment Details</h2>
+                
+            </div>
 
-      <div className="past-report-buttons">
-        <strong>Reports:</strong>
-        {appointment.Reports.map((Reports, index) => (
-          <button
-            key={index}
-            className="past-report-button"
-            onClick={() => window.open(Reports.link, "_blank")}
-          >
-            {Reports.label}
-          </button>
-        ))}
-      </div>
-      <button className="past-return-button" onClick={handleReturnClick}>
-        Return
-      </button>
-    </div>
-  );
+            <div className="appointment-info">
+                <p>
+                    <strong>Doctor:</strong> Dr. {appointment.doctor.name}
+                </p>
+                <p>
+                    <strong>Specialization:</strong> {appointment.doctor.specialization}
+                </p>
+                <p>
+                    <strong>Patient:</strong> {appointment.patient.name}
+                </p>
+                <p>
+                    <strong>Contact:</strong> {appointment.patient.contactNo}
+                </p>
+                <p>
+                    <strong>Hospital:</strong> {appointment.hospital.name}
+                </p>
+                <p>
+                    <strong>Date:</strong> {new Date(appointment.date).toLocaleDateString()}
+                </p>
+                <p>
+                    <strong>Time:</strong> {appointment.time}
+                </p>
+                <p>
+                    <strong>Status:</strong> {appointment.status}
+                </p>
+                <p>
+                    <strong>Description:</strong> {appointment.description}
+                </p>
+                <button onClick={handleReturnClick} className="pending-return-button">
+                    Back
+                </button>
+            </div>
+        </div>
+    );
 };
 
-export default PastAppointmentDetails;
+export default PendingAppointmentDetail;

@@ -27,7 +27,7 @@ const PatientLayout = () => {
               element={<PendingAppointments />}
             />
             <Route
-              path="/patient-pending-appointmentdetails/:id"
+              path="/patient/pending-appointmentdetails/:appointmentId"
               element={<PendingAppointmentDetail />}
             />
 

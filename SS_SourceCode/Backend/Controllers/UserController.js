@@ -24,9 +24,9 @@ export const getAllDoctors = async (req, res) => {
 };
 
 export const getDoctorById = async (req, res) => {
-    const { id } = req.params;
+    const { doctorId } = req.params;
     try {
-      const doctor = await Doctor.findById(id).populate('hospital', 'name');
+      const doctor = await Doctor.findById(doctorId).populate('hospital', 'name');
       if (!doctor) {
         return res.status(404).json({
           success: false,
@@ -45,3 +45,26 @@ export const getDoctorById = async (req, res) => {
       });
     }
   };
+
+export const getHospitalIdbyDoctorId = async (req, res) => {
+  const { doctorId } = req.params;
+  try {
+    const doctor = await Doctor.findById(doctorId);
+    if (!doctor) {
+      return res.status(404).json({
+        success: false,
+        message: 'Doctor not found',
+      });
+    }
+    res.status(200).json({
+      success: true,
+      hospitalId: doctor.hospital,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: 'Failed to fetch hospital details.',
+      error: error.message,
+    });
+  }
+};

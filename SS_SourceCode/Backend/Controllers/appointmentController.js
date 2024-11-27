@@ -53,7 +53,7 @@ export const requestAppointment = async (req, res) => {
         message: "Something went wrong while requesting the appointment.",
       });
     }
-  };
+  }; 
 
   export const getPendingAppointments = async (req, res) => {
     const { patientId } = req.params;
@@ -148,7 +148,7 @@ export const getAppointmentDetail = async (req, res) => {
       .populate('hospital', 'name');
     if (!appointment) {
       return res.status(404).json({
-        success: false,
+        success: false, 
         message: 'Appointment not found',
       });
     }

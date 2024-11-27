@@ -3,11 +3,33 @@ import { useParams } from "react-router-dom";
 import DoctorImg from '../../assets/images/doct01.jpg';
 import "./DoctorsDetails.css";
 import SidePanel from "./components/SidePanel";
-
+import { BASE_URL } from "../../config";
 const DoctorsDetails = () => {
-    
+    const { doctorId } = useParams();
+    // console.log(doctorId);
+    const [doctor, setDoctor] = useState(null);
 
+    useEffect(() => {
+        // Fetch doctor details from an API or data source
+        const fetchDoctorDetails = async () => {
+            try {
+                const response = await fetch(`${BASE_URL}/api/v1/patients/view-doctor/${doctorId}`);
+                const data = await response.json();
+                // Set the doctor data from the nested structure
+                if (data.success && data.doctor) {
+                    setDoctor(data.doctor);
+                }
+            } catch (error) {
+                console.error("Error fetching doctor details:", error);
+            }
+        };
 
+        fetchDoctorDetails();
+    }, [doctorId]);
+    console.log(doctor);
+    if (!doctor) {
+        return <div>Loading...</div>;
+    }
 
     return (
         <section className="docdetp-doctor-details">
@@ -27,11 +49,11 @@ const DoctorsDetails = () => {
 
                             <div className="docdetp-doctor-details__info">
                                 <span className="docdetp-doctor-details__specialty">
-                                    Surgeon
+                                    {doctor.specialization}
                                 </span>
-                                <h3 className="docdetp-doctor-details__name">Doctor Name</h3>
+                                <h3 className="docdetp-doctor-details__name">Dr. {doctor.name}</h3>
                                 <p className="docdetp-doctor-details__description">
-                                    A brief description of the doctor should go here.
+                                    {doctor.about}
                                 </p>
                             </div>
                         </div>
@@ -49,6 +71,7 @@ const DoctorsDetails = () => {
             </div>
         </section>
     );
+
 };
 
 export default DoctorsDetails;

@@ -14,7 +14,7 @@ export const Register = async (req, res) => {
     nationality,
     dob,
     gender,
-    bloodGroup,
+    bloodGroup, 
     role, // patient or hospital
     dof, // Date of foundation (specific to hospital)
     type, // Type of hospital (Gov, Semi-Gov, Private)

@@ -57,7 +57,7 @@ const Layout = () => {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/doctors" element={<Doctors />} />
-              <Route path="/doctor/:id" element={<DoctorsDetails />} />
+              <Route path="/patient/doctor-view/:doctorId" element={<DoctorsDetails />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
               <Route path="/contact" element={<Contact />} />
@@ -78,7 +78,7 @@ const Layout = () => {
                 element={<PendingAppointments />}
               />
               <Route
-                path="/patient/pending-appointmentdetails/:id"
+                path="/patient/pending-appointmentdetails/:appointmentId"
                 element={<PendingAppointmentDetail />}
               />
 
@@ -87,7 +87,7 @@ const Layout = () => {
                 element={<PastAppointmentList />}
               />
               <Route
-                path="/patient/pastappointmentdetails/:id"
+                path="/patient/pastappointmentdetails/:appointmentId"
                 element={<PastAppointmentDetails />}
               />
               <Route path="/patient/profile" element={<PatientProfile />} />

@@ -117,7 +117,7 @@ const PendingAppointments = () => {
   }, []);
 
   const handleViewClick = id => {
-    navigate(`/patient-pending-appointmentdetails/${id}`);
+    navigate(`/patient/pending-appointmentdetails/${id}`);
   };
 
   return (

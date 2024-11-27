@@ -63,7 +63,7 @@ body {
 }
 
 .new-view-button {
-  background-color: #05cdec;  /* Solid blue color */
+  background-color: #f06969;  /* Solid blue color */
   color: #fff;
   border: none;
   border-radius: 25px;
@@ -77,7 +77,7 @@ body {
 }
 
 .new-view-button:hover {
-  background-color: #05cdec;  /* Darker blue on hover */
+  background-color: #ff3535;  /* Darker blue on hover */
   transform: scale(1.1); /* Slightly enlarge on hover */
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); /* Glow effect */
 }

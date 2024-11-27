@@ -1,41 +1,69 @@
+import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify';
+import { BASE_URL } from '../../config';
 import "./PendingAppointmentDetail.css";
 
 const PendingAppointmentDetail = () => {
   const { appointmentId } = useParams();
   const navigate = useNavigate();
+  const [appointment, setAppointment] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  const appointmentDetails = {
-    1: {
-      doctor: "Dr. Alice Johnson",
-      symptomDescription:
-        "Patient experiences mild chest pain and occasional shortness of breath.",
-    },
-    2: {
-      doctor: "Dr. Robert Brown",
-      symptomDescription:
-        "Patient reports dizziness and mild headaches, especially in the mornings.",
-    },
-    // Add more details as needed
-  };
+  useEffect(() => {
+    const fetchAppointmentDetails = async () => {
+      try {
+        const response = await fetch(`${BASE_URL}/api/v1/patients/get-appo-details/${appointmentId}`);
+        const data = await response.json();
+        
+        if (data.success) {
+          setAppointment(data.appointment);
+        } else {
+          toast.error('Failed to fetch appointment details');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        toast.error('Error loading appointment details');
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  const appointment = appointmentDetails[appointmentId] || {
-    doctor: "Unknown",
-    symptomDescription: "No description available.",
-  };
+    fetchAppointmentDetails();
+  }, [appointmentId]);
 
   const handleReturnClick = () => {
-    navigate(-1); // This goes back to the previous page
+    navigate(-1);
   };
+
+  if (loading) {
+    return <div className="pending-appointment-detail">Loading...</div>;
+  }
+
+  if (!appointment) {
+    return <div className="pending-appointment-detail">Appointment not found</div>;
+  }
 
   return (
     <div className="pending-appointment-detail">
       <h2>Appointment Details</h2>
       <p>
-        <strong>Doctor:</strong> {appointment.doctor}
+        <strong>Doctor:</strong> Dr. {appointment.doctor.name}
       </p>
       <p>
-        <strong>Symptoms:</strong> {appointment.symptomDescription}
+        <strong>Symptoms:</strong> {appointment.description}
+      </p>
+      <p>
+        <strong>Status:</strong> {appointment.status}
+      </p>
+      <p>
+        <strong>Date:</strong> {new Date(appointment.date).toLocaleDateString()}
+      </p>
+      <p>
+        <strong>Time:</strong> {appointment.time}
+      </p>
+      <p>
+        <strong>Hospital:</strong> {appointment.hospital.name}
       </p>
       <button className="pending-return-button" onClick={handleReturnClick}>
         Return

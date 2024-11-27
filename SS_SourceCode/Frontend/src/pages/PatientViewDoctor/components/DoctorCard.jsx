@@ -1,4 +1,5 @@
 import React from "react";
+import {useNavigate} from "react-router-dom";
 import { Link } from "react-router-dom";
 import { BsArrowRight } from "react-icons/bs";
 import "./DoctorCard.css";
@@ -13,6 +14,11 @@ const DoctorCard = ({ doctor }) => {
     //totalPatient,
     hospital
   } = doctor;
+  
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate(`/patient/doctor-view/${doctor._id}`);
+  }
 
   return (
     <div className="dcp-doctor-card">
@@ -52,9 +58,9 @@ const DoctorCard = ({ doctor }) => {
           <p className="dcp-hospital-name">At {hospital.name}</p>
         </div>
         
-        <Link to="/doctor/01" className="dcp-doctor-card__link">
-          <BsArrowRight className="dcp-arrow-icon" />
-        </Link>
+        <div className="dcp-doctor-card__link">
+          <BsArrowRight className="dcp-arrow-icon" onClick={handleClick}/>
+        </div>
       </div>
     </div>
   );
