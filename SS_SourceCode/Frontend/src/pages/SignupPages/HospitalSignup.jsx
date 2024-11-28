@@ -4,11 +4,13 @@ import signupImg from "../../assets/images/rmlogo.png";
 import { BASE_URL } from "../../config";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import PhoneInput from 'react-phone-input-2';
+import 'react-phone-input-2/lib/style.css';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const HospitalSignup = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
-  const [email, setEmail] = useState("");
   const [otp, setOtp] = useState("");
   const [generatedOtp, setGeneratedOtp] = useState("");
   const [isVerified, setIsVerified] = useState(false);
@@ -23,290 +25,253 @@ const HospitalSignup = () => {
     dof: "",
     type: "",
     registration_no: "",
-    role:"hospital",
+    role: "hospital",
   });
 
-  
-  const navigate = useNavigate()
+  const [errors, setErrors] = useState({});
 
-  // Toggle visibility of password fields
-  const togglePasswordVisibility = () => {
-    setPasswordVisible(!passwordVisible);
+  const navigate = useNavigate();
+
+  const togglePasswordVisibility = () => setPasswordVisible(!passwordVisible);
+  const toggleConfirmPasswordVisibility = () => setConfirmPasswordVisible(!confirmPasswordVisible);
+
+  const validatePassword = (password) => {
+    const regex = /^(?=.\d)(?=.[a-z])(?=.[A-Z])(?=.[!@#$%^&])(?=.[a-zA-Z]).{8,}$/;
+    return regex.test(password);
   };
-
-  const toggleConfirmPasswordVisibility = () => {
-    setConfirmPasswordVisible(!confirmPasswordVisible);
-  };
-
-  // Simulate OTP sending (replace this with an API call)
-  const sendOtp = async () => {
-    if (!formData.email) {
-      alert("Please enter your email first.");
-      return;
-    }
-
-    const generated = Math.floor(100000 + Math.random() * 900000).toString();
-    setGeneratedOtp(generated);
-
-    // Simulate sending OTP (use backend in production)
-    alert(`OTP sent to your email: ${generated}`);
-  };
-
-
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      [name]: value,
-    }));
+    setFormData({ ...formData, [name]: value });
+    setErrors({ ...errors, [name]: '' });
   };
 
-  const submitHandler = async (e) => {
-    e.preventDefault();
+  const handlePhoneChange = (value, country) => {
+    setFormData({ ...formData, contactNo: value });
+    setErrors({ ...errors, contactNo: '' });
+  };
+
+  const validateForm = () => {
+    const newErrors = {};
+
+    if (!formData.email) newErrors.email = 'Email is required';
+    if (!formData.name) newErrors.name = 'Hospital name is required';
+    if (!formData.password) newErrors.password = 'Password is required';
+    if (!validatePassword(formData.password)) newErrors.password = 'Password must contain at least 8 characters, one uppercase, one lowercase, one number and one special character';
+    if (formData.password !== formData.confirmPassword) newErrors.confirmPassword = 'Passwords do not match';
+    if (!formData.contactNo || formData.contactNo.length < 10) newErrors.contactNo = 'Valid phone number is required';
+    if (!formData.dof) newErrors.dof = 'Date of foundation is required';
+    if (!formData.type) newErrors.type = 'Hospital type is required';
+    if (!formData.registration_no) newErrors.registration_no = 'Registration number is required';
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const sendOtp = async () => {
+    if (!formData.email) {
+      setErrors({ ...errors, email: 'Email is required to send OTP' });
+      return;
+    }
     setLoading(true);
+    // Implement OTP sending logic here
+    // For now, we'll simulate it
+    const simulatedOtp = Math.floor(100000 + Math.random() * 900000).toString();
+    setGeneratedOtp(simulatedOtp);
+    toast.success(`OTP sent to ${formData.email} ${simulatedOtp}`);
+    setLoading(false);
+  };
 
-    // Check if passwords match on the client side
-    if (formData.password !== formData.confirmPassword) {
-        toast.error("Passwords do not match!");
-        setLoading(false);
-        return;
-    }
-
-    try {
-        const res = await fetch(`${BASE_URL}/api/v1/auth/register`, {
-            method: "post",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            credentials: "include",
-            body: JSON.stringify(formData)
-        });
-
-        const data = await res.json();
-
-        if (!res.ok) {
-            throw new Error(data.message);
-        }
-
-        toast.success(data.message);
-        navigate("/login");
-    } catch (err) {
-        toast.error(err.message);
-    } finally {
-        setLoading(false);
-    }
-};
-
-  // Verify OTP
   const verifyOtp = () => {
     if (otp === generatedOtp) {
       setIsVerified(true);
-      alert("Email verified successfully!");
+      toast.success('Email verified successfully');
     } else {
-      alert("Incorrect OTP. Please try again.");
+      toast.error('Invalid OTP');
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (validateForm()) {
+      if (!isVerified) {
+        toast.error('Please verify your email before submitting');
+        return;
+      }
+      setLoading(true);
+      try {
+        // Implement API call to register hospital
+        const response = await fetch(`${BASE_URL}/api/v1/auth/register`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(formData),
+        });
+        const data = await response.json();
+        if (data.success) {
+          toast.success('Hospital registered successfully');
+          navigate('/login');
+        } else {
+          toast.error(data.message || 'Registration failed');
+        }
+      } catch (error) {
+        toast.error('An error occurred during registration');
+      } finally {
+        setLoading(false);
+      }
     }
   };
 
   return (
-    <section className="hospitalsgp-signup-section">
-      <div className="hospitalsgp-signup-container">
-        <div className="hospitalsgp-signup-grid">
-          {/* Image Box */}
-          <div className="hospitalsgp-signup-img-box">
-            <figure>
-              <img src={signupImg} alt="Sign Up" className="hospitalsgp-signup-img" />
-            </figure>
-          </div>
-  
-          {/* Signup Form */}
-          <div className="hospitalsgp-signup-form-container">
-            <h3 className="hospitalsgp-signup-heading">
-              Create an <span className="hospitalsgp-highlight">account</span>
-            </h3>
-  
-            <form className="hospitalsgp-signup-form" onSubmit={submitHandler}>
-              {/* Email Address with OTP Verification */}
-              <div className="hospitalsgp-form-group">
-                <label className="hospitalsgp-field-instruction">Hospital Email Address:</label>
-                <input
-                  type="email"
-                  placeholder="Enter Hospital Email"
-                  name="email"
-                  className="hospitalsgp-form-input"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  required
-                />
-                <button
-                  type="button"
-                  className="hospitalsgp-otp-btn"
-                  onClick={sendOtp}
-                  disabled={isVerified}
-                >
-                  {isVerified ? "Verified" : "Send OTP"}
-                </button>
-              </div>
-  
-              {generatedOtp && !isVerified && (
-                <div className="hospitalsgp-form-group">
-                  <label className="hospitalsgp-field-instruction">Enter OTP:</label>
-                  <input
-                    type="text"
-                    placeholder="Enter OTP"
-                    name="otp"
-                    className="hospitalsgp-form-input"
-                    value={otp}
-                    onChange={(e) => setOtp(e.target.value)}
-                    required
-                  />
-                  <button type="button" className="hospitalsgp-verify-otp-btn" onClick={verifyOtp}>
-                    Verify OTP
-                  </button>
-                </div>
-              )}
-  
-              {/* Hospital Name */}
-              <div className="hospitalsgp-form-group">
-                <label className="hospitalsgp-field-instruction">Hospital Name:</label>
+    <div className="hospital-signup-wrapper">
+      <div className="hospital-signup-container">
+        <div className="signup-left">
+          <img src={signupImg} alt="Signup" className="signup-img" />
+        </div>
+        <div className="signup-right">
+          <h2>Hospital Registration</h2>
+          <form onSubmit={handleSubmit}>
+            <div className="form-group">
+              <label htmlFor="email">Email</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={formData.email}
+                onChange={handleInputChange}
+                required
+              />
+              {errors.email && <span className="error">{errors.email}</span>}
+              <button type="button" onClick={sendOtp} disabled={loading || isVerified}>
+                {isVerified ? 'Verified' : 'Send OTP'}
+              </button>
+            </div>
+
+            {generatedOtp && !isVerified && (
+              <div className="form-group">
+                <label htmlFor="otp">OTP</label>
                 <input
                   type="text"
-                  placeholder="Hospital Name"
-                  name="name"
-                  className="hospitalsgp-form-input"
-                  value={formData.name}
-                  onChange={handleInputChange}
+                  id="otp"
+                  value={otp}
+                  onChange={(e) => setOtp(e.target.value)}
                   required
                 />
+                <button type="button" onClick={verifyOtp}>Verify OTP</button>
               </div>
-  
-              {/* Password Field */}
-              <div className="hospitalsgp-form-group password-field">
-                <label className="hospitalsgp-field-instruction">Password:</label>
+            )}
+
+            <div className="form-group">
+              <label htmlFor="name">Hospital Name</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                value={formData.name}
+                onChange={handleInputChange}
+                required
+              />
+              {errors.name && <span className="error">{errors.name}</span>}
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="password">Password</label>
+              <div className="password-input-wrapper">
                 <input
                   type={passwordVisible ? "text" : "password"}
-                  placeholder="Enter Your Password"
+                  id="password"
                   name="password"
-                  className="hospitalsgp-form-input"
                   value={formData.password}
                   onChange={handleInputChange}
                   required
                 />
-                <button
-                  type="button"
-                  className="hospitalsgp-toggle-password-btn"
-                  onClick={togglePasswordVisibility}
-                >
-                  {passwordVisible ? "Hide" : "Show"}
+                <button type="button" className="password-toggle" onClick={togglePasswordVisibility}>
+                  {passwordVisible ? <FaEyeSlash /> : <FaEye />}
                 </button>
               </div>
-  
-              {/* Confirm Password */}
-              <div className="hospitalsgp-form-group password-field">
-                <label className="hospitalsgp-field-instruction">Confirm Password:</label>
+              {errors.password && <span className="error">{errors.password}</span>}
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="confirmPassword">Confirm Password</label>
+              <div className="password-input-wrapper">
                 <input
                   type={confirmPasswordVisible ? "text" : "password"}
-                  placeholder="Confirm Your Password"
+                  id="confirmPassword"
                   name="confirmPassword"
-                  className="hospitalsgp-form-input"
                   value={formData.confirmPassword}
                   onChange={handleInputChange}
                   required
                 />
-                <button
-                  type="button"
-                  className="hospitalsgp-toggle-password-btn"
-                  onClick={toggleConfirmPasswordVisibility}
-                >
-                  {confirmPasswordVisible ? "Hide" : "Show"}
+                <button type="button" className="password-toggle" onClick={toggleConfirmPasswordVisibility}>
+                  {confirmPasswordVisible ? <FaEyeSlash /> : <FaEye />}
                 </button>
               </div>
-  
-              {/* Contact Number */}
-              <div className="hospitalsgp-form-group">
-                <label className="hospitalsgp-field-instruction">Contact Number:</label>
-                <input
-                  type="tel"
-                  placeholder="Contact No."
-                  name="contactNo"
-                  className="hospitalsgp-form-input"
-                  value={formData.contactNo}
-                  onChange={handleInputChange}
-                  required
-                />
-              </div>
-  
-              {/* Other Fields (Address, Registration Number, Ownership Type, etc.)
-              {/* Address */}
-              <div className="hospitalsgp-form-group">
-                <label className="hospitalsgp-field-instruction">Address:</label>
-                <input
-                  type="text"
-                  placeholder="Address"
-                  name="address"
-                  className="hospitalsgp-form-input"
-                  value={formData.address}
-                  onChange={handleInputChange}
-                  required
-                />
-              </div> 
-  
-              {/* Registration Number */}
-              <div className="hospitalsgp-form-group">
-                <label className="hospitalsgp-field-instruction">Registration Number:</label>
-                <input
-                  type="text"
-                  placeholder="Registration No."
-                  name="registration_no"
-                  className="hospitalsgp-form-input"
-                  value={formData.registration_no}
-                  onChange={handleInputChange}
-                  required
-                />
-              </div>
+              {errors.confirmPassword && <span className="error">{errors.confirmPassword}</span>}
+            </div>
 
-              
-              <div className="form-group">
-  <label className="field-instruction">Date of Foundation:</label>
-  <input
-    type="date"
-    name="dof"  // Ensure this matches with formData key
-    className="form-input"
-    value={formData.dof}  // Ensure the value is linked to formData
-    onChange={handleInputChange}  // Update state on change
-    required
-  />
-</div>
-              {/* Ownership Type */}
-              <div className="hospitalsgp-form-group">
-                <label className="hospitalsgp-field-instruction">Ownership Type:</label>
-                <select
-                  name="type"
-                  className="hospitalsgp-form-input"
-                  value={formData.type}
-                  onChange={handleInputChange}
-                  required
-                >
-                  <option value="" disabled>
-                    Select Ownership Type
-                  </option>
-                  <option value="Private">Private</option>
-                  <option value="Semi-Gov">Semi-Government</option>
-                  <option value="Gov">Government</option>
-                </select>
-              </div>
-  
-              {/* Submit Button */}
-              <div className="hospitalsgp-form-group">
-                <button type="submit" className="hospitalsgp-form-submit-btn">
-                  Submit
-                </button>
-              </div>
-            </form>
-          </div>
+            <div className="form-group">
+              <label htmlFor="contactNo">Contact Number</label>
+              <PhoneInput
+                country={'in'}
+                value={formData.contactNo}
+                onChange={handlePhoneChange}
+                inputProps={{
+                  required: true,
+                }}
+              />
+              {errors.contactNo && <span className="error">{errors.contactNo}</span>}
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="dof">Date of Foundation</label>
+              <input
+                type="date"
+                id="dof"
+                name="dof"
+                value={formData.dof}
+                onChange={handleInputChange}
+                required
+              />
+              {errors.dof && <span className="error">{errors.dof}</span>}
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="type">Hospital Type</label>
+              <select
+                id="type"
+                name="type"
+                value={formData.type}
+                onChange={handleInputChange}
+                required
+              >
+                <option value="">Select type</option>
+                <option value="Gov">Government</option>
+                <option value="Private">Private</option>
+                <option value="Semi-Gov">Semi-Gov</option>
+              </select>
+              {errors.type && <span className="error">{errors.type}</span>}
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="registration_no">Registration Number</label>
+              <input
+                type="text"
+                id="registration_no"
+                name="registration_no"
+                value={formData.registration_no}
+                onChange={handleInputChange}
+                required
+              />
+              {errors.registration_no && <span className="error">{errors.registration_no}</span>}
+            </div>
+
+            <button type="submit" disabled={loading || !isVerified}>
+              {loading ? 'Registering...' : 'Register Hospital'}
+            </button>
+          </form>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 

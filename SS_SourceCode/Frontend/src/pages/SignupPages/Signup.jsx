@@ -1,18 +1,18 @@
 import React, { useState } from "react";
 import "./Signup.css";
 import signupImg from "../../assets/images/rmlogo.png";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { BASE_URL } from "../../config";
 import { Link, useNavigate } from "react-router-dom";
-import {toast} from 'react-toastify';
-// import HashLoader from 'react-spinners/HashLoader';
+import PhoneInput from 'react-phone-input-2';
+import 'react-phone-input-2/lib/style.css';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const Signup = () => {
   const navigate = useNavigate();   
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
-  const [email, setEmail] = useState("");
   const [otp, setOtp] = useState("");
   const [generatedOtp, setGeneratedOtp] = useState("");
   const [isVerified, setIsVerified] = useState(false);
@@ -27,304 +27,275 @@ const Signup = () => {
     dob: "",
     gender: "",
     bloodGroup: "",
-    role:"patient",
+    role: "patient",
   });
 
+  const [errors, setErrors] = useState({});
 
-  // Toggle visibility of password fields
-  const togglePasswordVisibility = () => {
-    setPasswordVisible(!passwordVisible);
+  const togglePasswordVisibility = () => setPasswordVisible(!passwordVisible);
+  const toggleConfirmPasswordVisibility = () => setConfirmPasswordVisible(!confirmPasswordVisible);
+
+  const validatePassword = (password) => {
+    const regex = /^(?=.\d)(?=.[a-z])(?=.[A-Z])(?=.[!@#$%^&])(?=.[a-zA-Z]).{8,}$/;
+    return regex.test(password);
   };
-
-  const toggleConfirmPasswordVisibility = () => {
-    setConfirmPasswordVisible(!confirmPasswordVisible);
-  };
-
-  // Simulate OTP sending (replace this with an API call)
-  const sendOtp = async () => {
-    if (!email) {
-      alert("Please enter your email first.");
-      return;
-    }
-
-    const generated = Math.floor(100000 + Math.random() * 900000).toString();
-    setGeneratedOtp(generated);
-
-    // Simulate sending OTP (use backend in production)
-    alert(`OTP sent to your email: ${generated}`);
-  };
-
-  // Verify OTP
-
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      [name]: value,
-    }));
+    setFormData({ ...formData, [name]: value });
+    setErrors({ ...errors, [name]: '' });
   };
 
-  const submitHandler = async (e) => {
-    e.preventDefault();
+  const handlePhoneChange = (value, country) => {
+    setFormData({ ...formData, contactNo: value });
+    setErrors({ ...errors, contactNo: '' });
+  };
+
+  const validateForm = () => {
+    const newErrors = {};
+
+    if (!formData.email) newErrors.email = 'Email is required';
+    if (!formData.name) newErrors.name = 'Name is required';
+    if (!formData.password) newErrors.password = 'Password is required';
+    if (!validatePassword(formData.password)) newErrors.password = 'Password must contain at least 8 characters, one uppercase, one lowercase, one number and one special character';
+    if (formData.password !== formData.confirmPassword) newErrors.confirmPassword = 'Passwords do not match';
+    if (!formData.contactNo || formData.contactNo.length < 10) newErrors.contactNo = 'Valid phone number is required';
+    if (!formData.nationality) newErrors.nationality = 'Nationality is required';
+    if (!formData.dob) newErrors.dob = 'Date of birth is required';
+    if (!formData.gender) newErrors.gender = 'Gender is required';
+    if (!formData.bloodGroup) newErrors.bloodGroup = 'Blood group is required';
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const sendOtp = async () => {
+    if (!formData.email) {
+      setErrors({ ...errors, email: 'Email is required to send OTP' });
+      return;
+    }
     setLoading(true);
+    // Implement OTP sending logic here
+    // For now, we'll simulate it
+    const simulatedOtp = Math.floor(100000 + Math.random() * 900000).toString();
+    setGeneratedOtp(simulatedOtp);
+    toast.success(`OTP sent to ${formData.email} is ${simulatedOtp}`);
+    setLoading(false);
+  };
 
-    // Check if passwords match on the client side
-    if (formData.password !== formData.confirmPassword) {
-        toast.error("Passwords do not match!");
-        setLoading(false);
+  const verifyOtp = () => {
+    if (otp === generatedOtp) {
+      setIsVerified(true);
+      toast.success('Email verified successfully');
+    } else {
+      toast.error('Invalid OTP');
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (validateForm()) {
+      if (!isVerified) {
+        toast.error('Please verify your email before submitting');
         return;
-    }
-
-    try {
-        const res = await fetch(`${BASE_URL}/api/v1/auth/register`, {
-            method: "post",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            credentials: "include",
-            body: JSON.stringify(formData)
+      }
+      setLoading(true);
+      try {
+        // Implement API call to register user
+        const response = await fetch(`${BASE_URL}/api/v1/auth/register`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(formData),
         });
-
-        const data = await res.json();
-
-        if (!res.ok) {
-            throw new Error(data.message);
+        const data = await response.json();
+        if (data.success) {
+          toast.success('User registered successfully');  
+          navigate('/login');
+        } else {
+          toast.error(data.message || 'Registration failed');
         }
-
-        toast.success(data.message);
-        navigate("/login");
-    } catch (err) {
-        toast.error(err.message);
-    } finally {
+      } catch (error) {
+        toast.error('An error occurred during registration');
+      } finally {
         setLoading(false);
+      }
     }
-};
-
-const verifyOtp = () => {
-  if (otp === generatedOtp) {
-    setIsVerified(true);
-    alert("Email verified successfully!");
-  } else {
-    alert("Incorrect OTP. Please try again.");
-  }
-};
-
+  };
 
   return (
-    <section className="patientsgp-signup-section">
-      <div className="patientsgp-signup-container">
-        <div className="patientsgp-signup-grid">
-          {/* Image Box */}
-          <div className="patientsgp-signup-img-box">
-            <figure>
-              <img src={signupImg}alt="Sign Up" className="patientsgp-signup-img" />
-            </figure>
-          </div>
+    <div className="signup-wrapper">
+      <div className="signup-container">
+        <div className="signup-left">
+          <img src={signupImg} alt="Signup" className="signup-img" />
+        </div>
+        <div className="signup-right">
+          <h2>Patient Registration</h2>
+          <form onSubmit={handleSubmit}>
+            <div className="form-group">
+              <label htmlFor="email">Email</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={formData.email}
+                onChange={handleInputChange}
+                required
+              />
+              {errors.email && <span className="error">{errors.email}</span>}
+              <button type="button" onClick={sendOtp} disabled={loading || isVerified}>
+                {isVerified ? 'Verified' : 'Send OTP'}
+              </button>
+            </div>
 
-          {/* Signup Form */}
-          <div className="patientsgp-signup-form-container">
-            <h3 className="patientsgp-signup-heading">
-              Create an <span className="patientsgp-highlight">account</span>
-            </h3>
-
-            <form className="patientsgp-signup-form"  onSubmit={submitHandler}>
-              {/* Email Address with OTP Verification */}
-              <div className="patientsgp-form-group">
-                <label className="patientsgp-field-instruction">Email Address:</label>
-                <input
-                  type="email"
-                  placeholder="Enter Your Email"
-                  name="email"
-                  className="patientsgp-form-input"
-                  value={formData.email}
-                  onChange={(e) => {
-                    setEmail(e.target.value); // Update email state for OTP
-                    handleInputChange(e); // Update form data
-                  }}
-                  required
-                />
-                <button
-                  type="button"
-                  className="patientsgp-otp-btn"
-                  onClick={sendOtp}
-                  disabled={isVerified}
-                >
-                  {isVerified ? "Verified" : "Send OTP"}
-                </button>
-              </div>
-
-              {generatedOtp && !isVerified && (
-                <div className="patientsgp-form-group">
-                  <label className="patientsgp-field-instruction">Enter OTP:</label>
-                  <input
-                    type="text"
-                    placeholder="Enter OTP"
-                    name="otp"
-                    className="patientsgp-form-input"
-                    value={otp}
-                    onChange={(e) => setOtp(e.target.value)}
-                    required
-                  />
-                  <button type="button" className="patientsgp-verify-otp-btn" onClick={verifyOtp}>
-                    Verify OTP
-                  </button>
-                </div>
-              )}
-
-              {/* Full Name */}
-              <div className="patientsgp-form-group">
-                <label className="patientsgp-field-instruction">Full Name:</label>
+            {generatedOtp && !isVerified && (
+              <div className="form-group">
+                <label htmlFor="otp">OTP</label>
                 <input
                   type="text"
-                  placeholder="Full Name"
-                  name="name"
-                  className="patientsgp-form-input"
-                  value={formData.name}
-                  onChange={handleInputChange}
+                  id="otp"
+                  value={otp}
+                  onChange={(e) => setOtp(e.target.value)}
                   required
                 />
+                <button type="button" onClick={verifyOtp}>Verify OTP</button>
               </div>
+            )}
 
-              {/* Password Field */}
-              <div className="patientsgp-form-group password-field">
-                <label className="patientsgp-field-instruction">Password:</label>
+            <div className="form-group">
+              <label htmlFor="name">Name</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                value={formData.name}
+                onChange={handleInputChange}
+                required
+              />
+              {errors.name && <span className="error">{errors.name}</span>}
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="password">Password</label>
+              <div className="password-input-wrapper">
                 <input
                   type={passwordVisible ? "text" : "password"}
-                  placeholder="Enter Your Password"
+                  id="password"
                   name="password"
-                  className="patientsgp-form-input"
                   value={formData.password}
                   onChange={handleInputChange}
                   required
                 />
-                <button
-                  type="button"
-                  className="patientsgp-toggle-password-btn"
-                  onClick={togglePasswordVisibility}
-                >
-                  {passwordVisible ? "Hide" : "Show"}
+                <button type="button" className="password-toggle" onClick={togglePasswordVisibility}>
+                  {passwordVisible ? <FaEyeSlash /> : <FaEye />}
                 </button>
               </div>
+              {errors.password && <span className="error">{errors.password}</span>}
+            </div>
 
-              {/* Confirm Password */}
-              <div className="patientsgp-form-group password-field">
-                <label className="patientsgp-field-instruction">Confirm Password:</label>
+            <div className="form-group">
+              <label htmlFor="confirmPassword">Confirm Password</label>
+              <div className="password-input-wrapper">
                 <input
                   type={confirmPasswordVisible ? "text" : "password"}
-                  placeholder="Confirm Your Password"
+                  id="confirmPassword"
                   name="confirmPassword"
-                  className="patientsgp-form-input"
                   value={formData.confirmPassword}
                   onChange={handleInputChange}
                   required
                 />
-                <button
-                  type="button"
-                  className="patientsgp-toggle-password-btn"
-                  onClick={toggleConfirmPasswordVisibility}
-                >
-                  {confirmPasswordVisible ? "Hide" : "Show"}
+                <button type="button" className="password-toggle" onClick={toggleConfirmPasswordVisibility}>
+                  {confirmPasswordVisible ? <FaEyeSlash /> : <FaEye />}
                 </button>
               </div>
+              {errors.confirmPassword && <span className="error">{errors.confirmPassword}</span>}
+            </div>
 
-              {/* Contact Number */}
-              <div className="patientsgp-form-group">
-                <label className="patientsgp-field-instruction">Contact Number:</label>
-                <input
-                  type="tel"
-                  placeholder="Contact No."
-                  name="contactNo"
-                  className="patientsgp-form-input"
-                  value={formData.contactNo}
-                  onChange={handleInputChange}
-                  required
-                />
-              </div>
+            <div className="form-group">
+              <label htmlFor="contactNo">Contact Number</label>
+              <PhoneInput
+                country={'in'}
+                value={formData.contactNo}
+                onChange={handlePhoneChange}
+                inputProps={{
+                  required: true,
+                }}
+              />
+              {errors.contactNo && <span className="error">{errors.contactNo}</span>}
+            </div>
 
-              {/* Nationality */}
-              <div className="patientsgp-form-group">
-                <label className="patientsgp-field-instruction">Nationality:</label>
-                <input
-                  type="text"
-                  placeholder="Nationality"
-                  name="nationality"
-                  className="patientsgp-form-input"
-                  alue={formData.nationality}
-                  onChange={handleInputChange}
-                  required
-                />
-              </div>
+            <div className="form-group">
+              <label htmlFor="nationality">Nationality</label>
+              <input
+                type="text"
+                id="nationality"
+                name="nationality"
+                value={formData.nationality}
+                onChange={handleInputChange}
+                required
+              />
+              {errors.nationality && <span className="error">{errors.nationality}</span>}
+            </div>
 
-              {/* Date of Birth */}
-              <div className="patientsgp-form-group">
-                <label className="patientsgp-field-instruction">Date of Birth:</label>
-                <input
-                  type="date"
-                  placeholder="Date of Birth"
-                  name="dob"
-                  className="patientsgp-form-input"
-                  value={formData.dob}
-                  onChange={handleInputChange}
-                  required
-                />
-              </div>
+            <div className="form-group">
+              <label htmlFor="dob">Date of Birth</label>
+              <input
+                type="date"
+                id="dob"
+                name="dob"
+                value={formData.dob}
+                onChange={handleInputChange}
+                required
+              />
+              {errors.dob && <span className="error">{errors.dob}</span>}
+            </div>
 
-              {/* Gender */}
-              <div className="patientsgp-form-group">
-                <label className="patientsgp-field-instruction">Gender:</label>
-                <input
-                  list="gender-options"
-                  type="text"
-                  placeholder="Select Gender"
-                  name="gender"
-                  className="patientsgp-form-input"
-                  value={formData.gender}
-                  onChange={handleInputChange}
-                  required
-                />
-                <datalist id="gender-options">
-                  <option value="Male" />
-                  <option value="Female" />
-                  <option value="Other" />
-                </datalist>
-              </div>
+            <div className="form-group">
+              <label htmlFor="gender">Gender</label>
+              <select
+                id="gender"
+                name="gender"
+                value={formData.gender}
+                onChange={handleInputChange}
+                required
+              >
+                <option value="">Select gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+              </select>
+              {errors.gender && <span className="error">{errors.gender}</span>}
+            </div>
 
-              {/* Blood Group */}
-              <div className="patientsgp-form-group">
-                <label className="patientsgp-field-instruction">Blood Group:</label>
-                <input
-                  list="blood-group-options"
-                  type="text"
-                  placeholder="Select Blood Group"
-                  name="bloodGroup"
-                  className="patientsgp-form-input"
-                  value={formData.bloodGroup}
-                  onChange={handleInputChange}
-                  required
-                />
-                <datalist id="blood-group-options">
-                  <option value="A+" />
-                  <option value="A-" />
-                  <option value="B+" />
-                  <option value="B-" />
-                  <option value="AB+" />
-                  <option value="AB-" />
-                  <option value="O+" />
-                  <option value="O-" />
-                </datalist>
-              </div>
+            <div className="form-group">
+              <label htmlFor="bloodGroup">Blood Group</label>
+              <select
+                id="bloodGroup"
+                name="bloodGroup"
+                value={formData.bloodGroup}
+                onChange={handleInputChange}
+                required
+              >
+                <option value="">Select blood group</option>
+                <option value="A+">A+</option>
+                <option value="A-">A-</option>
+                <option value="B+">B+</option>
+                <option value="B-">B-</option>
+                <option value="AB+">AB+</option>
+                <option value="AB-">AB-</option>
+                <option value="O+">O+</option>
+                <option value="O-">O-</option>
+              </select>
+              {errors.bloodGroup && <span className="error">{errors.bloodGroup}</span>}
+            </div>
 
-              <div className="patientsgp-form-group">
-                <button type="submit" className="patientsgp-form-submit-btn">
-                  Submit
-                </button>
-              </div>
-            </form>
-          </div>
+            <button type="submit" disabled={loading || !isVerified}>
+              {loading ? 'Registering...' : 'Register'}
+            </button>
+          </form>
         </div>
       </div>
-    </section>
+      <ToastContainer />
+    </div>
   );
 };
 
