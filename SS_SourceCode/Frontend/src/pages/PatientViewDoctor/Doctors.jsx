@@ -1,10 +1,31 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useDoctors } from "./../../assets/data/doctors.jsx";
 import DoctorCard from "./components/DoctorCard"
 import "./Doctors.css";
 
 const Doctors = () => {
-  const doctors = useDoctors(); 
+  const allDoctors = useDoctors();
+  const [searchQuery, setSearchQuery] = useState("");
+  const [doctors, setDoctors] = useState([]);
+
+  useEffect(() => {
+    setDoctors(allDoctors);
+  }, [allDoctors]);
+
+  const handleSearchChange = (e) => {
+    const query = e.target.value.toLowerCase();
+    setSearchQuery(query);
+    
+    const filteredDoctors = query 
+      ? allDoctors.filter(doctor => 
+          doctor.name.toLowerCase().includes(query) ||
+          doctor.specialization.toLowerCase().includes(query) ||
+          doctor.hospital.name.toLowerCase().includes(query)
+        )
+      : allDoctors;
+    setDoctors(filteredDoctors);
+  };
+
   return (
     <>
       <section className="docp-doctor-search-section">
@@ -15,7 +36,9 @@ const Doctors = () => {
               <input
                 type="search"
                 className="docp-search-input"
-                placeholder="Search Doctors"
+                placeholder="Search by Doctor's Name, Department, or Hospital"
+                value={searchQuery}
+                onChange={handleSearchChange}
               />
               <button className="docp-search-button">
                 <svg
@@ -37,11 +60,11 @@ const Doctors = () => {
         </div>
       </section>
 
-      <section>
+      <section className="docp-doctor-list-section">
         <div className="docp-container">
           <div className="docp-doctor-grid">
             {doctors.map((doctor) => (
-              <DoctorCard key={doctor.id} doctor={doctor} />
+              <DoctorCard key={doctor._id} doctor={doctor} />
             ))}
           </div>
         </div>
@@ -50,4 +73,4 @@ const Doctors = () => {
   );
 };
 
-export default Doctors;
+export default Doctors;   

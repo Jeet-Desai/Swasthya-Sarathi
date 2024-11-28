@@ -1,248 +1,220 @@
-import { useState } from "react";
-import "./DoctorProfileForm.css";
+import React, { useState, useContext } from 'react';
+import { AuthContext } from '../../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
-const DoctorProfileForm = () => {
+import { toast } from "react-toastify";
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import './AddNewDoc.css';
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#05cdec",
+    }
+  }
+});
+
+const AddNewDoctor = () => {
+  const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    firstName: "",
-    middleName: "",
-    lastName: "",
+    name: "",
     email: "",
-    password: "", // State for password
+    password: "",
+    confirmPassword: "",
     phone: "",
-    medicalLicense: "",
-    yearsOfExperience: "",
     gender: "",
-    age: "",
-    dateOfBirth: "",
-    registrationNumber: "",
+    specialization: "",
     qualification: "",
-    about: "", // Added about field
-    associatedHospital: "", // Added associated hospital field
-    field: "", // Added field field
+    experience: "",
+    about: "",
+    dob: "",
+    nationality: "",
   });
 
-  const handleInputChange = e => {
-    const { name, value } = e.target;
-    setFormData(prevData => ({
+  const departmentsArray = [
+    "Pediatrics",
+    "Orthopedics",
+    "Cardiology",
+    "Neurology",
+    "Oncology",
+    "Radiology",
+    "Physical Therapy",
+    "Dermatology",
+    "ENT",
+  ];
+
+  
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData((prevData) => ({
       ...prevData,
       [name]: value,
     }));
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (formData.password !== formData.confirmPassword) {
+      toast.error("Passwords do not match.");
+      return;
+    }
+
+    const hospitalId = user ? user._id : null;
+    if (!hospitalId) {
+      toast.error("Hospital ID not found in local storage.");
+      return;
+    }
+
+    const doctorData = {
+      ...formData,
+      hospitalId,
+    };
+
+    try {
+      const response = await fetch(
+        "http://localhost:5000/api/v1/hospitals/register-doctor",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(doctorData),
+        }
+      );
+
+      const data = await response.json();
+
+      if (response.ok) {
+        toast.success(data.message, { autoClose: 700 });  
+        navigate('/admin/home');
+        setTimeout(() => {  
+          window.location.href = "/admin/home";
+        }, 1100);
+        
+        
+      } else {
+        toast.error(data.message || "Failed to register doctor.");
+      }
+    } catch (error) {
+      toast.error("An error occurred. Please try again.");
+    }
+  };
   return (
-    <div className="doctor-form-wrapper">
-      {" "}
-      {/* Background color wrapper */}
-      <div className="doctor-form-container">
-        <h2 className="doctor-form-title">DOCTOR PROFILE</h2>
-        <form className="doctor-profile-form">
-          {/* First Name */}
-          <div className="doctor-form-group">
+    <ThemeProvider theme={theme}>
+      <div className="add-new-doctor-page">
+        <div className="add-new-doctor-container">
+          <h1 className="add-new-doctor-title">Add New Doctor</h1>
+          <form className="add-new-doctor-form-wrapper" onSubmit={handleSubmit}>
             <input
               type="text"
-              placeholder="First Name"
-              name="firstName"
-              value={formData.firstName}
-              onChange={handleInputChange}
-              required
+              name="name"
+              placeholder="Doctor Name"
+              value={formData.name}
+              onChange={handleChange}
             />
-          </div>
 
-          {/* Middle Name */}
-          <div className="doctor-form-group">
-            <input
-              type="text"
-              placeholder="Middle Name"
-              name="middleName"
-              value={formData.middleName}
-              onChange={handleInputChange}
-            />
-          </div>
-
-          {/* Last Name */}
-          <div className="doctor-form-group">
-            <input
-              type="text"
-              placeholder="Last Name"
-              name="lastName"
-              value={formData.lastName}
-              onChange={handleInputChange}
-              required
-            />
-          </div>
-
-          {/* Email */}
-          <div className="doctor-form-group">
             <input
               type="email"
-              placeholder="Email"
               name="email"
+              placeholder="Email Address"
               value={formData.email}
-              onChange={handleInputChange}
-              required
+              onChange={handleChange}
             />
-          </div>
 
-          {/* Password */}
-          <div className="doctor-form-group">
             <input
               type="password"
-              placeholder="Password"
               name="password"
+              placeholder="Password"
               value={formData.password}
-              onChange={handleInputChange}
-              required
+              onChange={handleChange}
             />
-          </div>
 
-          {/* Phone */}
-          <div className="doctor-form-group">
+            <input
+              type="password"
+              name="confirmPassword"
+              placeholder="Confirm Password"
+              value={formData.confirmPassword}
+              onChange={handleChange}
+            />
+
             <input
               type="tel"
-              placeholder="Phone number"
               name="phone"
+              placeholder="Contact Number"
               value={formData.phone}
-              onChange={handleInputChange}
-              required
+              onChange={handleChange}
             />
-          </div>
 
-          {/* Medical License No. */}
-          <div className="doctor-form-group">
-            <input
-              type="text"
-              placeholder="License Number"
-              name="medicalLicense"
-              value={formData.medicalLicense}
-              onChange={handleInputChange}
-              required
-            />
-          </div>
-
-          {/* Years of Experience */}
-          <div className="doctor-form-group">
-            <input
-              type="number"
-              placeholder="Years of Experience"
-              name="yearsOfExperience"
-              value={formData.yearsOfExperience}
-              onChange={handleInputChange}
-              required
-            />
-          </div>
-
-          {/* Associated Hospital */}
-          <div className="doctor-form-group">
-            <input
-              type="text"
-              placeholder="Associated Hospital"
-              name="associatedHospital"
-              value={formData.associatedHospital}
-              onChange={handleInputChange}
-              required
-            />
-          </div>
-
-          {/* Field */}
-          <div className="doctor-form-group">
-            <input
-              type="text"
-              placeholder="Field of Expertise"
-              name="field"
-              value={formData.field}
-              onChange={handleInputChange}
-              required
-            />
-          </div>
-
-          {/* Gender */}
-          <div className="doctor-form-group">
             <select
               name="gender"
               value={formData.gender}
-              onChange={handleInputChange}
-              required
+              onChange={handleChange}
             >
-              <option value="">Gender</option>
+              <option value="">Select Gender</option>
               <option value="male">Male</option>
               <option value="female">Female</option>
               <option value="other">Other</option>
             </select>
-          </div>
 
-          {/* Age */}
-          <div className="doctor-form-group">
+            <select
+              name="specialization"
+              value={formData.specialization}
+              onChange={handleChange}
+            >
+              <option value="">Select Specialization</option>
+              {departmentsArray.map((dept) => (
+                <option key={dept} value={dept}>{dept}</option>
+              ))}
+            </select>
+
+            <input
+              type="text"
+              name="qualification"
+              placeholder="Qualification"
+              value={formData.qualification}
+              onChange={handleChange}
+            />
+
             <input
               type="number"
-              placeholder="Age"
-              name="age"
-              value={formData.age}
-              onChange={handleInputChange}
-              required
+              name="experience"
+              placeholder="Years of Experience"
+              value={formData.experience}
+              onChange={handleChange}
             />
-          </div>
 
-          {/* Date of Birth */}
-          <div className="doctor-form-group doctor-form-floating-label">
+            <input
+              type="text"
+              name="about"
+              placeholder="About Doctor"
+              value={formData.about}
+              onChange={handleChange}
+            />
+
             <input
               type="date"
-              id="dateOfBirth"
-              name="dateOfBirth"
-              value={formData.dateOfBirth}
-              onChange={handleInputChange}
-              required
-              className="doctor-form-dob-input"
+              name="dob"
+              placeholder="Date of Birth"
+              value={formData.dob}
+              onChange={handleChange}
             />
-            <label htmlFor="dateOfBirth" className="doctor-form-dob-label">
-              Date of Birth
-            </label>
-          </div>
 
-          {/* Registration Number */}
-          <div className="doctor-form-group">
             <input
               type="text"
-              placeholder="Registration Number"
-              name="registrationNumber"
-              value={formData.registrationNumber}
-              onChange={handleInputChange}
-              required
+              name="nationality"
+              placeholder="Nationality"
+              value={formData.nationality}
+              onChange={handleChange}
             />
-          </div>
 
-          {/* Qualification */}
-          <div className="doctor-form-group">
-            <input
-              type="text"
-              placeholder="Qualification"
-              name="qualification"
-              value={formData.qualification}
-              onChange={handleInputChange}
-              required
-            />
-          </div>
-
-          {/* About */}
-          <div className="doctor-form-group">
-            <textarea
-              placeholder="About"
-              name="about"
-              value={formData.about}
-              onChange={handleInputChange}
-              required
-            />
-          </div>
-
-          {/* Submit Button */}
-          <div className="doctor-form-group">
-            <button type="submit" className="doctor-form-submit">
-              Submit
-            </button>
-          </div>
-        </form>
+            <button type="submit">Register Doctor</button>
+          </form>
+        </div>
       </div>
-    </div>
+    </ThemeProvider>
   );
 };
 
-export default DoctorProfileForm;
+export default AddNewDoctor;

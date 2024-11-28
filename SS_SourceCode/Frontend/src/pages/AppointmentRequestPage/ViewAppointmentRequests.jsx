@@ -52,7 +52,7 @@ export default function ViewAppointmentRequests() {
                 appointmentID={appointment.appointmentId}
                 patientName={appointment.patientName}
               />
-            ))
+            )) 
           ) : (
             <div>No pending appointments</div>
           )}

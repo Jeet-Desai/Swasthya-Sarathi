@@ -1,95 +1,152 @@
+.docdetp-doctor-details {
+  padding: 2rem 0;
+  background-color: #f8f9fa;
+}
+
 .docdetp-doctor-details__container {
-    max-width: 1170px;
-    padding: 0 1.25rem;
-    margin: 0 auto;
+  max-width: 1170px;
+  padding: 0 1.25rem;
+  margin: 0 auto;
+}
+
+.docdetp-doctor-details__header {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+}
+
+.docdetp-doctor-details__image-container {
+  flex-shrink: 0;
+}
+
+.docdetp-doctor-details__image {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid #38b6ff;
+}
+
+.docdetp-doctor-details__info {
+  flex-grow: 1;
+}
+
+.docdetp-doctor-details__name {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.docdetp-doctor-details__specialty {
+  font-size: 1.2rem;
+  color: #38b6ff;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.docdetp-doctor-details__stats {
+  display: flex;
+  gap: 2rem;
+}
+
+.docdetp-doctor-details__stat {
+  text-align: center;
+}
+
+.docdetp-doctor-details__stat-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #38b6ff;
+  display: block;
+}
+
+.docdetp-doctor-details__stat-label {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.docdetp-doctor-details__content {
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.docdetp-doctor-details__tabs {
+  display: flex;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.docdetp-doctor-details__tab {
+  padding: 1rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #666;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.docdetp-doctor-details__tab.active {
+  color: #38b6ff;
+  border-bottom: 2px solid #38b6ff;
+}
+
+.docdetp-doctor-details__tab-content {
+  padding: 2rem;
+}
+
+.docdetp-doctor-details__about h2,
+.docdetp-doctor-details__experience h2 {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.docdetp-doctor-details__about p,
+.docdetp-doctor-details__experience p {
+  font-size: 1rem;
+  color: #666;
+  line-height: 1.6;
+}
+
+.docdetp-doctor-details__sidebar {
+  margin-top: 2rem;
+}
+
+.docdetp-loading {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #666;
+  padding: 2rem;
+}
+
+@media (min-width: 768px) {
+  .docdetp-doctor-details__container {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 2rem;
   }
-  
-  .docdetp-doctor-details__grid {
-    display: grid;
-    gap: 3.125rem;
+
+  .docdetp-doctor-details__sidebar {
+      margin-top: 0;
   }
-  
-  @media (min-width: 768px) {
-    .docdetp-doctor-details__grid {
-        grid-template-columns: repeat(3, 1fr);
-    }
-  
-    .docdetp-doctor-details__main {
-        grid-column: span 2;
-    }
-  }
-  
+}
+
+@media (max-width: 767px) {
   .docdetp-doctor-details__header {
-    display: flex;
-    align-items: center;
-    gap: 1.25rem;
+      flex-direction: column;
+      text-align: center;
   }
-  
-  .docdetp-doctor-details__image {
-    max-width: 200px;
-    max-height: 200px;
+
+  .docdetp-doctor-details__stats {
+      justify-content: center;
   }
-  
-  .docdetp-doctor-details__image img {
-    width: 100%;
-    height: auto;
-  }
-  
-  .docdetp-doctor-details__specialty {
-    display: inline-block;
-    background-color: #CCF0F3;
-    color: var(--iris-blue-color, #01B5C5);
-    padding: 0.25rem 1.5rem;
-    font-size: 0.75rem;
-    line-height: 1rem;
-    border-radius: 0.25rem;
-  }
-  
-  @media (min-width: 1024px) {
-    .docdetp-doctor-details__specialty {
-        padding: 0.5rem 1.5rem;
-        font-size: 1rem;
-        line-height: 1.75rem;
-    }
-  }
-  
-  .docdetp-doctor-details__name {
-    color: var(--heading-color, #181A1E);
-    font-size: 1.375rem;
-    line-height: 2.25rem;
-    margin-top: 0.75rem;
-    font-weight: 700;
-  }
-  
-  .docdetp-doctor-details__description {
-    font-size: 0.875rem;
-    line-height: 1.25rem;
-  }
-  
-  @media (min-width: 768px) {
-    .docdetp-doctor-details__description {
-        font-size: 0.9375rem;
-    }
-  }
-  
-  @media (min-width: 1024px) {
-    .docdetp-doctor-details__description {
-        max-width: 390px;
-    }
-  }
-  
-  /* Commented Navigation Styles
-  .docdetp-doctor-details__nav {
-    margin-top: 3.125rem;
-    border-bottom: 1px solid #0066f34;
-  }
-  
-  .docdetp-doctor-details__nav-button {
-    padding: 0.5rem 1.25rem;
-    margin-right: 1.25rem;
-    font-size: 1rem;
-    line-height: 1.75rem;
-    color: var(--heading-color);
-    font-weight: 600;
-  }
-  */
+}

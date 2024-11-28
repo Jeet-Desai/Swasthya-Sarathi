@@ -17,7 +17,7 @@ export default function AppointmentDetails() {
     time: '10:00',
     appointmentId: appointmentId, // Display the appointmentId
   };
-
+ 
   return (
     <div className="appointment-details">
       <div className="container">

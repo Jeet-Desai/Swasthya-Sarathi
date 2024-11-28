@@ -48,6 +48,11 @@ const AppointmentForm = ({ onClose, doctor }) => {
         e.preventDefault();
         
         try {
+            if(!patientId){
+                toast.error("Please login to book an appointment");
+                navigate('/login');
+                return;
+            }
             const response = await fetch(`${BASE_URL}/api/v1/patients/request_appointment`, {
                 method: 'POST',
                 headers: {
@@ -95,7 +100,7 @@ const AppointmentForm = ({ onClose, doctor }) => {
                 </div>
 
                 <div className="afp-form-group">
-                    <label className="afp-form-label">Time:</label>
+                    <label className="afp-form-label">Time:</label> 
                     <input
                         type="time"
                         name="time"

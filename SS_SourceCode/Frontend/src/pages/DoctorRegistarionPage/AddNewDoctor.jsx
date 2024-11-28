@@ -1,55 +1,17 @@
-import React, { useState, useContext } from "react";
-import {
-  ThemeProvider,
-  createTheme,
-  Card,
-  CardContent,
-  TextField,
-  Button,
-  Box,
-  Typography,
-  Grid,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
-} from "@mui/material";
-import { Upload as UploadIcon } from "@mui/icons-material";
-import { AuthContext } from "../../Context/AuthContext";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useContext } from 'react';
+import { AuthContext } from '../../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
+
 import { toast } from "react-toastify";
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import './AddNewDoc.css';
 
 const theme = createTheme({
   palette: {
     primary: {
       main: "#05cdec",
-    },
-  },
-  typography: {
-    h5: {
-      fontSize: "1.5rem",
-      "@media (max-width:900px)": {
-        fontSize: "1.3rem",
-      },
-      "@media (max-width:600px)": {
-        fontSize: "1.1rem",
-      },
-      "@media (max-width:400px)": {
-        fontSize: "0.75rem",
-      },
-    },
-  },
-  components: {
-    MuiCard: {
-      styleOverrides: {
-        root: {
-          borderRadius: 16,
-          boxShadow: "0 10px 30px rgba(0, 0, 0, 0.2)",
-          overflow: "hidden",
-        },
-      },
-    },
-  },
+    }
+  }
 });
 
 const AddNewDoctor = () => {
@@ -82,6 +44,7 @@ const AddNewDoctor = () => {
     "ENT",
   ];
 
+  
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormData((prevData) => ({
@@ -138,170 +101,118 @@ const AddNewDoctor = () => {
       toast.error("An error occurred. Please try again.");
     }
   };
-
   return (
     <ThemeProvider theme={theme}>
-      <Box
-        sx={{
-          background: "linear-gradient(135deg, #d4d4d8, #e4e4e7, #f4f4f5, #a1a1aa)",
-          padding: 3,
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "center",
-          minHeight: "100vh",
-        }}
-      >
-        <Card
-          sx={{
-            width: "100%",
-            maxWidth: { xs: "90%", sm: "95%", md: "100%" },
-            backgroundColor: "white",
-            margin: "0",
-          }}
-        >
-          <CardContent
-            sx={{
-              padding: { xs: "16px", sm: "24px", md: "32px" },
-            }}
-          >
-            <Typography
-              variant="h5"
-              component="h1"
-              align="center"
-              sx={{
-                mb: { xs: 2, sm: 3, md: 4 },
-                fontWeight: "bold",
-                color: "#333",
-                textTransform: "uppercase",
-              }}
+      <div className="add-new-doctor-page">
+        <div className="add-new-doctor-container">
+          <h1 className="add-new-doctor-title">Add New Doctor</h1>
+          <form className="add-new-doctor-form-wrapper" onSubmit={handleSubmit}>
+            <input
+              type="text"
+              name="name"
+              placeholder="Doctor Name"
+              value={formData.name}
+              onChange={handleChange}
+            />
+
+            <input
+              type="email"
+              name="email"
+              placeholder="Email Address"
+              value={formData.email}
+              onChange={handleChange}
+            />
+
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              value={formData.password}
+              onChange={handleChange}
+            />
+
+            <input
+              type="password"
+              name="confirmPassword"
+              placeholder="Confirm Password"
+              value={formData.confirmPassword}
+              onChange={handleChange}
+            />
+
+            <input
+              type="tel"
+              name="phone"
+              placeholder="Contact Number"
+              value={formData.phone}
+              onChange={handleChange}
+            />
+
+            <select
+              name="gender"
+              value={formData.gender}
+              onChange={handleChange}
             >
-              Register New Doctor
-            </Typography>
+              <option value="">Select Gender</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="other">Other</option>
+            </select>
 
-            <form onSubmit={handleSubmit}>
-              <Grid container spacing={2}>
-                <Grid item xs={12} md={6}>
-                  <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
-                    {[
-                      { name: "name", label: "Name" },
-                      { name: "email", label: "Email", type: "email" },
-                      { name: "password", label: "Password", type: "password" },
-                      {
-                        name: "confirmPassword",
-                        label: "Confirm Password",
-                        type: "password",
-                      },
-                      { name: "phone", label: "Phone" },
-                      { name: "nationality", label: "Nationality" },
-                    ].map((field) => (
-                      <TextField
-                        key={field.name}
-                        required
-                        fullWidth
-                        name={field.name}
-                        label={field.label}
-                        type={field.type || "text"}
-                        value={formData[field.name]}
-                        onChange={handleChange}
-                        variant="outlined"
-                      />
-                    ))}
-                  </Box>
-                </Grid>
+            <select
+              name="specialization"
+              value={formData.specialization}
+              onChange={handleChange}
+            >
+              <option value="">Select Specialization</option>
+              {departmentsArray.map((dept) => (
+                <option key={dept} value={dept}>{dept}</option>
+              ))}
+            </select>
 
-                <Grid item xs={12} md={6}>
-                  <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
-                    <FormControl fullWidth required>
-                      <InputLabel>Gender</InputLabel>
-                      <Select
-                        name="gender"
-                        value={formData.gender}
-                        onChange={handleChange}
-                        label="Gender"
-                      >
-                        <MenuItem value="Male">Male</MenuItem>
-                        <MenuItem value="Female">Female</MenuItem>
-                        <MenuItem value="Other">Other</MenuItem>
-                      </Select>
-                    </FormControl>
+            <input
+              type="text"
+              name="qualification"
+              placeholder="Qualification"
+              value={formData.qualification}
+              onChange={handleChange}
+            />
 
-                    <FormControl fullWidth required>
-                      <InputLabel>Specialization</InputLabel>
-                      <Select
-                        name="specialization"
-                        value={formData.specialization}
-                        onChange={handleChange}
-                        label="Specialization"
-                      >
-                        {departmentsArray.map((dept) => (
-                          <MenuItem key={dept} value={dept}>
-                            {dept}
-                          </MenuItem>
-                        ))}
-                      </Select>
-                    </FormControl>
+            <input
+              type="number"
+              name="experience"
+              placeholder="Years of Experience"
+              value={formData.experience}
+              onChange={handleChange}
+            />
 
-                    {[
-                      { name: "qualification", label: "Qualification" },
-                      { name: "experience", label: "Experience" },
-                      { name: "dob", label: "Date of Birth", type: "date" },
-                    ].map((field) => (
-                      <TextField
-                        key={field.name}
-                        required
-                        fullWidth
-                        name={field.name}
-                        label={field.label}
-                        type={field.type || "text"}
-                        value={formData[field.name]}
-                        onChange={handleChange}
-                        variant="outlined"
-                        InputLabelProps={
-                          field.type === "date" ? { shrink: true } : undefined
-                        }
-                      />
-                    ))}
+            <input
+              type="text"
+              name="about"
+              placeholder="About Doctor"
+              value={formData.about}
+              onChange={handleChange}
+            />
 
-                    <TextField
-                      required
-                      fullWidth
-                      name="about"
-                      label="About"
-                      multiline
-                      rows={4}
-                      value={formData.about}
-                      onChange={handleChange}
-                      variant="outlined"
-                    />
-                  </Box>
-                </Grid>
-              </Grid>
+            <input
+              type="date"
+              name="dob"
+              placeholder="Date of Birth"
+              value={formData.dob}
+              onChange={handleChange}
+            />
 
-              <Button
-                type="submit"
-                variant="contained"
-                sx={{
-                  mt: 4,
-                  width: "30vw",
-                  margin: "20px auto",
-                  display: "block",
-                  fontSize: {
-                    xs: '0.6rem',  // for small screens (tablet)
-                    sm : '0.7rem',
-                    md: '1rem',    // for medium screens (laptops/tablets and above)
-                  },
-                  backgroundColor: "#05cdec",
-                  "&:hover": {
-                    backgroundColor: "#039bbd",
-                  },
-                }}
-              >
-                Register
-              </Button>
-            </form>
-          </CardContent>
-        </Card>
-      </Box>
+            <input
+              type="text"
+              name="nationality"
+              placeholder="Nationality"
+              value={formData.nationality}
+              onChange={handleChange}
+            />
+
+            <button type="submit">Register Doctor</button>
+          </form>
+        </div>
+      </div>
     </ThemeProvider>
   );
 };

@@ -50,7 +50,7 @@ export const getPendingAppointmentsbyDiD = async (req, res) => {
         // Find all pending appointments for the doctor
         const pendingAppointments = await Appointment.find({
             doctor: doctorId,
-            status: "pending"
+            status: "approved"
         })
         .populate('patient', 'name') // Only get patient name
         .select('_id patient date time description'); // Select required fields

@@ -47,7 +47,7 @@ export default function AdminAppointmentDetails() {
 
       const data = await response.json();
 
-      if (!response.ok) {
+      if (!response.ok) { 
         throw new Error(data.message || 'Failed to update appointment status');
       }
 
@@ -68,59 +68,93 @@ export default function AdminAppointmentDetails() {
         <h1>Appointment Details</h1>
         <form>
           <label htmlFor="patientName">Patient Name:</label>
-          <input type="text" id="patientName" name="patientName" value={appointmentData.patient.name} disabled />
-          <label htmlFor="patientName">Patient Name:</label>
-          <input type="text" id="patientName" name="patientName" value={appointmentData.patient.name} disabled />
+          <input 
+            type="text" 
+            id="patientName" 
+            name="patientName" 
+            value={appointmentData.patient.name} 
+            disabled 
+          />
 
           <label htmlFor="contact">Contact No.:</label>
-          <input type="text" id="contact" name="contact" value={appointmentData.patient.contactNo} disabled />
-          <input type="text" id="contact" name="contact" value={appointmentData.patient.contactNo} disabled />
+          <input 
+            type="text" 
+            id="contact" 
+            name="contact" 
+            value={appointmentData.patient.contactNo} 
+            disabled 
+          />
 
           <label htmlFor="doctorName">Doctor Name:</label>
-          <input type="text" id="doctorName" name="doctorName" value={appointmentData.doctor.name} disabled />
+          <input 
+            type="text" 
+            id="doctorName" 
+            name="doctorName" 
+            value={appointmentData.doctor.name} 
+            disabled 
+          />
 
           <label htmlFor="specialization">Specialization:</label>
-          <input type="text" id="specialization" name="specialization" value={appointmentData.doctor.specialization} disabled />
+          <input 
+            type="text" 
+            id="specialization" 
+            name="specialization" 
+            value={appointmentData.doctor.specialization} 
+            disabled 
+          />
 
           <label htmlFor="hospitalName">Hospital Name:</label>
-          <input type="text" id="hospitalName" name="hospitalName" value={appointmentData.hospital.name} disabled />
-          <label htmlFor="doctorName">Doctor Name:</label>
-          <input type="text" id="doctorName" name="doctorName" value={appointmentData.doctor.name} disabled />
+          <input 
+            type="text" 
+            id="hospitalName" 
+            name="hospitalName" 
+            value={appointmentData.hospital.name} 
+            disabled 
+          />
 
-          <label htmlFor="specialization">Specialization:</label>
-          <input type="text" id="specialization" name="specialization" value={appointmentData.doctor.specialization} disabled />
-
-          <label htmlFor="hospitalName">Hospital Name:</label>
-          <input type="text" id="hospitalName" name="hospitalName" value={appointmentData.hospital.name} disabled />
-
-          <label htmlFor="description">Description:</label>
-          <textarea id="description" name="description" value={appointmentData.description} disabled></textarea>
-          <textarea id="description" name="description" value={appointmentData.description} disabled></textarea>
-
-          <label htmlFor="date">Date:</label>
-          <input type="text" id="date" name="date" value={formatDate(appointmentData.date)} disabled />
-          <input type="text" id="date" name="date" value={formatDate(appointmentData.date)} disabled />
+          <label htmlFor="appointmentId">Appointment ID:</label>
+          <input 
+            type="text" 
+            id="appointmentId" 
+            name="appointmentId" 
+            value={appointmentData._id} 
+            disabled 
+          />
 
           <label htmlFor="time">Time:</label>
-          <input type="text" id="time" name="time" value={appointmentData.time} disabled />
+          <input 
+            type="text" 
+            id="time" 
+            name="time" 
+            value={appointmentData.time} 
+            disabled 
+          />
 
           <label htmlFor="status">Status:</label>
-          <input type="text" id="status" name="status" value={appointmentData.status} disabled />
+          <input 
+            type="text" 
+            id="status" 
+            name="status" 
+            value={appointmentData.status} 
+            disabled 
+          />
 
-          <label htmlFor="appointmentId">Appointment ID:</label>
-          <input type="text" id="appointmentId" name="appointmentId" value={appointmentData._id} disabled />
-          <input type="text" id="time" name="time" value={appointmentData.time} disabled />
-
-          <label htmlFor="status">Status:</label>
-          <input type="text" id="status" name="status" value={appointmentData.status} disabled />
-
-          <label htmlFor="appointmentId">Appointment ID:</label>
-          <input type="text" id="appointmentId" name="appointmentId" value={appointmentData._id} disabled />
-
-          <button type="button" className="btn-danger" onClick={() => handleUpdateStatus('rejected')}>Discard Appointment</button>
-          <button type="button" className="btn-success" onClick={() => handleUpdateStatus('approved')}>Confirm Appointment</button>
-          <button type="button" className="btn-danger" onClick={() => handleUpdateStatus('rejected')}>Discard Appointment</button>
-          <button type="button" className="btn-success" onClick={() => handleUpdateStatus('approved')}>Confirm Appointment</button>
+          <div className="button-group">
+            <button 
+              type="button" 
+              className="btn-danger" 
+              onClick={() => handleUpdateStatus('rejected')}
+            >
+              Reject Appointment
+            </button>
+            <button 
+              type="button" 
+              className="btn-success" 
+              onClick={() => handleUpdateStatus('approved')}
+            >
+              Approve Appointment
+            </button>
+          </div>
         </form>
       </div>
     </div>

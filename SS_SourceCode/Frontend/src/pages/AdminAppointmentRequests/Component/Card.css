@@ -1,68 +1,82 @@
 .card {
-    background-color: #f4f4f5;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);    
-    margin: 10px;
-    padding: 20px;
-    width: 80%; /* 80% of the parent container */
-    display: flex;
-    justify-content: space-between; /* Space between left and right content */
-    align-items: center; /* Align items vertically at the center */
-    height: 70px; /* Set a fixed height to ensure a rectangle */
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
+  border-left: 5px solid #38b6ff; /* Default border color */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);    
+  margin: 10px;
+  padding: 20px;
+  width: 80%; /* 80% of the parent container */
+  display: flex;
+  justify-content: space-between; /* Space between left and right content */
+  align-items: center; /* Align items vertically at the center */
+  height: auto; /* Allow height to adjust based on content */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
 
-.card-info h2{     
-    text-align: center;
-  }
+.card-pending {
+  background-color: #fff3cd; /* Light yellow background for pending status */
+  border-left-color: #ffc107; /* Yellow border for pending status */
+}
 
-.btn{
-    background-color:#38b6ff;
-    color: white;
-    padding: 10px 20px;
-    text-decoration: none;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    height: 40px; /* Ensure uniform button height */
-  }
-  
-  .btn:hover {
-    background-color: #0056b3;
+.card-approved {
+  background-color: #d4edda; /* Light green background for approved status */
+  border-left-color: #28a745; /* Green border for approved status */
+}
+
+.card-rejected {
+  background-color: #f8d7da; /* Light red background for rejected status */
+  border-left-color: #dc3545; /* Red border for rejected status */
+}
+
+.card-completed {
+  background-color: #d1ecf1; /* Light blue background for completed status */
+  border-left-color: #17a2b8; /* Blue border for completed status */
 }
 
 .card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-5px); /* Slight lift on hover */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
 }
 
-
-/*For Responsiveness*/
-
-/* Small screens (up to 767px) */
-@media (max-width: 767px) {
-  .card { width: 90%; padding: 15px; margin: 10px; }
-  .btn { padding: 8px 16px; height: 35px; }
-  .card-info { margin-right: 10px; }
-  .card-info h2 { font-size: 1rem; }
-  .card-info p { font-size: 0.8rem; }
+.card-info h2 {
+  text-align: center;
+  font-size: 1.5rem; /* Font size for headings */
+  color: #333; /* Darker color for better readability */
+  margin-bottom: 15px;
 }
 
-/* Medium screens (768px to 991px) */
-@media (min-width: 768px) and (max-width: 991px) {
-  .card { width: 85%; }
-  .card-info h2 { font-size: 1.2rem; }  /* Adjust font-size for tablets */
-}
-@media (max-width: 475px) {
-  .card { width: 95%; padding: 10px; margin: 5px; }
-  .btn { padding: 5px 12px; height: 30px; font-size: 0.8rem; }
-  .card-info h2 { font-size: 1rem; }
-  .card-info p { font-size: 0.7rem; }
+.card-info p {
+  font-size: 1rem; /* Standard font size for paragraphs */
+  color: #555; /* Slightly lighter color for paragraph text */
+  margin: 5px 0;
 }
 
-@media (max-width: 375px) {
-  .card { width: 95%; padding: 10px; margin: 5px; }
-  .btn { padding: 5px 12px; height: 25px; font-size: 0.5rem; }
-  .card-info h2 { font-size: 0.7rem; }
-  .card-info p { font-size: 0.5rem; }
+.card-info p strong {
+  color: #000; /* Stronger color for labels */
+}
+
+.btn {
+  background-color: #38b6ff;
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  height: 40px; /* Ensure uniform button height */
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #0056b3;
+  transform: scale(1.05); /* Slightly enlarge button on hover */
+}
+
+.appointment-segment {
+  margin-bottom: 30px;
+}
+
+.appointment-segment h3 {
+  font-size: 1.8rem;
+  color: #333;
+  margin-bottom: 20px;
 }
