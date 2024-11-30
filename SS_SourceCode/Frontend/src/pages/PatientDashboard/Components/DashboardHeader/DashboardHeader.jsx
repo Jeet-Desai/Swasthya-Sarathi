@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import "./DashboardHeader.css";
 import MyProfileImage from "../../../../assets/images/MyProfile.jpg"; // Import the image
 import logo from "../../../../assets/images/rmlogo.png";
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from "react-router-dom";
 
 const navLinks = [
   { path: "/patient/dashboard", display: "Dashboard" },
@@ -18,8 +18,8 @@ const DashboardHeader = () => {
   const headerRef = useRef(null);
   const menuRef = useRef(null);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [userName, setUserName] = useState('');
-const navigate = useNavigate();
+  const [userName, setUserName] = useState("");
+  const navigate = useNavigate();
   // Close menu when clicking outside (for mobile)
   // useEffect(() => {
   //   const handleClickOutside = event => {
@@ -33,7 +33,7 @@ const navigate = useNavigate();
   // }, []);
   useEffect(() => {
     // Retrieve the user's name from local storage
-    const user = JSON.parse(localStorage.getItem('user'));
+    const user = JSON.parse(localStorage.getItem("user"));
     if (user && user.name) {
       setUserName(user.name);
     }
@@ -41,14 +41,13 @@ const navigate = useNavigate();
   const handleLogout = () => {
     alert("Logging out...");
     // Clear user data from local storage
-    localStorage.removeItem('user');
-    localStorage.removeItem('token');
-    localStorage.removeItem('role');
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+    localStorage.removeItem("role");
     // Navigate to the home page
-    navigate('/login');
+    navigate("/login");
     window.location.href = "/login/";
   };
-
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
 
@@ -63,7 +62,13 @@ const navigate = useNavigate();
                 ☰
               </span>
               {/* Logo */}
-              <Link to="/patient/dashboard">
+              <Link
+                to="/patient/dashboard"
+                onClick={e => {
+                  toggleMenu(); // Close menu
+                  window.location.href = link.path; // Navigate to the link and trigger page reload
+                }}
+              >
                 <div className="logo">
                   <img src={logo} alt="Logo" />{" "}
                   {/* Corrected to use imported logo */}
@@ -132,10 +137,7 @@ const navigate = useNavigate();
                     <span className="user-name">{userName}</span>
                   </button>
                 </Link>
-                <button
-                  className="logout-button"
-                  onClick={handleLogout}
-                >
+                <button className="logout-button" onClick={handleLogout}>
                   Logout
                 </button>
               </div>

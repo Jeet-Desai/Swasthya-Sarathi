@@ -5,7 +5,7 @@ import "./footer.css";
 
 const socialLinks = [
   {
-    path: "",
+    path: "https://www.youtube.com",
     icon: <AiFillYoutube className="social-icon" />,
   },
   {
