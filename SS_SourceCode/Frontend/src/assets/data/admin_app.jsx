@@ -19,7 +19,7 @@ export const getHospitalAppointments = () => {
         const response = await fetch(`http://localhost:5000/api/v1/hospitals/get-hospital-appointments/${hospitalId}`);
         
         const data = await response.json();
-        // console.log(data);
+        console.log(data);
         if (response.ok) {
           setAppointments(data.appointments);
         } else {
