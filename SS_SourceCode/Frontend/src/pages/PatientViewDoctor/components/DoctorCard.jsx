@@ -23,7 +23,7 @@ const DoctorCard = ({ doctor }) => {
   return (
     <div className="dcp-doctor-card">
       <div className="dcp-doctor-card__image">
-        <img src="https://preview.redd.it/bvjhv94ta7121.jpg?auto=webp&s=9f8faec3040b3e3f32250ef5c39b43d99b016aa0"
+        <img src="https://ih1.redbubble.net/image.3509846515.7302/raf,360x360,075,t,fafafa:ca443f4786.jpg"
           style={{
             width: "330px",
             height: "330px",

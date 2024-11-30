@@ -6,7 +6,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0; /* Ensure no default margin */
+  margin: 0;
 }
 
 .signup-wrapper {
@@ -15,6 +15,7 @@ body {
   align-items: center;
   width: 100%;
   height: 100%;
+  padding: 20px;
 }
 
 .signup-container {
@@ -53,8 +54,7 @@ body {
 h2 {
   text-align: center;
   color: #333;
-  margin-bottom: 2rem;
-  font-size: 2rem;
+  margin-bottom: 1.5rem;
 }
 
 /* Form Styles */
@@ -62,119 +62,139 @@ h2 {
   margin-bottom: 1.5rem;
 }
 
-label {
+.form-group label {
   display: block;
   margin-bottom: 0.5rem;
-  color: #555;
-  font-weight: 600;
+  color: #333;
+  font-weight: 500;
 }
 
-input[type="text"],
-input[type="email"],
-input[type="password"],
-input[type="date"],
-select,
-.react-tel-input .form-control {
+.form-group input,
+.form-group select {
   width: 100%;
-  padding: 0.75rem;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  font-size: 1rem;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
 }
 
-input[type="text"]:focus,
-input[type="email"]:focus,
-input[type="password"]:focus,
-input[type="date"]:focus,
-select:focus,
-.react-tel-input .form-control:focus {
-  outline: none;
-  border-color: #4a90e2;
-  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+.form-group select {
+  appearance: none;
+  background: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 5"><path fill="#333" d="M2 0L0 2h4zm0 5L0 3h4z"/></svg>') no-repeat right 10px center;
+  background-size: 10px;
 }
 
-.password-input-wrapper {
+/* Email and OTP Section */
+.email-group, .otp-group {
   display: flex;
-  align-items: center;
+  gap: 10px;
 }
 
-.password-input-wrapper input {
+.email-group input, .otp-group input {
   flex: 1;
 }
 
-.password-toggle {
-  background: none;
-  border: none;
-  cursor: pointer;
-  margin-left: -2.5rem;
-  color: #555;
-}
-
-/* Button Styles */
-button {
-  background-color: #4a90e2;
+.otp-button, .verify-button {
+  padding: 8px 16px;
+  white-space: nowrap;
+  background-color: #4CAF50;
   color: white;
   border: none;
-  padding: 0.75rem 1.5rem;
-  border-radius: 8px;
+  border-radius: 5px;
   cursor: pointer;
-  font-size: 1rem;
-  font-weight: 600;
-  transition: background-color 0.3s ease, transform 0.3s ease;
+  transition: background-color 0.3s;
 }
 
-button:hover {
-  background-color: #3a7bc8;
-  transform: translateY(-2px);
+.otp-button:hover, .verify-button:hover {
+  background-color: #45a049;
 }
 
-button:disabled {
-  background-color: #ccc;
+.otp-button:disabled, .verify-button:disabled {
+  background-color: #cccccc;
   cursor: not-allowed;
 }
 
-/* Error Message Styles */
-.error {
-  color: #e74c3c;
-  font-size: 0.875rem;
-  margin-top: 0.25rem;
+/* Password Input */
+.password-input-wrapper {
+  position: relative;
 }
 
-/* Phone Input Styles */
+.password-toggle {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #666;
+}
+
+/* Error Messages */
+.error {
+  color: #dc3545;
+  font-size: 0.8rem;
+  margin-top: 4px;
+}
+
+/* Submit Button */
+.submit-button {
+  width: 100%;
+  padding: 12px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 1rem;
+}
+
+.submit-button:hover {
+  background-color: #0056b3;
+}
+
+.submit-button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+/* Phone Input Customization */
 .react-tel-input .form-control {
   width: 100% !important;
+  height: 40px !important;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
   .signup-container {
     flex-direction: column;
-    padding: 1.5rem;
-  }
-
-  .signup-left {
     padding: 1rem;
   }
-
-  .signup-right {
-    padding: 1.5rem;
+  
+  .email-group, .otp-group {
+    flex-direction: column;
   }
 
-  h2 {
-    font-size: 1.5rem;
+  .otp-button, .verify-button {
+    width: 100%;
   }
+}
 
-  input[type="text"],
-  input[type="email"],
-  input[type="password"],
-  input[type="date"],
-  select,
-  .react-tel-input .form-control {
-    padding: 0.6rem;
-  }
+/* Loading State */
+.loading {
+  opacity: 0.7;
+  pointer-events: none;
+}
 
-  button {
-    padding: 0.6rem 1.2rem;
-  }
+/* Success State */
+.verified {
+  border-color: #4CAF50 !important;
+}
+
+.verified-text {
+  color: #4CAF50;
+  font-size: 0.8rem;
+  margin-top: 4px;
 }
