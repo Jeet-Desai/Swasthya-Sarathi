@@ -3,6 +3,25 @@ import Hospital from '../Models/HospitalModel.js'; // Importing the Hospital mod
 import Doctor from '../Models/DoctorModel.js'; // Importing the Doctor model (same as hospital model)
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
+import dns from 'dns';
+
+export const validateEmail = async (req, res) => {
+  const { email } = req.body;
+
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    return res.status(400).json({ success: false, message: 'Invalid email format!' });
+  }
+
+  const domain = email.split('@')[1];
+
+  dns.resolveMx(domain, (err, addresses) => {
+    if (err || addresses.length === 0) {
+      return res.status(400).json({ success: false, message: 'Invalid email domain!' });
+    }
+
+    res.status(200).json({ success: true, message: 'Email is valid!' });
+  });
+};
 
 export const Register = async (req, res) => {
   const {
@@ -22,6 +41,14 @@ export const Register = async (req, res) => {
   } = req.body;
 
   try {
+    // Email validation regex
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    // Validate email format
+    if (!email || !emailRegex.test(email)) {
+      return res.status(400).json({ message: "Invalid email format!" });
+    }
+
     // Check if password and confirmPassword match
     if (password !== confirmPassword) {
       return res.status(400).json({ message: "Passwords do not match!" });
@@ -61,7 +88,8 @@ export const Register = async (req, res) => {
         bloodGroup,
         appointments: [],
       });
-    } else if (role === "hospital") {
+    } 
+    else if (role === "hospital") {
       // Create a new hospital
       user = new Hospital({
         email,
@@ -89,6 +117,13 @@ export const Register = async (req, res) => {
 export const Login = async (req, res) => {
     try {
         const { email, password: pass, type} = req.body;
+        // Email validation regex
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        // Validate email format
+        if (!email || !emailRegex.test(email)) {
+          return res.status(400).json({ message: "Invalid email format!" });
+        }
 
         // Check if email, password, and type are provided
         if (!email || !pass) {

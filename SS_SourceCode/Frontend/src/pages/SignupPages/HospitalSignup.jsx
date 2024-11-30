@@ -36,7 +36,7 @@ const HospitalSignup = () => {
   const toggleConfirmPasswordVisibility = () => setConfirmPasswordVisible(!confirmPasswordVisible);
 
   const validatePassword = (password) => {
-    const regex = /^(?=.\d)(?=.[a-z])(?=.[A-Z])(?=.[!@#$%^&])(?=.[a-zA-Z]).{8,}$/;
+    const regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}$/;
     return regex.test(password);
   };
 
@@ -68,18 +68,44 @@ const HospitalSignup = () => {
     return Object.keys(newErrors).length === 0;
   };
 
+  const validateEmailAddress = async () => {
+    try {
+      const response = await fetch(`${BASE_URL}/api/v1/auth/validate-email`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: formData.email }),
+      });
+      const data = await response.json();
+  
+      if (data.success) {
+        return true;
+      } else {
+        setErrors({ ...errors, email: data.message });
+        toast.error(data.message);
+        return false;
+      }
+    } catch (err) {
+      toast.error('Error validating email');
+      return false;
+    }
+  };
+
   const sendOtp = async () => {
     if (!formData.email) {
       setErrors({ ...errors, email: 'Email is required to send OTP' });
       return;
     }
-    setLoading(true);
-    // Implement OTP sending logic here
-    // For now, we'll simulate it
-    const simulatedOtp = Math.floor(100000 + Math.random() * 900000).toString();
-    setGeneratedOtp(simulatedOtp);
-    toast.success(`OTP sent to ${formData.email} ${simulatedOtp}`);
-    setLoading(false);
+
+    const isEmailValid = await validateEmailAddress();
+
+    if (isEmailValid) {
+      setLoading(true);
+      // Simulate OTP generation
+      const simulatedOtp = Math.floor(100000 + Math.random() * 900000).toString();
+      setGeneratedOtp(simulatedOtp);
+      toast.success(`OTP sent to ${formData.email} is ${simulatedOtp}`);
+      setLoading(false);
+    }
   };
 
   const verifyOtp = () => {
