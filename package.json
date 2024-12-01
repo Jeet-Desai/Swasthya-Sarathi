@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "dns": "^0.2.2",
-    "nodemon": "^3.1.7"
+    "nodemon": "^3.1.7",
+    "react-phone-input-2": "^2.15.1"
   }
 }
