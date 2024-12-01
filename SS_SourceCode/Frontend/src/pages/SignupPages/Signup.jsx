@@ -219,6 +219,7 @@ const Signup = () => {
                 value={formData.name}
                 onChange={handleInputChange}
                 required
+                
               />
               {errors.name && <span className="error">{errors.name}</span>}
             </div>
@@ -301,6 +302,8 @@ const Signup = () => {
                 name="dob"
                 value={formData.dob}
                 onChange={handleInputChange}
+                required
+                max={new Date().toISOString().split("T")[0]} // Set the max to today's date
                 required
               />
               {errors.dob && <span className="error">{errors.dob}</span>}

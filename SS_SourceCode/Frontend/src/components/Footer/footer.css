@@ -65,6 +65,7 @@
   font-weight: 700;
   color: #181a1e;
   margin-bottom: 15px;
+  display: flex;
 }
 
 .footer-link-list {

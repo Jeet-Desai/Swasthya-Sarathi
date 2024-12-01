@@ -289,6 +289,8 @@ const HospitalSignup = () => {
                 value={formData.dof}
                 onChange={handleInputChange}
                 required
+                max={new Date().toISOString().split("T")[0]} // Set the max to today's date
+                required
               />
               {errors.dof && <span className="error">{errors.dof}</span>}
             </div>

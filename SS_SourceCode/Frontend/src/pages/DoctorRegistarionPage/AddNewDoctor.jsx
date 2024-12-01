@@ -231,6 +231,8 @@ const AddNewDoctor = () => {
               placeholder="Date of Birth"
               value={formData.dob}
               onChange={handleChange}
+              max={new Date().toISOString().split("T")[0]} // Set the max to today's date
+                required
             />
 
             <label htmlFor="nationality">Nationality</label>
