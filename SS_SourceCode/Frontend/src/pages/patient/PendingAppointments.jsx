@@ -3,9 +3,11 @@ import { useNavigate } from "react-router-dom";
 import { BASE_URL } from '../../config';
 import "./PendingAppointments.css";
 
+
 const PendingAppointments = () => {
   const navigate = useNavigate();
   const [appointments, setAppointments] = useState([]);
+
 
   useEffect(() => {
     const fetchPendingAppointments = async () => {
@@ -15,6 +17,7 @@ const PendingAppointments = () => {
         console.error('Patient ID not found in local storage.');
         return;
       }
+
 
       try {
         const response = await fetch(`${BASE_URL}/api/v1/patients/${patientId}/pending-appointments`);
@@ -29,12 +32,15 @@ const PendingAppointments = () => {
       }
     };
 
+
     fetchPendingAppointments();
   }, []);
+
 
   const handleViewClick = id => {
     navigate(`/patient/pending-appointmentdetails/${id}`);
   };
+
 
   return (
     <div className="pending-appointment-list">
@@ -61,5 +67,6 @@ const PendingAppointments = () => {
     </div>
   );
 };
+
 
 export default PendingAppointments;

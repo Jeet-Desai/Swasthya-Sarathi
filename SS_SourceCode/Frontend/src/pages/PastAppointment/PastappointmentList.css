@@ -8,6 +8,7 @@
   box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.1);
 }
 
+
 .past-appointment-list h2 {
   text-align: center;
   color: #333;
@@ -16,11 +17,13 @@
   font-weight: bold;
 }
 
+
 .past-appointments-container {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
+
 
 .past-appointment-card {
   display: flex;
@@ -34,16 +37,19 @@
   flex-wrap: nowrap;
 }
 
+
 .past-appointment-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
+
 
 .past-appointment-details {
   display: flex;
   flex-direction: column;
   flex: 1;
 }
+
 
 .past-appointment-hospital {
   font-weight: bold;
@@ -52,12 +58,14 @@
   font-size: 1.1em;
 }
 
+
 .past-appointment-date,
 .past-appointment-time {
   font-size: 0.95em;
   color: #666;
   margin: 2px 0;
 }
+
 
 .past-view-button {
   background-color: #05cdec;
@@ -74,11 +82,13 @@
   flex-shrink: 0;
 }
 
+
 .past-view-button:hover {
   background-color: #04b3d1;
   transform: scale(1.1);
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
 }
+
 
 /* Responsive Styles */
 @media only screen and (max-width: 768px) {
@@ -86,15 +96,18 @@
     padding: 15px;
   }
 
+
   .past-appointment-card {
     flex-wrap: wrap;
     gap: 10px;
   }
 
+
   .past-appointment-details {
     flex: 1;
     order: 1;
   }
+
 
   .past-view-button {
     order: 2;

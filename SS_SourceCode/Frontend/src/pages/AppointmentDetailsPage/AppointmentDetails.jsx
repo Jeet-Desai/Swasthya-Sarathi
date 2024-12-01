@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 import { BASE_URL } from '../../config';
 import './AppointmentDetails.css';
 
+
 export default function AppointmentDetails() {
   const { appointmentId } = useParams();
   const navigate = useNavigate();
@@ -16,6 +17,7 @@ export default function AppointmentDetails() {
   });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
 
   useEffect(() => {
     const fetchAppointmentData = async () => {
@@ -39,8 +41,10 @@ export default function AppointmentDetails() {
       }
     };
 
+
     fetchAppointmentData();
   }, [appointmentId]);
+
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
@@ -57,6 +61,7 @@ export default function AppointmentDetails() {
     }
   };
 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -66,20 +71,25 @@ export default function AppointmentDetails() {
       formDataToSend.append('medicines', formData.medicines.split(',').map(med => med.trim()));
       formDataToSend.append('doctorId', appointmentData.doctor._id);
 
+
       for (let i = 0; i < formData.reports.length; i++) {
         formDataToSend.append('reports', formData.reports[i]);
       }
+
 
       const response = await fetch(`${BASE_URL}/api/v1/doctors/upd_appo/${appointmentId}`, {
         method: 'POST',
         body: formDataToSend,
       });
 
+
       const data = await response.json();
+
 
       if (!response.ok) {
         throw new Error(data.message || 'Failed to update appointment');
       }
+
 
       toast.success('Appointment updated successfully');
       navigate('/doctor/appointments');
@@ -88,8 +98,10 @@ export default function AppointmentDetails() {
     }
   };
 
+
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
+
 
   const renderCompletedAppointment = () => (
     <div className="completed-appointment">
@@ -114,10 +126,11 @@ export default function AppointmentDetails() {
                     );
                 })}
       </ul>
-      
-                
+     
+               
     </div>
   );
+
 
   const renderApprovedAppointment = () => (
     <form onSubmit={handleSubmit}>
@@ -127,18 +140,23 @@ export default function AppointmentDetails() {
         <option value="completed">Completed</option>
       </select>
 
+
       <label htmlFor="prescription">Prescription:</label>
       <textarea id="prescription" name="prescription" value={formData.prescription} onChange={handleChange} />
+
 
       <label htmlFor="medicines">Medicines (comma separated):</label>
       <input type="text" id="medicines" name="medicines" value={formData.medicines} onChange={handleChange} />
 
+
       <label htmlFor="reports">Reports:</label>
       <input type="file" id="reports" name="reports" multiple onChange={handleChange} />
+
 
       <button type="submit" className="btn-success">Update Appointment</button>
     </form>
   );
+
 
   return (
     <div className="appointment-details">
@@ -159,3 +177,6 @@ export default function AppointmentDetails() {
     </div>
   );
 }
+
+
+

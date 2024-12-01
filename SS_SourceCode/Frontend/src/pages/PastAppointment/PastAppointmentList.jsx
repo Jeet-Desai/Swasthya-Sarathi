@@ -3,9 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import { BASE_URL } from '../../config';
 import './PastappointmentList.css';
 
+
 const PastAppointmentList = () => {
   const navigate = useNavigate();
   const [appointments, setAppointments] = useState([]);
+
 
   useEffect(() => {
     const fetchPastAppointments = async () => {
@@ -15,6 +17,7 @@ const PastAppointmentList = () => {
         console.error('Patient ID not found in local storage.');
         return;
       }
+
 
       try {
         const response = await fetch(`${BASE_URL}/api/v1/patients/${patientId}/past-appointments`);
@@ -29,12 +32,15 @@ const PastAppointmentList = () => {
       }
     };
 
+
     fetchPastAppointments();
   }, []);
+
 
   const handleViewClick = id => {
     navigate(`/patient/pastappointmentdetails/${id}`);
   };
+
 
   return (
     <div className="past-appointment-list">
@@ -61,5 +67,6 @@ const PastAppointmentList = () => {
     </div>
   );
 };
+
 
 export default PastAppointmentList;

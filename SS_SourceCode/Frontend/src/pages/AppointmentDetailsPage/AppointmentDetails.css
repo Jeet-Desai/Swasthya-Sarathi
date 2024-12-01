@@ -1,5 +1,8 @@
 /* General styles for the form and details */
+/* General styles for the form and details */
 .appointment-details {
+  padding: 2rem;
+  background-color: #f8f9fa;
   padding: 2rem;
   background-color: #f8f9fa;
 }
@@ -15,6 +18,7 @@
 
 h1 {
   text-align: center;
+  margin-bottom: 2rem;
   margin-bottom: 2rem;
 }
 
@@ -48,7 +52,13 @@ textarea,
 select {
   width: 100%;
   padding: 0.75rem;
+  padding: 0.75rem;
   font-size: 1rem;
+  border: 2px solid #eef2f7;
+  border-radius: 8px;
+  background-color: #f8fafc;
+  color: #2d3748;
+  transition: all 0.3s ease;
   border: 2px solid #eef2f7;
   border-radius: 8px;
   background-color: #f8fafc;
@@ -71,9 +81,12 @@ button {
   font-weight: 600;
   color: white;
   background: linear-gradient(135deg, #38b6ff, #05cdec);
+  background: linear-gradient(135deg, #38b6ff, #05cdec);
   border: none;
   border-radius: 8px;
+  border-radius: 8px;
   cursor: pointer;
+  transition: all 0.3s ease;
   transition: all 0.3s ease;
 }
 

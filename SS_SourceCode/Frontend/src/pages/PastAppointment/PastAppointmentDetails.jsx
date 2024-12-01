@@ -4,18 +4,20 @@ import { BASE_URL } from '../../config';
 import { toast } from 'react-toastify';
 import './PastappointmentDetails.css';
 
+
 const PastAppointmentDetail = () => {
     const { appointmentId } = useParams();
     const navigate = useNavigate();
     const [appointment, setAppointment] = useState(null);
     const [loading, setLoading] = useState(true);
 
+
     useEffect(() => {
         const fetchAppointmentDetails = async () => {
             try {
                 const response = await fetch(`${BASE_URL}/api/v1/patients/get-appo-details/${appointmentId}`);
                 const data = await response.json();
-                
+               
                 if (data.success) {
                     setAppointment(data.appointment);
                 } else {
@@ -29,20 +31,25 @@ const PastAppointmentDetail = () => {
             }
         };
 
+
         fetchAppointmentDetails();
     }, [appointmentId]);
+
 
     const handleReturnClick = () => {
         navigate(-1);
     };
 
+
     if (loading) {
         return <div className="past-appointment-detail">Loading...</div>;
     }
 
+
     if (!appointment) {
         return <div className="past-appointment-detail">Appointment not found</div>;
     }
+
 
     return (
         <div className="past-appointment-container">
@@ -72,5 +79,6 @@ const PastAppointmentDetail = () => {
         </div>
     );
 };
+
 
 export default PastAppointmentDetail;
