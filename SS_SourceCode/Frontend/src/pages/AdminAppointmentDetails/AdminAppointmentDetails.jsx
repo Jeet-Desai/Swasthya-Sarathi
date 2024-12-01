@@ -1,5 +1,3 @@
-
-
 import React, { useState, useEffect } from 'react';
 import { useParams ,useNavigate} from 'react-router-dom';
 import "./AdminAppointmentDetails.css";
@@ -20,6 +18,7 @@ export default function AdminAppointmentDetails() {
         }
         const data = await response.json();
         setAppointmentData(data.appointment);
+        console.log(data.appointment);  
       } catch (err) {
         setError(err.message);
       } finally {
@@ -144,6 +143,9 @@ export default function AdminAppointmentDetails() {
               type="button" 
               className="btn-danger" 
               onClick={() => handleUpdateStatus('rejected')}
+              disabled={appointmentData.status !== 'pending'}
+
+
             >
               Reject Appointment
             </button>
@@ -151,6 +153,8 @@ export default function AdminAppointmentDetails() {
               type="button" 
               className="btn-success" 
               onClick={() => handleUpdateStatus('approved')}
+              disabled={appointmentData.status !== 'pending'}
+
             >
               Approve Appointment
             </button>

@@ -7,11 +7,18 @@ import authRoute from './Routes/auth.js'
 import patRoute from './Routes/pat.js'
 import docRoute from './Routes/doc.js'
 import hosRoute from './Routes/hos.js'
-
+import path from 'path';
+import bodyParser from 'body-parser';
 dotenv.config();
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 const app = express();
 const port = process.env.PORT || 8000;
+app.use(bodyParser.json({ limit: '50mb' }));
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
 const corseOption = {
     origin:true
@@ -24,6 +31,7 @@ app.use(cors({
 app.get('/',(req,res)=>{
     res.send('Hello');
 })
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 //DATABASE connection
 mongoose.set('strictQuery',false);

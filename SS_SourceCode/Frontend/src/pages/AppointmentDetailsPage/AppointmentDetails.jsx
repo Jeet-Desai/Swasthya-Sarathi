@@ -8,32 +8,29 @@ export default function AppointmentDetails() {
   const { appointmentId } = useParams();
   const navigate = useNavigate();
   const [appointmentData, setAppointmentData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
   const [formData, setFormData] = useState({
     status: '',
     prescription: '',
     medicines: '',
-    reports: '',
+    reports: []
   });
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchAppointmentData = async () => {
       try {
-        if (!appointmentId) {
-          throw new Error('Appointment ID is missing');
-        }
         const response = await fetch(`${BASE_URL}/api/v1/doctors/appo/${appointmentId}`);
-        if (!response.ok) {
-          throw new Error('Failed to fetch appointment data');
-        }
         const data = await response.json();
+        if (!response.ok) {
+          throw new Error(data.message || 'Failed to fetch appointment data');
+        }
         setAppointmentData(data.appointment);
         setFormData({
           status: data.appointment.status,
           prescription: data.appointment.prescription || '',
           medicines: data.appointment.medicines.join(', ') || '',
-          reports: data.appointment.reports.join(', ') || '',
+          reports: data.appointment.reports || []
         });
       } catch (err) {
         setError(err.message);
@@ -46,27 +43,36 @@ export default function AppointmentDetails() {
   }, [appointmentId]);
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+    const { name, value, files } = e.target;
+    if (name === 'reports') {
+      setFormData((prevData) => ({
+        ...prevData,
+        reports: files,
+      }));
+    } else {
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }));
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      const formDataToSend = new FormData();
+      formDataToSend.append('status', formData.status);
+      formDataToSend.append('prescription', formData.prescription);
+      formDataToSend.append('medicines', formData.medicines.split(',').map(med => med.trim()));
+      formDataToSend.append('doctorId', appointmentData.doctor._id);
+
+      for (let i = 0; i < formData.reports.length; i++) {
+        formDataToSend.append('reports', formData.reports[i]);
+      }
+
       const response = await fetch(`${BASE_URL}/api/v1/doctors/upd_appo/${appointmentId}`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          ...formData,
-          medicines: formData.medicines.split(',').map(med => med.trim()),
-          reports: formData.reports.split(',').map(rep => rep.trim()),
-          doctorId: appointmentData.doctor._id,
-        }),
+        body: formDataToSend,
       });
 
       const data = await response.json();
@@ -85,6 +91,55 @@ export default function AppointmentDetails() {
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
 
+  const renderCompletedAppointment = () => (
+    <div className="completed-appointment">
+      <h2>Completed Appointment Details</h2>
+      <p><strong>Patient Name:</strong> {appointmentData.patient.name}</p>
+      <p><strong>Contact No.:</strong> {appointmentData.patient.contactNo}</p>
+      <p><strong>Ailment:</strong> {appointmentData.description}</p>
+      <p><strong>Date:</strong> {new Date(appointmentData.date).toISOString().split('T')[0]}</p>
+      <p><strong>Time:</strong> {appointmentData.time}</p>
+      <p><strong>Prescription:</strong> {appointmentData.prescription}</p>
+      <p><strong>Medicines:</strong> {appointmentData.medicines.join(', ')}</p>
+      <h3>Reports:</h3>
+      <ul>
+      {appointmentData.reports.map((report, index) => {
+                    const reportName = report.split('\\').pop().split('-').slice(1).join('-');
+                    return (
+                        <li key={index}>
+                            <a href={`${BASE_URL}/${report}`} download>
+                                {reportName}
+                            </a>
+                        </li>
+                    );
+                })}
+      </ul>
+      
+                
+    </div>
+  );
+
+  const renderApprovedAppointment = () => (
+    <form onSubmit={handleSubmit}>
+      <label htmlFor="status">Status:</label>
+      <select id="status" name="status" value={formData.status} onChange={handleChange}>
+        <option value="approved">Approved</option>
+        <option value="completed">Completed</option>
+      </select>
+
+      <label htmlFor="prescription">Prescription:</label>
+      <textarea id="prescription" name="prescription" value={formData.prescription} onChange={handleChange} />
+
+      <label htmlFor="medicines">Medicines (comma separated):</label>
+      <input type="text" id="medicines" name="medicines" value={formData.medicines} onChange={handleChange} />
+
+      <label htmlFor="reports">Reports:</label>
+      <input type="file" id="reports" name="reports" multiple onChange={handleChange} />
+
+      <button type="submit" className="btn-success">Update Appointment</button>
+    </form>
+  );
+
   return (
     <div className="appointment-details">
       <div className="container">
@@ -98,24 +153,8 @@ export default function AppointmentDetails() {
           <p><strong>Date:</strong> {new Date(appointmentData.date).toISOString().split('T')[0]}</p>
           <p><strong>Time:</strong> {appointmentData.time}</p>
         </div>
-        <form onSubmit={handleSubmit}>
-          <label htmlFor="status">Status:</label>
-          <select id="status" name="status" value={formData.status} onChange={handleChange}>
-            <option value="approved">Approved</option>
-            <option value="completed">Completed</option>
-          </select>
-
-          <label htmlFor="prescription">Prescription:</label>
-          <textarea id="prescription" name="prescription" value={formData.prescription} onChange={handleChange} />
-
-          <label htmlFor="medicines">Medicines (comma separated):</label>
-          <input type="text" id="medicines" name="medicines" value={formData.medicines} onChange={handleChange} />
-
-          <label htmlFor="reports">Reports (comma separated):</label>
-          <input type="text" id="reports" name="reports" value={formData.reports} onChange={handleChange} />
-
-          <button type="submit" className="btn-success">Update Appointment</button>
-        </form>
+        {appointmentData.status === 'completed' && renderCompletedAppointment()}
+        {appointmentData.status === 'approved' && renderApprovedAppointment()}
       </div>
     </div>
   );

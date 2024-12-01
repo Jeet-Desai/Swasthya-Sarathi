@@ -1,161 +1,60 @@
 .dcp-doctor-card {
-    padding: 0.75rem;
+    padding: 1.5rem;
+    cursor: pointer;
+    background-color: #fff;
+    border-radius: 16px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+    text-align: center;
+    border: 1px solid #e0e0e0;
 }
 
-@media (min-width: 1024px) {
-    .dcp-doctor-card {
-        padding: 1.25rem;
-    }
+.dcp-doctor-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+    border-color: #38b6ff;
+}
+
+.dcp-doctor-card__image {
+    width: 120px; /* Set a fixed width for the images */
+    height: 120px; /* Set a fixed height for the images */
+    overflow: hidden; /* Hide overflow to ensure uniform size */
+    border-radius: 50%; /* Make the images circular */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto; /* Center the image horizontally */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow for elegance */
+    border: 4px solid #38b6ff; /* Add a border to the image */
 }
 
 .dcp-doctor-card__image img {
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: cover; /* Ensure the image covers the entire container */
+}
+
+.dcp-doctor-card__info {
+    margin-top: 1.5rem;
 }
 
 .dcp-doctor-card__name {
-    font-size: 1.125rem;
-    line-height: 1.875rem;
+    font-size: 1.5rem;
+    line-height: 2rem;
     font-weight: 700;
-    color: var(--heading-color, #181A1E);
+    color: #333;
     margin-top: 0.75rem;
 }
 
-@media (min-width: 1024px) {
-    .dcp-doctor-card__name {
-        font-size: 1.625rem;
-        line-height: 2.25rem;
-        margin-top: 1.25rem;
-    }
-}
-
-.dcp-doctor-card__specialization-container {
-    margin-top: 0.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-@media (min-width: 1024px) {
-    .dcp-doctor-card__specialization-container {
-        margin-top: 1rem;
-    }
-}
-
 .dcp-doctor-card__specialization {
-    background-color: #CCF0F3;
-    color: var(--iris-blue, #01B5C5);
-    padding: 0.25rem 0.5rem;
-    font-size: 0.75rem;
-    line-height: 1rem;
-    font-weight: 600;
-    border-radius: 0.25rem;
-}
-
-@media (min-width: 1024px) {
-    .dcp-doctor-card__specialization {
-        padding: 0.5rem 1.5rem;
-        font-size: 1rem;
-        line-height: 1.75rem;
-    }
-}
-
-/* Rating styles for future use
-.doctor-card__rating {
-    display: flex;
-    align-items: center;
-    gap: 0.375rem;
-}
-
-.rating-score {
-    display: flex;
-    align-items: center;
-    gap: 0.375rem;
-    font-size: 0.875rem;
-    line-height: 1.5rem;
-    font-weight: 600;
-    color: var(--heading-color);
-}
-
-.total-ratings {
-    font-size: 0.875rem;
-    line-height: 1.5rem;
-    font-weight: 400;
-    color: var(--text-color);
-}
-
-@media (min-width: 1024px) {
-    .rating-score,
-    .total-ratings {
-        font-size: 1rem;
-        line-height: 1.75rem;
-    }
-}
-*/
-
-.dcp-doctor-card__footer {
-    margin-top: 1.125rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-@media (min-width: 1024px) {
-    .dcp-doctor-card__footer {
-        margin-top: 1.25rem;
-    }
+    font-size: 1.125rem;
+    color: #38b6ff;
+    margin-top: 0.5rem;
 }
 
 .dcp-doctor-card__hospital {
-    color: var(--text-color, #4E545F);
-}
-
-/* Patient count styles for future use
-.patient-count {
     font-size: 1rem;
-    line-height: 1.75rem;
-    font-weight: 600;
-    color: var(--heading-color);
+    color: #666;
+    margin-top: 0.5rem;
 }
-
-@media (min-width: 1024px) {
-    .patient-count {
-        font-size: 1.125rem;
-        line-height: 1.875rem;
-    }
-}
-*/
-
-.dcp-hospital-name {
-    font-size: 0.875rem;
-    line-height: 1.5rem;
-    font-weight: 400;
-}
-
-.dcp-doctor-card__link {
-    width: 2.75rem;
-    height: 2.75rem;
-    border-radius: 50%;
-    border: 1px solid #191A1E;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-}
-
-.dcp-doctor-card__link:hover {
-    background-color: var(--primary-color, #0067FF);
-    border: none;
-}
-
-.dcp-arrow-icon {
-    width: 1.5rem;
-    height: 1.25rem;
-}
-
-.dcp-doctor-card__link:hover .arrow-icon {
-    color: white;
-}
-
-
-  

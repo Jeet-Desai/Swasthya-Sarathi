@@ -15,4 +15,4 @@ const HospitalModel = new mongoose.Schema({
   appointments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Appointment' }],
 });
 
-export default mongoose.model("Hospital", HospitalModel);
+export default mongoose.model("Hospital", HospitalModel); 

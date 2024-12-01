@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import "./PastappointmentList.css";
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { BASE_URL } from '../../config';
+import './PastappointmentList.css';
 
 const PastAppointmentList = () => {
   const navigate = useNavigate();
@@ -16,7 +17,7 @@ const PastAppointmentList = () => {
       }
 
       try {
-        const response = await fetch(`http://localhost:5000/api/v1/patients/${patientId}/past-appointments`);
+        const response = await fetch(`${BASE_URL}/api/v1/patients/${patientId}/past-appointments`);
         const data = await response.json();
         if (response.ok) {
           setAppointments(data.appointments);
@@ -31,39 +32,31 @@ const PastAppointmentList = () => {
     fetchPastAppointments();
   }, []);
 
-  console.log(appointments);
   const handleViewClick = id => {
     navigate(`/patient/pastappointmentdetails/${id}`);
   };
 
   return (
-    <div
-      style={{
-        minHeight: "100vh",
-        padding: "20px",
-      }}
-    >
-      <div className="new-past-appointments">
-        <h2>Past Appointments</h2>
-        <div className="new-appointments-list">
-          {appointments.map(appointment => (
-            <div key={appointment._id} className="new-appointment-card">
-              <div className="new-appointment-details">
-                <p className="new-appointment-hospital">
-                  {appointment.hospital.name}
-                </p>
-                <p className="new-appointment-date">Date: {new Date(appointment.date).toLocaleDateString()}</p>
-                <p className="new-appointment-time">Time: {appointment.time}</p>
-              </div>
-              <button
-                className="new-view-button"
-                onClick={() => handleViewClick(appointment._id)}
-              >
-                View
-              </button>
+    <div className="past-appointment-list">
+      <h2>Past Appointments</h2>
+      <div className="past-appointments-container">
+        {appointments.map(appointment => (
+          <div key={appointment._id} className="past-appointment-card">
+            <div className="past-appointment-details">
+              <p className="past-appointment-hospital">
+                {appointment.hospital.name}
+              </p>
+              <p className="past-appointment-date">Date: {new Date(appointment.date).toLocaleDateString()}</p>
+              <p className="past-appointment-time">Time: {appointment.time}</p>
             </div>
-          ))}
-        </div>
+            <button
+              className="past-view-button"
+              onClick={() => handleViewClick(appointment._id)}
+            >
+              View
+            </button>
+          </div>
+        ))}
       </div>
     </div>
   );

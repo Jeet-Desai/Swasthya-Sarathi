@@ -1,124 +1,139 @@
-/* Namespace the styles with .appointment-details */
-.appointment-details * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Arial', sans-serif;
-}
-
+/* General styles for the form and details */
 .appointment-details {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-  padding: 20px;
-}
-
-.appointment-details .container {
-  background: #fff;
-  border-radius: 15px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
   padding: 2rem;
-  max-width: 600px;
-  width: 100%;
+  background-color: #f8f9fa;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
   text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin-bottom: 2rem;
 }
 
-.appointment-details .container:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+.colored-section {
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
 }
 
-.appointment-details h1 {
-  font-size: 2.5rem;
-  color: #333;
-  margin-bottom: 1.5rem;
-  border-bottom: 2px solid #4CAF50;
-  display: inline-block;
-  padding-bottom: 0.5rem;
+.blue {
+  background-color: #e0f7fa;
 }
 
-.appointment-details form {
+.purple {
+  background-color: #f3e5f5;
+}
+
+form {
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
 
-.appointment-details label {
-  font-size: 1.1rem;
-  color: #555;
-  text-align: left;
+label {
   font-weight: bold;
+  margin-bottom: 0.5rem;
 }
 
-.appointment-details input,
-.appointment-details textarea,
-.appointment-details select {
+input,
+textarea,
+select {
   width: 100%;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
+  padding: 0.75rem;
   font-size: 1rem;
-  transition: border-color 0.3s ease;
+  border: 2px solid #eef2f7;
+  border-radius: 8px;
+  background-color: #f8fafc;
+  color: #2d3748;
+  transition: all 0.3s ease;
 }
 
-.appointment-details input:focus,
-.appointment-details textarea:focus,
-.appointment-details select:focus {
-  border-color: #4CAF50;
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: #38b6ff;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 4px rgba(56, 182, 255, 0.15);
   outline: none;
 }
 
-.appointment-details textarea {
-  resize: vertical;
-  height: 100px;
-}
-
-.appointment-details .btn-success {
-  padding: 10px 20px;
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.appointment-details .btn-success:hover {
-  background-color: #45a049;
-}
-
-.appointment-details .btn-success:disabled {
-  background-color: #cccccc;
-  cursor: not-allowed;
-}
-
-/* Additional Styling for Colored Components */
-.appointment-details .colored-section {
-  background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+button {
   padding: 1rem;
-  border-radius: 10px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: white;
+  background: linear-gradient(135deg, #38b6ff, #05cdec);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background: linear-gradient(135deg, #2d9ee6, #04b3d1);
+}
+
+/* Styles for completed appointment details */
+.completed-appointment {
+  background-color: #e8f5e9;
+  padding: 1rem;
+  border-radius: 8px;
   margin-bottom: 1rem;
-  color: #fff;
-  font-weight: bold;
-  text-align: left;
 }
 
-.appointment-details .colored-section.blue {
-  background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
+.completed-appointment h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
 }
 
-.appointment-details .colored-section.purple {
-  background: linear-gradient(135deg, #c3cfe2 0%, #a1c4fd 100%);
-}
-
-.appointment-details .colored-section p {
-  font-size: 1.2rem;
+.completed-appointment p {
+  font-size: 1rem;
   margin: 0.5rem 0;
 }
 
-.appointment-details .colored-section strong {
-  font-size: 1.3rem;
+.completed-appointment ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.completed-appointment ul li {
+  margin: 0.5rem 0;
+}
+
+.completed-appointment ul li a {
+  color: #38b6ff;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.completed-appointment ul li a:hover {
+  color: #2d9ee6;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .container {
+    padding: 1.5rem;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  .completed-appointment h2 {
+    font-size: 1.2rem;
+  }
+
+  .completed-appointment p {
+    font-size: 0.9rem;
+  }
 }

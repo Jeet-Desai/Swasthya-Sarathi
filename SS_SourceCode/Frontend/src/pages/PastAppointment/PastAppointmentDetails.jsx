@@ -1,16 +1,15 @@
-
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { BASE_URL } from '../../config';
 import { toast } from 'react-toastify';
 import './PastappointmentDetails.css';
 
-const PendingAppointmentDetail = () => {
+const PastAppointmentDetail = () => {
     const { appointmentId } = useParams();
     const navigate = useNavigate();
     const [appointment, setAppointment] = useState(null);
     const [loading, setLoading] = useState(true);
-    console.log(appointmentId);
+
     useEffect(() => {
         const fetchAppointmentDetails = async () => {
             try {
@@ -38,54 +37,40 @@ const PendingAppointmentDetail = () => {
     };
 
     if (loading) {
-        return <div className="loading">Loading appointment details...</div>;
+        return <div className="past-appointment-detail">Loading...</div>;
     }
 
     if (!appointment) {
-        return <div className="error">Appointment not found</div>;
+        return <div className="past-appointment-detail">Appointment not found</div>;
     }
 
     return (
-        <div className="pending-appointment-detail">
-            <div className="appointment-header">
-                <h2>Appointment Details</h2>
-                
-            </div>
-
-            <div className="appointment-info">
-                <p>
-                    <strong>Doctor:</strong> Dr. {appointment.doctor.name}
-                </p>
-                <p>
-                    <strong>Specialization:</strong> {appointment.doctor.specialization}
-                </p>
-                <p>
-                    <strong>Patient:</strong> {appointment.patient.name}
-                </p>
-                <p>
-                    <strong>Contact:</strong> {appointment.patient.contactNo}
-                </p>
-                <p>
-                    <strong>Hospital:</strong> {appointment.hospital.name}
-                </p>
-                <p>
-                    <strong>Date:</strong> {new Date(appointment.date).toLocaleDateString()}
-                </p>
-                <p>
-                    <strong>Time:</strong> {appointment.time}
-                </p>
-                <p>
-                    <strong>Status:</strong> {appointment.status}
-                </p>
-                <p>
-                    <strong>Description:</strong> {appointment.description}
-                </p>
-                <button onClick={handleReturnClick} className="pending-return-button">
-                    Back
-                </button>
-            </div>
+        <div className="past-appointment-container">
+            <h2>Appointment Details</h2>
+            <p><strong>Patient Name:</strong> {appointment.patient.name}</p>
+            <p><strong>Contact No.:</strong> {appointment.patient.contactNo}</p>
+            <p><strong>Ailment:</strong> {appointment.description}</p>
+            <p><strong>Date:</strong> {new Date(appointment.date).toLocaleDateString()}</p>
+            <p><strong>Time:</strong> {appointment.time}</p>
+            <p><strong>Status:</strong> {appointment.status}</p>
+            <p><strong>Prescription:</strong> {appointment.prescription}</p>
+            <p><strong>Medicines:</strong> {appointment.medicines.join(', ')}</p>
+            <h3>Reports</h3>
+            <ul className="report-list">
+                {appointment.reports.map((report, index) => {
+                    const reportName = report.split('\\').pop().split('-').slice(1).join('-');
+                    return (
+                        <li key={index}>
+                            <a href={`${BASE_URL}/${report}`} download>
+                                {reportName}
+                            </a>
+                        </li>
+                    );
+                })}
+            </ul>
+            <button className="pending-return-button" onClick={handleReturnClick}>Return</button>
         </div>
     );
 };
 
-export default PendingAppointmentDetail;
+export default PastAppointmentDetail;

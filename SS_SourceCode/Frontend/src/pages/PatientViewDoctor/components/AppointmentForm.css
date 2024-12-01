@@ -9,7 +9,7 @@
     margin: 0 auto;
     transition: all 0.3s ease;
 }
-
+ 
 .afp-appointment-form:hover {
     transform: translateY(-3px);
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);

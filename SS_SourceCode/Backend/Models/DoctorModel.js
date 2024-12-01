@@ -14,9 +14,9 @@ const DoctorModel = new mongoose.Schema({
     nationality: { type: String, required: true },
     hospital: { type: mongoose.Schema.Types.ObjectId, ref: 'Hospital' },
     appointments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Appointment' }],
+    photo: { type: String, default: '' }, // Add photo field
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now }
 });
-
 
 export default mongoose.model("Doctor", DoctorModel);

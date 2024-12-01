@@ -18,7 +18,7 @@
   border-radius: 12px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   margin-bottom: 2rem;
-}
+} 
 
 .docdetp-doctor-details__image-container {
   flex-shrink: 0;
@@ -144,9 +144,5 @@
   .docdetp-doctor-details__header {
       flex-direction: column;
       text-align: center;
-  }
-
-  .docdetp-doctor-details__stats {
-      justify-content: center;
   }
 }

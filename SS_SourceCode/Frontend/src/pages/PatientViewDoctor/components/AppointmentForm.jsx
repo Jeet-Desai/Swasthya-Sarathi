@@ -10,7 +10,7 @@ const AppointmentForm = ({ onClose, doctor }) => {
     const patientId = user?._id;
     const navigate = useNavigate();
     const [hospitalId, setHospitalId] = useState(null);
-
+ 
     useEffect(() => {
         const fetchHospitalId = async () => {
             try {

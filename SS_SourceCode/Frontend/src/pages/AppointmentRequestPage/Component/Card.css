@@ -1,43 +1,75 @@
 .card {
-    background-color:#fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);    
-    margin: 10px;
-    padding: 20px;
-    width: 80%; /* 80% of the parent container */
-    display: flex;
-    justify-content: space-between; /* Space between left and right content */
-    align-items: center; /* Align items vertically at the center */
-    height: 70px; /* Set a fixed height to ensure a rectangle */
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
+  border-left: 5px solid; /* Default border color */
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 10px;
+  padding: 20px;
+  width: 100%; /* Full width of the parent container */
+  display: flex;
+  justify-content: space-between; /* Space between left and right content */
+  align-items: center; /* Align items vertically at the center */
+  height: auto; /* Allow height to adjust based on content */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-color: #fff; /* White background for better contrast */
+}
 
-.card-info h2{     
-    text-align: center;
-  }
+.card-pending {
+  border-left-color: #ffc107; /* Yellow border for pending status */
+}
 
-.btn{
-    background-color: black;
-    color: white;
-    padding: 10px 20px;
-    text-decoration: none;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    height: 40px; /* Ensure uniform button height */
-  }
-  
-  .btn:hover {
-    background-color: #0056b3;
+.card-approved {
+  border-left-color: #6a0dad; /* Purple border for approved status */
+}
+
+.card-rejected {
+  border-left-color: #dc3545; /* Red border for rejected status */
+}
+
+.card-completed {
+  border-left-color: #28a745; /* Green border for completed status */
 }
 
 .card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-5px); /* Slight lift on hover */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
 }
 
+.card-info {
+  flex: 1; /* Allow card-info to take up remaining space */
+}
 
-/*For Responsiveness*/
+.card-info h2 {
+  font-size: 1.5rem; /* Font size for headings */
+  color: #333; /* Darker color for better readability */
+  margin-bottom: 15px;
+}
+
+.card-info p {
+  font-size: 1rem; /* Standard font size for paragraphs */
+  color: #555; /* Slightly lighter color for paragraph text */
+  margin: 5px 0;
+}
+
+.card-info p strong {
+  color: #000; /* Stronger color for labels */
+}
+
+.btn {
+  background-color: #38b6ff;
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  height: 40px; /* Ensure uniform button height */
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #0056b3;
+  transform: scale(1.05); /* Slightly enlarge button on hover */
+}
 
 /* Small screens (up to 767px) */
 @media (max-width: 767px) {
@@ -53,6 +85,7 @@
   .card { width: 85%; }
   .card-info h2 { font-size: 1.2rem; }  /* Adjust font-size for tablets */
 }
+
 @media (max-width: 475px) {
   .card { width: 95%; padding: 10px; margin: 5px; }
   .btn { padding: 5px 12px; height: 30px; font-size: 0.8rem; }

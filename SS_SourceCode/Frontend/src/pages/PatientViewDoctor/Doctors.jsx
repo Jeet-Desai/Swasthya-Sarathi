@@ -25,7 +25,7 @@ const Doctors = () => {
       : allDoctors;
     setDoctors(filteredDoctors);
   };
-
+ 
   return (
     <>
       <section className="docp-doctor-search-section">

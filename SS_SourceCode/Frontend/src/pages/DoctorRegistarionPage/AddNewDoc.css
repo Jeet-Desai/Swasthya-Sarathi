@@ -30,23 +30,13 @@
               box-shadow 0.4s ease;
   position: relative;
   overflow: hidden;
-} 
+}
 
 .add-new-doctor-container:hover {
   transform: translateY(-8px);
   box-shadow: 0 30px 70px rgba(0, 0, 0, 0.12),
               0 15px 35px rgba(0, 0, 0, 0.08),
               0 8px 15px rgba(56, 182, 255, 0.15);
-}
-
-.add-new-doctor-container::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 5px;
-  background: linear-gradient(90deg, #38b6ff, #05cdec);
 }
 
 .add-new-doctor-title {
@@ -73,14 +63,25 @@
   border-radius: 4px;
 }
 
+.add-new-doctor-form-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.add-new-doctor-form-wrapper label {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
 .add-new-doctor-form-wrapper input,
 .add-new-doctor-form-wrapper select {
-  width: 100%;
-  padding: 1rem 1.2rem;
-  margin-bottom: 1.2rem;
+  padding: 0.75rem;
+  font-size: 1rem;
+  margin-bottom: 1rem;
   border: 2px solid #eef2f7;
   border-radius: 12px;
-  font-size: 1rem;
   background-color: #f8fafc;
   color: #2d3748;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -99,15 +100,6 @@
   background-color: #ffffff;
   box-shadow: 0 0 0 4px rgba(56, 182, 255, 0.15);
   outline: none;
-}
-
-.add-new-doctor-form-wrapper select {
-  appearance: none;
-  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2338b6ff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
-  background-repeat: no-repeat;
-  background-position: right 1.2rem center;
-  background-size: 1.2em;
-  padding-right: 3rem;
 }
 
 .add-new-doctor-form-wrapper button {
@@ -149,32 +141,4 @@
 
 .add-new-doctor-form-wrapper button:hover::before {
   left: 100%;
-}
-
-@media (max-width: 768px) {
-  .add-new-doctor-page {
-    padding: 1.5rem 1rem;
-  }
-
-  .add-new-doctor-container {
-    padding: 2rem 1.5rem;
-    margin: 0.5rem;
-  }
-
-  .add-new-doctor-title {
-    font-size: 1.8rem;
-  }
-
-  .add-new-doctor-form-wrapper input,
-  .add-new-doctor-form-wrapper select {
-    padding: 0.9rem;
-    font-size: 0.95rem;
-    margin-bottom: 1rem;
-  }
-
-  .add-new-doctor-form-wrapper button {
-    padding: 0.9rem;
-    font-size: 1rem;
-    margin-top: 1.5rem;
-  }
 }

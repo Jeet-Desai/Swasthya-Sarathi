@@ -15,6 +15,7 @@ export default function ViewAppointmentRequests() {
       try {
         const response = await fetch(`${BASE_URL}/api/v1/doctors/get-pending-appo/${doctorId}`);
         const data = await response.json();
+        // console.log(data);
 
         if (data.success) {
           setAppointments(data.appointments);
@@ -37,6 +38,12 @@ export default function ViewAppointmentRequests() {
   if (loading) {
     return <div className="view-appointment-requests-page">Loading...</div>;
   }
+  console.log(appointments);
+  // Sort appointments: approved first, then completed, then others
+  const sortedAppointments = [...appointments].sort((a, b) => {
+    const order = ['approved', 'completed', 'pending', 'rejected'];
+    return order.indexOf(a.status) - order.indexOf(b.status);
+  });
 
   return (
     <div className="view-appointment-requests-page">
@@ -45,16 +52,19 @@ export default function ViewAppointmentRequests() {
           Appointment Requests
         </div>
         <div className="view-appointment-requests-list">
-          {appointments.length > 0 ? (
-            appointments.map((appointment) => (
+          {sortedAppointments.length > 0 ? (
+            sortedAppointments.map((appointment) => (
               <Card 
                 key={appointment.appointmentId}
                 appointmentID={appointment.appointmentId}
                 patientName={appointment.patientName}
+                status={appointment.status}
+                date={appointment.date}
+                time={appointment.time}
               />
             )) 
           ) : (
-            <div>No pending appointments</div>
+            <div>No appointments found</div>
           )}
         </div>
       </div>

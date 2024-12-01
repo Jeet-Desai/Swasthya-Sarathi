@@ -12,6 +12,6 @@ const DoctorList = () => {
     </div>
   );
 };
-
+ 
 export default DoctorList;
 x

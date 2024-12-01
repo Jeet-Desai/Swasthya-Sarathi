@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import DoctorImg from '../../assets/images/doct01.jpg';
 import "./DoctorsDetails.css";
 import SidePanel from "./components/SidePanel";
 import { BASE_URL } from "../../config";
@@ -23,7 +22,7 @@ const DoctorsDetails = () => {
                 console.error("Error fetching doctor details:", error);
             }
         };
-
+ 
         fetchDoctorDetails();
     }, [doctorId]);
 
@@ -36,7 +35,7 @@ const DoctorsDetails = () => {
             <div className="docdetp-doctor-details__container">
                 <div className="docdetp-doctor-details__header">
                     <div className="docdetp-doctor-details__image-container">
-                        <img src={DoctorImg} alt="Doctor profile" className="docdetp-doctor-details__image" />
+                        <img src={doctor.photo ? `http://localhost:5000/${doctor.photo}` : "default-photo-url"} alt="Doctor profile" className="docdetp-doctor-details__image" />
                     </div>
                     <div className="docdetp-doctor-details__info">
                         <h1 className="docdetp-doctor-details__name">Dr. {doctor.name}</h1>
@@ -46,7 +45,6 @@ const DoctorsDetails = () => {
                                 <span className="docdetp-doctor-details__stat-value">{doctor.experience}</span>
                                 <span className="docdetp-doctor-details__stat-label">Years Experience</span>
                             </div>
-                            
                         </div>
                     </div>
                 </div>

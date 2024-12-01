@@ -1,23 +1,3 @@
-// import mongoose from "mongoose";
-
-// const UserModel = new mongoose.Schema({
-//   Email: { type: String, required: true, unique: true },
-//   password: { type: String, required: true },
-//   FullName: { type: String, required: true },
-//   phone: { type: Number },
-//   Profilepic: { type: String },
-//   role: {
-//     type: String,
-//     enum: ["patient", "admin"],
-//     default: "patient",
-//   },
-//   gender: { type: String, enum: ["male", "female", "other"] },
-//   bloodType: { type: String },
-//   appointments: [{ type: mongoose.Types.ObjectId, ref: "Appointment" }],
-// });
-
-// export default mongoose.model("User", UserModel);
-
 import mongoose from "mongoose";
 
 const PatientModel = new mongoose.Schema(
@@ -52,6 +32,6 @@ const PatientModel = new mongoose.Schema(
   {
     timestamps: true, // Automatically add `createdAt` and `updatedAt` fields
   }
-);
-
+); 
+ 
 export default mongoose.model("Patient", PatientModel);

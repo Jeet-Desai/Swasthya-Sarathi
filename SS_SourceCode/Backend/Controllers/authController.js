@@ -3,10 +3,10 @@ import Hospital from '../Models/HospitalModel.js'; // Importing the Hospital mod
 import Doctor from '../Models/DoctorModel.js'; // Importing the Doctor model (same as hospital model)
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
-import dns from 'dns';
+import dns from 'dns'; 
 import { generateOTP, sendOTPEmail } from '../utils/emailService.js';
 import OTP from '../Models/OTPModel.js';
-
+ 
 export const validateEmail = async (req, res) => {
   const { email } = req.body;
 
@@ -22,7 +22,7 @@ export const validateEmail = async (req, res) => {
     } 
 
     res.status(200).json({ success: true, message: 'Email is valid!' });
-  });
+  }); 
 };
 export const sendEmailOTP = async (req, res) => {
   try {
