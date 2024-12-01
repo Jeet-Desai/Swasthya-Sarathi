@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { NavLink, Link, useNavigate } from "react-router-dom";
-
+import MyProfileImage from "../../assets/images/MyProfile.jpg"
 import { BiMenu } from "react-icons/bi";
 import { AiOutlineClose } from "react-icons/ai"; // Import Close Icon
 import log from "/assests/images/SS_logo.png"; /* Update all class names to include `doctor-navbar-` prefix */
@@ -18,6 +18,7 @@ const DoctorNavbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
 
+  const [userName, setUserName] = useState('');
   const handleStickyHeader = () => {
     window.addEventListener("scroll", () => {
       if (
@@ -44,7 +45,13 @@ const DoctorNavbar = () => {
     handleStickyHeader();
     return () => window.removeEventListener("scroll", handleStickyHeader);
   }, []);
-
+  useEffect(() => {
+    // Retrieve the user's name from local storage
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user && user.name) {
+      setUserName(user.name);
+    }
+  }, []);
   const toggleMenu = () => setMenuOpen(!menuOpen);
 
   return (
@@ -115,16 +122,26 @@ const DoctorNavbar = () => {
           </nav>
 
           {/* Nav Right */}
-          <div className="doctor-navbar-nav-right">
-            <Link to="/login">
-              <button
-                className="doctor-navbar-login-button"
-                onClick={handleLogout}
-              >
-                Logout
-              </button>
-            </Link>
-          </div>
+          <div className="nav-right">
+                {/* Profile Button with Circle for Profile Image */}
+                <NavLink to="/doctor/profile" onClick={(e) => {
+                      window.location.href = "/doctor/profile"; // Navigate to the link and trigger page reload
+                    }}  style={{ textDecoration: 'none' }}>
+                  <button className="profile-button">
+                    <div className="profile-photo">
+                      {/* Use the imported image */}
+                      <img src={MyProfileImage} alt="User Profile" />
+                    </div>
+                    <span className="user-name">{userName}</span>
+                  </button>
+                </NavLink>
+                <button
+                  className="logout-button"
+                  onClick={handleLogout}
+                >
+                  Logout
+                </button>
+              </div>
         </div>
       </div>
 

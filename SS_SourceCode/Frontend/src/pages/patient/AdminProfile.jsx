@@ -1,133 +1,98 @@
-import React, { useState } from "react";
-import "./AdminProfile.css";
+import React, { useState, useEffect } from 'react';
+import './PatientProfile.css';
 
 const AdminProfile = () => {
-  const [formData, setFormData] = useState({
+  const [profileData, setProfileData] = useState({
     email: "",
-    name: "",
-    hospitalAddress: "",
-    verificationDocument: "",
-    registrationNumber: "",
-    contactNumber: "",
-    department: "",
-    websiteLink: "",
-    ownership: "",
+    firstName: "",
+    contactNo: "",
+    dof: "",
+    type: "",
+    registration_no: ""
   });
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  const handleAddDoctor = () => {
-    alert("Add Doctor functionality triggered.");
-  };
+  useEffect(() => {
+    // Retrieve the user's profile data from local storage
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user) {
+      setProfileData({
+        email: user.email || '',
+        firstName: user.name || '',
+        contactNumber: user.contactNo || '',
+        dof: user.dof ? new Date(user.dof).toISOString().split('T')[0] : '',
+        type: user.type || '',
+        registration_no: user.registration_no
+      });
+    }
+  }, []);
 
   return (
-    <div className="admin-form-container">
-      <h2 style={{ textAlign: "center" }}>ADMIN PROFILE</h2>
-      <form className="admin-form">
-        <div className="admin-form-group">
+    <div className="patient-profile-container">
+      <h2 style={{ textAlign: 'center' }}>HOSPITAL PROFILE</h2>
+      <form className="form">
+        {/* Email */}
+        <div className="patient-profile-form-group">
+          <label>Email</label>
           <input
             type="email"
             name="email"
-            value={formData.email}
-            onChange={handleInputChange}
+            value={profileData.email}
+            readOnly
             placeholder="Email"
-            required
           />
         </div>
 
-        <div className="admin-form-group">
+        {/* First Name */}
+        <div className="patient-profile-form-group">
+          <label>Hospital Name</label>
           <input
             type="text"
-            name="name"
-            value={formData.name}
-            onChange={handleInputChange}
-            placeholder="Name"
-            required
+            name="firstName"
+            value={profileData.firstName}
+            readOnly
+            placeholder=" Name"
           />
         </div>
 
-        <div className="admin-form-group">
-          <input
-            type="text"
-            name="hospitalAddress"
-            value={formData.hospitalAddress}
-            onChange={handleInputChange}
-            placeholder="Hospital Address"
-            required
-          />
-        </div>
-
-        <div className="admin-form-group">
-          <input
-            type="text"
-            name="verificationDocument"
-            value={formData.verificationDocument}
-            onChange={handleInputChange}
-            placeholder="Verification Document"
-            required
-          />
-        </div>
-
-        <div className="admin-form-group">
-          <input
-            type="text"
-            name="registrationNumber"
-            value={formData.registrationNumber}
-            onChange={handleInputChange}
-            placeholder="Registration Number"
-            required
-          />
-        </div>
-
-        <div className="admin-form-group">
+        {/* Contact Number */}
+        <div className="patient-profile-form-group">
+          <label>Contact Number</label>
           <input
             type="tel"
             name="contactNumber"
-            value={formData.contactNumber}
-            onChange={handleInputChange}
+            value={profileData.contactNumber}
+            readOnly
             placeholder="Contact Number"
-            required
+          />
+        </div>
+        {/* Date of Birth */}
+        <div className="patient-profile-form-group">
+          <label>Date of Establishment</label>
+          <input
+            type="date"
+            id="dateOfBirth"
+            name="dateOfBirth"
+            value={profileData.dof}
+            readOnly
+            className="dob-input"
           />
         </div>
 
-        <div className="admin-form-group">
+        
+
+        {/* Nationality */}
+        <div className="patient-profile-form-group">
+          <label>Registration Number</label>
           <input
             type="text"
-            name="department"
-            value={formData.department}
-            onChange={handleInputChange}
-            placeholder="Department"
-            required
+            name="nationality"
+            value={profileData.registration_no}
+            readOnly
+            placeholder="Nationality"
           />
         </div>
 
-        <div className="admin-form-group">
-          <input
-            type="url"
-            name="websiteLink"
-            value={formData.websiteLink}
-            onChange={handleInputChange}
-            placeholder="Website Link"
-          />
-        </div>
 
-        <div className="admin-form-group">
-          <input
-            type="text"
-            name="ownership"
-            value={formData.ownership}
-            onChange={handleInputChange}
-            placeholder="Ownership"
-            required
-          />
-        </div>
-
-        <button type="submit" className="admin-submit-button">
-          Save Profile
-        </button>
       </form>
     </div>
   );

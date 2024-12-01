@@ -1,67 +1,7 @@
 import Patient from '../Models/PatientModel.js';
 import Appointment from '../Models/AppointmentModel.js';
 import Doctor from '../Models/DoctorModel.js';
-import Hospital from '../Models/HospitalModel.js';
-   
-import multer from 'multer';
-import path from 'path';
-
-
-import fs from 'fs';
-
-
-export const updateAppointment = async (req, res) => {
-  const { appointmentId } = req.params;
-  const { status, prescription, medicines, doctorId } = req.body;
-
-
-  try {
-    // Fetch the appointment by appointmentId
-    const appointment = await Appointment.findById(appointmentId);
-
-
-    if (!appointment) {
-      return res.status(404).json({ message: "Appointment not found!" });
-    }
-
-
-    if (appointment.doctor.toString() !== doctorId) {
-      return res.status(403).json({ message: "You are not authorized to update this appointment." });
-    }
-
-
-    appointment.status = status || appointment.status;
-    appointment.prescription = prescription || appointment.prescription;
-    appointment.medicines = medicines || appointment.medicines;
-
-
-    // Handle file uploads
-    if (req.files) {
-      const reportPaths = req.files.map(file => file.path);
-      appointment.reports = appointment.reports.concat(reportPaths);
-    }
-
-
-    // Save the updated appointment
-    await appointment.save();
-
-
-    res.status(200).json({
-      success: true,
-      message: "Appointment updated successfully.",
-      appointment,
-    });
-  } catch (err) {
-    console.error("Error updating appointment:", err);
-    res.status(500).json({
-      success: false,
-      message: "Failed to update appointment.",
-    });
-  }
-};
-
-
-    
+import Hospital from '../Models/HospitalModel.js'; 
 import multer from 'multer';
 import path from 'path';
 

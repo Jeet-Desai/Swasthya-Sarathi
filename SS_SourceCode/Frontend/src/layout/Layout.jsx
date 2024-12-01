@@ -31,6 +31,8 @@ import AdminAppointmentDetails from "../pages/AdminAppointmentDetails/AdminAppoi
 import PatientFooter from "../components/Footer/PatientFooter";
 import AdminFooter from "../components/Footer/AdminFooter";
 import DoctorFooter from "../components/Footer/DoctorFooter";
+import AdminProfile from "../pages/patient/AdminProfile";
+import DoctorProfile from "../pages/patient/DoctorProfile";
 
 const Layout = () => {
   return (
@@ -91,6 +93,8 @@ const Layout = () => {
                 element={<PastAppointmentDetails />}
               />
               <Route path="/patient/profile" element={<PatientProfile />} />
+              <Route path ="/admin/profile" element={<AdminProfile/>}/>
+              <Route path="/doctor/profile/" element={<DoctorProfile/>}/>
               <Route path="/doctor/home" element={<AdminHome />} />
               <Route path="/doctor/" element={<AdminHome />} />
               <Route

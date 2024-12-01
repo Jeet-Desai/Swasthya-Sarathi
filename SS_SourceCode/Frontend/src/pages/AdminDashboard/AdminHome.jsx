@@ -17,7 +17,7 @@ const AdminHome = () => {
       ticker = setTimeout(() => {
         setIsPaused(false);
         setIsDeleting(true);
-      }, 3000); // 3 seconds pause after full text
+      }, 2000); // 3 seconds pause after full text
     } else {
       ticker = setTimeout(() => {
         tick();

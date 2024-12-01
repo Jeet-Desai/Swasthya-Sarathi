@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import "./DashboardHeader.css";
 import MyProfileImage from "../../../../assets/images/MyProfile.jpg"; // Import the image
 import logo from "../../../../assets/images/rmlogo.png";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 
 const navLinks = [
   { path: "/patient/dashboard", display: "Dashboard" },
@@ -128,7 +128,9 @@ const DashboardHeader = () => {
               {/* Nav Right */}
               <div className="nav-right">
                 {/* Profile Button with Circle for Profile Image */}
-                <Link to="/patient/profile">
+                <NavLink to="/patient/profile" onClick={(e) => {
+                      window.location.href = "/patient/profile"; // Navigate to the link and trigger page reload
+                    }}  style={{ textDecoration: 'none' }}>
                   <button className="profile-button">
                     <div className="profile-photo">
                       {/* Use the imported image */}
@@ -136,7 +138,7 @@ const DashboardHeader = () => {
                     </div>
                     <span className="user-name">{userName}</span>
                   </button>
-                </Link>
+                </NavLink>
                 <button className="logout-button" onClick={handleLogout}>
                   Logout
                 </button>
