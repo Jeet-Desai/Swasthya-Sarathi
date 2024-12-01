@@ -14,11 +14,13 @@ import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+// const __dirname = dirname(__filename);
 const app = express();
 const port = process.env.PORT || 8000;
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
+
+const __dirname = path.resolve();
 
 const corseOption = {
     origin:true
@@ -28,9 +30,10 @@ app.use(cors({
     credentials: true // Enable credentials for cookies, etc.
   }));
   
-app.get('/',(req,res)=>{
-    res.send('Hello');
-})
+// app.get('/',(req,res)=>{
+//     res.send('Hello');
+// })
+
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 //DATABASE connection
@@ -58,6 +61,10 @@ app.use('/api/v1/patients',patRoute);
 app.use('/api/v1/doctors',docRoute);
 app.use('/api/v1/hospitals',hosRoute);
 
+app.use(express.static(path.join(__dirname,"/Frontend/dist")));
+app.get("*",(req,res)=>{
+    res.sendFile(path.resolve(__dirname,"Frontend","dist","index.html"));
+})
 
 app.listen(port,()=>{
     connectDB();
