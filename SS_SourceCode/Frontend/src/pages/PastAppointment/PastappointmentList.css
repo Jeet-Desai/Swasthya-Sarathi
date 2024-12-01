@@ -1,102 +1,117 @@
 .past-appointment-list {
-  width: 90%; /* Full width on mobile */
-  max-width: 600px; /* Limit width on larger screens */
+  width: 90%;
+  max-width: 800px;
   margin: 20px auto;
-  background-color: linear-gradient(135deg, #d4d4d8, #e4e4e7, #f4f4f5, #a1a1aa);
+  background: linear-gradient(135deg, #d4d4d8, #e4e4e7, #f4f4f5, #a1a1aa);
   padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.1);
 }
+
 
 .past-appointment-list h2 {
   text-align: center;
   color: #333;
-  font-size: 1.5em;
+  font-size: 1.8em;
   margin-bottom: 20px;
+  font-weight: bold;
 }
+
 
 .past-appointments-container {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 20px;
 }
+
 
 .past-appointment-card {
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: #fff;
-  padding: 15px;
-  border-radius: 5px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  flex-wrap: nowrap; /* Keep elements on the same row */
+  flex-wrap: nowrap;
 }
 
-.past-appointment-card:hover{
+
+.past-appointment-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
+
 
 .past-appointment-details {
   display: flex;
   flex-direction: column;
-  flex: 1; /* Expand to fill available space */
+  flex: 1;
 }
+
 
 .past-appointment-hospital {
   font-weight: bold;
   color: #333;
   margin-bottom: 5px;
+  font-size: 1.1em;
 }
+
 
 .past-appointment-date,
 .past-appointment-time {
-  font-size: 0.9em;
+  font-size: 0.95em;
   color: #666;
   margin: 2px 0;
 }
 
+
 .past-view-button {
-  background-color: #05cdec; 
+  background-color: #05cdec;
   color: #fff;
   border: none;
   border-radius: 25px;
-  padding: 5px 20px;
+  padding: 10px 20px;
   cursor: pointer;
   font-size: 0.9em;
   transition: background-color 0.3s ease, transform 0.3s ease;
   height: 40px;
   text-align: center;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  flex-shrink: 0; /* Prevent button from shrinking */
+  flex-shrink: 0;
 }
 
+
 .past-view-button:hover {
-  background-color: #04b3d1; 
-  transform: scale(1.1); /* Slightly enlarge on hover */
-  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); /* Glow effect */
+  background-color: #04b3d1;
+  transform: scale(1.1);
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
 }
+
 
 /* Responsive Styles */
 @media only screen and (max-width: 768px) {
   .past-appointment-list {
-    padding: 15px; /* Reduce padding on smaller screens */
+    padding: 15px;
   }
+
 
   .past-appointment-card {
-    flex-wrap: wrap; /* Allow wrapping on smaller screens */
-    gap: 10px; /* Add spacing between items */
+    flex-wrap: wrap;
+    gap: 10px;
   }
+
 
   .past-appointment-details {
-    flex: 1; /* Ensure details take available space */
-    order: 1; /* Keep details first on wrap */
+    flex: 1;
+    order: 1;
   }
 
+
   .past-view-button {
-    order: 2; /* Ensure button remains on the same row or wraps below */
-    margin-left: auto; /* Align button to the right */
-    padding: 10px; /* Adjust padding for better usability */
+    order: 2;
+    margin-left: auto;
+    padding: 10px;
   }
 }

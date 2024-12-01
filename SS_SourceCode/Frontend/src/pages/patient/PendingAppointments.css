@@ -1,83 +1,117 @@
-body {
-  margin: 0;
-  background-color: linear-gradient(135deg, #d4d4d8, #e4e4e7, #f4f4f5, #a1a1aa);
-  font-family: 'Arial', sans-serif;
-}
-
-.new-pending-appointments {
-  width: 40%;
+.pending-appointment-list {
+  width: 90%;
+  max-width: 800px;
   margin: 20px auto;
-  background-color: #f4f4f5;
+  background: linear-gradient(135deg, #d4d4d8, #e4e4e7, #f4f4f5, #a1a1aa);
   padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.1);
 }
 
-.new-pending-appointments h2 {
+
+.pending-appointment-list h2 {
   text-align: center;
   color: #333;
-  font-size: 1.5em;
+  font-size: 1.8em;
   margin-bottom: 20px;
+  font-weight: bold;
 }
 
-.new-appointments-list {
+
+.pending-appointments-container {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 20px;
 }
 
-.new-appointment-card {
+
+.pending-appointment-card {
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: #fff;
-  padding: 15px;
-  border-radius: 5px;
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  flex-wrap: nowrap;
 }
 
-.new-appointment-card:hover{
+
+.pending-appointment-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 
-.new-appointment-details {
+.pending-appointment-details {
   display: flex;
   flex-direction: column;
+  flex: 1;
 }
 
-.new-appointment-hospital {
+
+.pending-appointment-hospital {
   font-weight: bold;
   color: #333;
   margin-bottom: 5px;
+  font-size: 1.1em;
 }
 
-.new-appointment-date,
-.new-appointment-time {
-  font-size: 0.9em;
+
+.pending-appointment-date,
+.pending-appointment-time {
+  font-size: 0.95em;
   color: #666;
   margin: 2px 0;
 }
 
-.new-view-button {
-  background-color: #f06969;  /* Solid blue color */
+
+.pending-view-button {
+  background-color: #05cdec;
   color: #fff;
   border: none;
   border-radius: 25px;
-  padding: 5px 20px;
+  padding: 10px 20px;
   cursor: pointer;
   font-size: 0.9em;
   transition: background-color 0.3s ease, transform 0.3s ease;
   height: 40px;
   text-align: center;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  flex-shrink: 0;
 }
 
-.new-view-button:hover {
-  background-color: #ff3535;  /* Darker blue on hover */
-  transform: scale(1.1); /* Slightly enlarge on hover */
-  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); /* Glow effect */
+
+.pending-view-button:hover {
+  background-color: #04b3d1;
+  transform: scale(1.1);
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+
+/* Responsive Styles */
+@media only screen and (max-width: 768px) {
+  .pending-appointment-list {
+    padding: 15px;
+  }
+
+
+  .pending-appointment-card {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+
+  .pending-appointment-details {
+    flex: 1;
+    order: 1;
+  }
+
+
+  .pending-view-button {
+    order: 2;
+    margin-left: auto;
+    padding: 10px;
+  }
 }

@@ -9,6 +9,7 @@
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
+
 /* Heading */
 .past-appointment-container h2 {
   text-align: center;
@@ -16,6 +17,48 @@
   font-size: 1.5em;
   margin-bottom: 20px;
 }
+
+
+/* Paragraph Styling */
+.past-appointment-container p {
+  margin: 10px 0;
+  color: #333;
+}
+
+
+.past-appointment-container p strong {
+  font-weight: bold;
+  color: #444;
+}
+
+
+/* Report List */
+.report-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 20px 0;
+}
+
+
+.report-list li {
+  margin: 10px 0;
+}
+
+
+.report-list a {
+  color: #05cdec;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+
+.report-list a:hover {
+  color: #038bb5;
+}
+
+
+/* Return Button */
 .pending-return-button {
   margin-top: 20px;
   background-color: #f05a5a;
@@ -35,89 +78,34 @@
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
+
 .pending-return-button:hover {
   background-color: #d04444;
   transform: scale(1.05);
 }
 
 
-/* Paragraph Styling */
-.past-appointment-container p {
-  margin: 10px 0;
-  color: #333;
-}
-
-.past-appointment-container ul {
-  padding-left: 20px;
-  margin: 10px 0;
-  color: #333;
-}
-
-/* Report Buttons */
-
-.past-report-button {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  align-items: center;
-  background-color: #05cdec;
-  width: 120px;
-  height: 50px;
-  color: #fff;
-  border: none;
-  border-radius: 25px;
-  padding: 12px 15px;
-  cursor: pointer;
-  font-size: 0.9em;
-  transition: background-color 0.3s ease, transform 0.3s ease;
-  text-align: center;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  margin: 10px 0;
-}
-
-.past-report-button:hover {
-  background-color: #04b3d1;
-  transform: scale(1.05);
-}
-
-/* Return Button */
-.past-return-button {
-  margin-top: 20px;
-  background-color: #f05a5a;
-  color: #fff;
-  border: none;
-  border-radius: 25px;
-  padding: 10px 20px;
-  cursor: pointer;
-  font-size: 1em;
-  transition: background-color 0.3s ease, transform 0.3s ease;
-}
-
-.past-return-button:hover {
-  background-color: #d04444;
-  transform: scale(1.05);
-}
-
 /* Responsive Styles */
 @media only screen and (max-width: 768px) {
   .past-appointment-container {
-    padding: 15px; /* Reduce padding for smaller screens */
+    padding: 15px;
   }
 
-  .past-report-buttons {
-    gap: 8px; /* Reduce spacing between buttons */
-  }
-
-  .past-report-button, .return-button {
-    font-size: 0.85em; /* Adjust font size */
-    padding: 8px 10px; /* Reduce padding */
-  }
 
   .past-appointment-container h2 {
-    font-size: 1.3em; /* Adjust heading size */
+    font-size: 1.3em;
   }
 
+
   .past-appointment-container p {
-    font-size: 0.95em; /* Adjust paragraph font size */
+    font-size: 0.95em;
+  }
+
+
+  .pending-return-button {
+    font-size: 0.9em;
+    padding: 8px 10px;
   }
 }
+
+
