@@ -1,12 +1,15 @@
 import "./about.css";
 import teamImage from "../../assets/images/Photo1.jpg";
-import profile1 from "../../assets/images/MyPhoto.jpg";
 import jeetPhoto from "../../assets/images/JeetProfile.jpg";
 import harshPhoto from "../../assets/images/HarshProfile.jpg";
 import jeminiPhoto from "../../assets/images/JeminiProfile.jpg";
 import mayankPhoto from "../../assets/images/MaynakProfile.jpg";
 import anujPhoto from "../../assets/images/AnujProfile.jpg";
 import aryanPhoto from "../../assets/images/AryanProfile.jpg";
+import nandiniPhoto from "../../assets/images/NandiniProfile.jpg";
+import popatiyaPhoto from "../../assets/images/PopHarshProfile.jpg";
+import jaikritPhoto from "../../assets/images/JaikritProfile.jpg";
+import arnoldPhoto from "../../assets/images/ArnoldProfile.jpg";
 
 // Sample team data
 const teamMembers = [
@@ -26,14 +29,14 @@ const teamMembers = [
     name: "Anuj Valambhiya",
     img: `${anujPhoto}`,
   },
-  { name: "Arnold Mochahari", img: `${profile1}` },
+  { name: "Nandini Mandaviya", img: `${nandiniPhoto}` },
   { name: "Harsh Lad", img: `${harshPhoto}` },
   { name: "Aryan Patel", img: `${aryanPhoto}` },
-  { name: "", img: `${profile1}` },
-  { name: "Member 9", img: `${profile1}` },
+  { name: "Harsh Popatiya", img: `${popatiyaPhoto}` },
+  { name: "Jaikrit Sanandiya", img: `${jaikritPhoto}` },
   {
-    name: "Member 10",
-    img: `${profile1}`,
+    name: "Arnold Mochahari",
+    img: `${arnoldPhoto}`,
   },
 ];
 

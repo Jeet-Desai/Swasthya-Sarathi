@@ -1,5 +1,5 @@
-import { useState, useEffect, useRef} from "react";
-import { NavLink, Link, useNavigate} from "react-router-dom";
+import { useState, useEffect, useRef } from "react";
+import { NavLink, Link, useNavigate } from "react-router-dom";
 
 import { BiMenu } from "react-icons/bi";
 import { AiOutlineClose } from "react-icons/ai"; // Import Close Icon
@@ -9,6 +9,8 @@ import log from "/assests/images/SS_logo.png"; /* Update all class names to incl
 
 const navLinks = [
   { path: "/doctor/home", display: "Home" },
+  { path: "/doctor/appointments", display: "View Appointments" },
+  { path: "/doctor/addmedicalrecord", display: "Add Medical Record" },
   { path: "/doctor/appointments", display: "View Appointments" }
 ];
 
@@ -33,11 +35,11 @@ const DoctorNavbar = () => {
   const handleLogout = () => {
     alert("Logging out...");
     // Clear user data from local storage
-    localStorage.removeItem('user');
-    localStorage.removeItem('token');
-    localStorage.removeItem('role');
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+    localStorage.removeItem("role");
     // Navigate to the home page
-    navigate('/login');
+    navigate("/login");
     window.location.href = "/login/";
   };
   useEffect(() => {
@@ -52,12 +54,21 @@ const DoctorNavbar = () => {
       <div className="doctor-navbar-header-wrapper">
         <div className="doctor-navbar-header-content">
           {/* Toggle Menu Icon - Visible on mobile */}
-          <span className="doctor-navbar-menu-icon doctor-navbar-mobile-only" onClick={toggleMenu}>
+          <span
+            className="doctor-navbar-menu-icon doctor-navbar-mobile-only"
+            onClick={toggleMenu}
+          >
             <BiMenu />
           </span>
 
           {/* Logo */}
-          <Link to="/homedoctor">
+          <Link
+            to="/doctor/home"
+            onClick={e => {
+              toggleMenu(); // Close menu
+              window.location.href = link.path; // Navigate to the link and trigger page reload
+            }}
+          >
             <div className="doctor-navbar-logo">
               <img src={log} alt="Logo" />
             </div>
@@ -71,11 +82,16 @@ const DoctorNavbar = () => {
 
           {/* Desktop Navigation (always visible) */}
           <nav
-            className={`doctor-navbar-navigation ${menuOpen ? "doctor-navbar-show-menu" : "doctor-navbar-hide-menu"}`}
+            className={`doctor-navbar-navigation ${
+              menuOpen ? "doctor-navbar-show-menu" : "doctor-navbar-hide-menu"
+            }`}
             ref={menuRef}
           >
             {/* Close Button (Mobile only) */}
-            <span className="doctor-navbar-close-icon doctor-navbar-mobile-only" onClick={toggleMenu}>
+            <span
+              className="doctor-navbar-close-icon doctor-navbar-mobile-only"
+              onClick={toggleMenu}
+            >
               <AiOutlineClose />
             </span>
             <ul className="doctor-navbar-menu-list">
@@ -84,9 +100,11 @@ const DoctorNavbar = () => {
                   <NavLink
                     to={link.path}
                     className={({ isActive }) =>
-                      isActive ? "doctor-navbar-menu-link active" : "doctor-navbar-menu-link"
+                      isActive
+                        ? "doctor-navbar-menu-link active"
+                        : "doctor-navbar-menu-link"
                     }
-                    onClick={(e) => {
+                    onClick={e => {
                       toggleMenu(); // Close menu
                       window.location.href = link.path; // Navigate to the link and trigger page reload
                     }}
@@ -101,14 +119,21 @@ const DoctorNavbar = () => {
           {/* Nav Right */}
           <div className="doctor-navbar-nav-right">
             <Link to="/login">
-              <button className="doctor-navbar-login-button" onClick={handleLogout}>Logout</button>
+              <button
+                className="doctor-navbar-login-button"
+                onClick={handleLogout}
+              >
+                Logout
+              </button>
             </Link>
           </div>
         </div>
       </div>
 
       {/* Overlay for Mobile Menu */}
-      {menuOpen && <div className="doctor-navbar-overlay" onClick={toggleMenu}></div>}
+      {menuOpen && (
+        <div className="doctor-navbar-overlay" onClick={toggleMenu}></div>
+      )}
     </header>
   );
 };

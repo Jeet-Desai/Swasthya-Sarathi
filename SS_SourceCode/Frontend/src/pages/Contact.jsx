@@ -1,11 +1,14 @@
 import "./contact.css";
-import profile1 from "../assets/images/MyPhoto.jpg";
 import jeetPhoto from "../assets/images/JeetProfile.jpg";
 import harshPhoto from "../assets/images/HarshProfile.jpg";
 import jeminiPhoto from "../assets/images/JeminiProfile.jpg";
 import mayankPhoto from "../assets/images/MaynakProfile.jpg";
 import anujPhoto from "../assets/images/AnujProfile.jpg";
 import aryanPhoto from "../assets/images/AryanProfile.jpg";
+import nandiniPhoto from "../assets/images/NandiniProfile.jpg";
+import popatiyaPhoto from "../assets/images/PopHarshProfile.jpg";
+import jaikritPhoto from "../assets/images/JaikritProfile.jpg";
+import arnoldPhoto from "../assets/images/ArnoldProfile.jpg";
 
 const teamMembers = [
   {
@@ -44,12 +47,12 @@ const teamMembers = [
     img: `${anujPhoto}`,
   },
   {
-    name: "Arnold Mochahari",
+    name: "Nandini Mandaviya",
 
     email: "@gmail.com",
     github: "https//github",
     contact: "6000649992",
-    img: `${profile1}`,
+    img: `${nandiniPhoto}`,
   },
   {
     name: "Harsh Lad",
@@ -68,28 +71,28 @@ const teamMembers = [
     img: `${aryanPhoto}`,
   },
   {
-    name: "Harsh",
+    name: "Harsh Popatiya",
 
     email: "@gmail.com",
     github: "https//github",
     contact: "6000649992",
-    img: `${profile1}`,
+    img: `${popatiyaPhoto}`,
   },
   {
-    name: "Member 9",
+    name: "Jaikrit Sanandiya",
 
     email: "@gmail.com",
     github: "https//github",
     contact: "6000649992",
-    img: `${profile1}`,
+    img: `${jaikritPhoto}`,
   },
   {
-    name: "Member 10",
+    name: "Arnold Mochahari",
 
     email: "@gmail.com",
     github: "https//github",
     contact: "6000649992",
-    img: `${profile1}`,
+    img: `${arnoldPhoto}`,
   },
 ];
 

@@ -6,14 +6,12 @@ import log from "/assests/images/SS_logo.png"; /* Update all class names to incl
 import { useNavigate } from "react-router-dom"; // Add useNavigate
 import { toast } from "react-toastify";
 
-
-
 // import "./AdminNavbar.css";
 
 const navLinks = [
   { path: "/admin/home", display: "Home" },
   { path: "/admin/appointments", display: "View Appointments" },
-  { path: "/admin/adddoctor", display: "Add Doctor" }
+  { path: "/admin/adddoctor", display: "Add Doctor" },
 ];
 
 const AdminNavbar = () => {
@@ -30,7 +28,7 @@ const AdminNavbar = () => {
     toast.success("Logged out successfully");
     // Navigate to login page
     window.location.href = "/login";
-    };
+  };
 
   const handleStickyHeader = () => {
     window.addEventListener("scroll", () => {
@@ -57,12 +55,21 @@ const AdminNavbar = () => {
       <div className="doctor-navbar-header-wrapper">
         <div className="doctor-navbar-header-content">
           {/* Toggle Menu Icon - Visible on mobile */}
-          <span className="doctor-navbar-menu-icon doctor-navbar-mobile-only" onClick={toggleMenu}>
+          <span
+            className="doctor-navbar-menu-icon doctor-navbar-mobile-only"
+            onClick={toggleMenu}
+          >
             <BiMenu />
           </span>
 
           {/* Logo */}
-          <Link to="/admin/home">
+          <Link
+            to="/admin/home"
+            onClick={e => {
+              toggleMenu(); // Close menu
+              window.location.href = link.path; // Navigate to the link and trigger page reload
+            }}
+          >
             <div className="doctor-navbar-logo">
               <img src={log} alt="Logo" />
             </div>
@@ -76,11 +83,16 @@ const AdminNavbar = () => {
 
           {/* Desktop Navigation (always visible) */}
           <nav
-            className={`doctor-navbar-navigation ${menuOpen ? "doctor-navbar-show-menu" : "doctor-navbar-hide-menu"}`}
+            className={`doctor-navbar-navigation ${
+              menuOpen ? "doctor-navbar-show-menu" : "doctor-navbar-hide-menu"
+            }`}
             ref={menuRef}
           >
             {/* Close Button (Mobile only) */}
-            <span className="doctor-navbar-close-icon doctor-navbar-mobile-only" onClick={toggleMenu}>
+            <span
+              className="doctor-navbar-close-icon doctor-navbar-mobile-only"
+              onClick={toggleMenu}
+            >
               <AiOutlineClose />
             </span>
             <ul className="doctor-navbar-menu-list">
@@ -89,9 +101,11 @@ const AdminNavbar = () => {
                   <NavLink
                     to={link.path}
                     className={({ isActive }) =>
-                      isActive ? "doctor-navbar-menu-link active" : "doctor-navbar-menu-link"
+                      isActive
+                        ? "doctor-navbar-menu-link active"
+                        : "doctor-navbar-menu-link"
                     }
-                    onClick={(e) => {
+                    onClick={e => {
                       toggleMenu(); // Close menu
                       window.location.href = link.path; // Navigate to the link and trigger page reload
                     }} // Close menu on link click
@@ -105,15 +119,20 @@ const AdminNavbar = () => {
 
           {/* Nav Right */}
           <div className="doctor-navbar-nav-right">
-            
-              <button className="doctor-navbar-login-button" onClick={handleLogout}>Logout</button>
-            
+            <button
+              className="doctor-navbar-login-button"
+              onClick={handleLogout}
+            >
+              Logout
+            </button>
           </div>
         </div>
       </div>
 
       {/* Overlay for Mobile Menu */}
-      {menuOpen && <div className="doctor-navbar-overlay" onClick={toggleMenu}></div>}
+      {menuOpen && (
+        <div className="doctor-navbar-overlay" onClick={toggleMenu}></div>
+      )}
     </header>
   );
 };
