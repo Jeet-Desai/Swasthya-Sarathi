@@ -11,6 +11,7 @@ const navLinks = [
   { path: "/doctor/home", display: "Home" },
   { path: "/doctor/appointments", display: "View Appointments" },
   { path: "/doctor/addmedicalrecord", display: "Add Medical Record" },
+  { path: "/doctor/appointments", display: "View Appointments" }
 ];
 
 const DoctorNavbar = () => {

@@ -12,7 +12,7 @@ const HospitalSignup = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
   const [otp, setOtp] = useState("");
-  const [generatedOtp, setGeneratedOtp] = useState("");
+  const [isOtpSent, setIsOtpSent] = useState(false);
   const [isVerified, setIsVerified] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -55,7 +55,7 @@ const HospitalSignup = () => {
     const newErrors = {};
 
     if (!formData.email) newErrors.email = 'Email is required';
-    if (!formData.name) newErrors.name = 'Hospital name is required';
+    if (!formData.name) newErrors.name = 'Name is required';
     if (!formData.password) newErrors.password = 'Password is required';
     if (!validatePassword(formData.password)) newErrors.password = 'Password must contain at least 8 characters, one uppercase, one lowercase, one number and one special character';
     if (formData.password !== formData.confirmPassword) newErrors.confirmPassword = 'Passwords do not match';
@@ -68,82 +68,89 @@ const HospitalSignup = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const validateEmailAddress = async () => {
+  const sendOtp = async () => {
+    if (!formData.email) {
+      setErrors({ ...errors, email: 'Email is required' });
+      return;
+    }
+
     try {
-      const response = await fetch(`${BASE_URL}/api/v1/auth/validate-email`, {
+      setLoading(true);
+      const response = await fetch(`${BASE_URL}/api/v1/auth/send-otp`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: formData.email }),
       });
       const data = await response.json();
-  
+      
       if (data.success) {
-        return true;
+        toast.success('OTP sent successfully! Please check your email');
+        setIsOtpSent(true); // Update state to show the verify button
       } else {
-        setErrors({ ...errors, email: data.message });
-        toast.error(data.message);
-        return false;
+        toast.error(data.message || 'Failed to send OTP');
       }
-    } catch (err) {
-      toast.error('Error validating email');
-      return false;
-    }
-  };
-
-  const sendOtp = async () => {
-    if (!formData.email) {
-      setErrors({ ...errors, email: 'Email is required to send OTP' });
-      return;
-    }
-
-    const isEmailValid = await validateEmailAddress();
-
-    if (isEmailValid) {
-      setLoading(true);
-      // Simulate OTP generation
-      const simulatedOtp = Math.floor(100000 + Math.random() * 900000).toString();
-      setGeneratedOtp(simulatedOtp);
-      toast.success(`OTP sent to ${formData.email} is ${simulatedOtp}`);
+    } catch (error) {
+      toast.error('Error sending OTP');
+    } finally {
       setLoading(false);
     }
   };
 
-  const verifyOtp = () => {
-    if (otp === generatedOtp) {
-      setIsVerified(true);
-      toast.success('Email verified successfully');
-    } else {
-      toast.error('Invalid OTP');
+  const verifyOtp = async () => {
+    try {
+      setLoading(true);
+      const response = await fetch(`${BASE_URL}/api/v1/auth/verify-otp`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+          email: formData.email,
+          otp: otp 
+        }),
+      });
+      const data = await response.json();
+      
+      if (data.success) {
+        setIsVerified(true);
+        toast.success('Email verified successfully');
+      } else {
+        toast.error(data.message || 'Invalid OTP');
+      }
+    } catch (error) {
+      toast.error('Error verifying OTP');
+    } finally {
+      setLoading(false);
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (validateForm()) {
-      if (!isVerified) {
-        toast.error('Please verify your email before submitting');
-        return;
-      }
+    if (!validateForm()) return;
+    
+    if (!isVerified) {
+      toast.error('Please verify your email first');
+      return;
+    }
+
+    try {
       setLoading(true);
-      try {
-        // Implement API call to register hospital
-        const response = await fetch(`${BASE_URL}/api/v1/auth/register`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(formData),
-        });
-        const data = await response.json();
-        if (data.success) {
-          toast.success('Hospital registered successfully');
-          navigate('/login');
-        } else {
-          toast.error(data.message || 'Registration failed');
-        }
-      } catch (error) {
-        toast.error('An error occurred during registration');
-      } finally {
-        setLoading(false);
+      const response = await fetch(`${BASE_URL}/api/v1/auth/register`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        toast.success('Registration successful!');
+        navigate('/login');
+      } else {
+        toast.error(data.message || 'Registration failed');
       }
+    } catch (error) {
+      toast.error('Error during registration');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -158,31 +165,48 @@ const HospitalSignup = () => {
           <form onSubmit={handleSubmit}>
             <div className="form-group">
               <label htmlFor="email">Email</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value={formData.email}
-                onChange={handleInputChange}
-                required
-              />
-              {errors.email && <span className="error">{errors.email}</span>}
-              <button type="button" onClick={sendOtp} disabled={loading || isVerified}>
-                {isVerified ? 'Verified' : 'Send OTP'}
-              </button>
-            </div>
-
-            {generatedOtp && !isVerified && (
-              <div className="form-group">
-                <label htmlFor="otp">OTP</label>
+              <div className="email-group">
                 <input
-                  type="text"
-                  id="otp"
-                  value={otp}
-                  onChange={(e) => setOtp(e.target.value)}
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  disabled={isVerified}
                   required
                 />
-                <button type="button" onClick={verifyOtp}>Verify OTP</button>
+                <button 
+                  type="button" 
+                  onClick={sendOtp}
+                  disabled={loading || isVerified}
+                  className="otp-button"
+                >
+                  {loading ? 'Sending...' : isVerified ? 'Verified' : 'Send OTP'}
+                </button>
+              </div>
+              {errors.email && <span className="error">{errors.email}</span>}
+            </div>
+
+            {isOtpSent && !isVerified && (
+              <div className="form-group">
+                <label htmlFor="otp">Enter OTP</label>
+                <div className="otp-group">
+                  <input
+                    type="text"
+                    id="otp"
+                    value={otp}
+                    onChange={(e) => setOtp(e.target.value)}
+                    required
+                  />
+                  <button 
+                    type="button" 
+                    onClick={verifyOtp}
+                    disabled={loading}
+                    className="verify-button"
+                  >
+                    {loading ? 'Verifying...' : 'Verify OTP'}
+                  </button>
+                </div>
               </div>
             )}
 
@@ -210,7 +234,11 @@ const HospitalSignup = () => {
                   onChange={handleInputChange}
                   required
                 />
-                <button type="button" className="password-toggle" onClick={togglePasswordVisibility}>
+                <button 
+                  type="button" 
+                  className="password-toggle" 
+                  onClick={togglePasswordVisibility}
+                >
                   {passwordVisible ? <FaEyeSlash /> : <FaEye />}
                 </button>
               </div>
@@ -228,7 +256,11 @@ const HospitalSignup = () => {
                   onChange={handleInputChange}
                   required
                 />
-                <button type="button" className="password-toggle" onClick={toggleConfirmPasswordVisibility}>
+                <button 
+                  type="button" 
+                  className="password-toggle" 
+                  onClick={toggleConfirmPasswordVisibility}
+                >
                   {confirmPasswordVisible ? <FaEyeSlash /> : <FaEye />}
                 </button>
               </div>
@@ -263,18 +295,14 @@ const HospitalSignup = () => {
 
             <div className="form-group">
               <label htmlFor="type">Hospital Type</label>
-              <select
+              <input
+                type="text"
                 id="type"
                 name="type"
                 value={formData.type}
                 onChange={handleInputChange}
                 required
-              >
-                <option value="">Select type</option>
-                <option value="Gov">Government</option>
-                <option value="Private">Private</option>
-                <option value="Semi-Gov">Semi-Gov</option>
-              </select>
+              />
               {errors.type && <span className="error">{errors.type}</span>}
             </div>
 
@@ -291,8 +319,12 @@ const HospitalSignup = () => {
               {errors.registration_no && <span className="error">{errors.registration_no}</span>}
             </div>
 
-            <button type="submit" disabled={loading || !isVerified}>
-              {loading ? 'Registering...' : 'Register Hospital'}
+            <button 
+              type="submit" 
+              className="submit-button"
+              disabled={loading || !isVerified}
+            >
+              {loading ? 'Registering...' : 'Register'}
             </button>
           </form>
         </div>

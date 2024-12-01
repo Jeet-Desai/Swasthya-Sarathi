@@ -30,7 +30,7 @@
               box-shadow 0.4s ease;
   position: relative;
   overflow: hidden;
-}
+} 
 
 .add-new-doctor-container:hover {
   transform: translateY(-8px);

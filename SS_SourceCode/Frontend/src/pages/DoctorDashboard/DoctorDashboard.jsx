@@ -27,7 +27,7 @@ const DoctorDashboard = () => {
               <Route path="/homedoctor" element={<AdminHome/>}/>
               <Route path="/doctorappointments" element={<ViewAppointmentRequests/>} />
               <Route path="/addmedicalrecord" element={<AddMedicalRecord />} />
-              <Route path="/doctorappointments/:appointmentID" element={<AppointmentDetails/>} />
+              <Route path="/doctor/appointments/:appointmentId" element={<AppointmentDetails/>} />
             </Routes>
           {/* <Footer /> */}
         </BrowserRouter>

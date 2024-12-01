@@ -4,6 +4,8 @@ import Doctor from '../Models/DoctorModel.js'; // Importing the Doctor model (sa
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import dns from 'dns';
+import { generateOTP, sendOTPEmail } from '../utils/emailService.js';
+import OTP from '../Models/OTPModel.js';
 
 export const validateEmail = async (req, res) => {
   const { email } = req.body;
@@ -17,10 +19,92 @@ export const validateEmail = async (req, res) => {
   dns.resolveMx(domain, (err, addresses) => {
     if (err || addresses.length === 0) {
       return res.status(400).json({ success: false, message: 'Invalid email domain!' });
-    }
+    } 
 
     res.status(200).json({ success: true, message: 'Email is valid!' });
   });
+};
+export const sendEmailOTP = async (req, res) => {
+  try {
+    const { email } = req.body;
+    if (!email) {
+      return res.status(400).json({ success: false, message: 'Email is required' });
+    }
+
+    // Generate OTP
+    const otp = generateOTP();
+    console.log('Generated OTP:', otp);
+
+    // Save OTP to database
+    await OTP.findOneAndUpdate(
+      { email },
+      { email, otp },
+      { upsert: true, new: true }
+    );
+    console.log('OTP saved to database for email:', email);
+
+    // Send OTP email
+    const emailSent = await sendOTPEmail(email, otp);
+    if (!emailSent) {
+      throw new Error('Failed to send email');
+    }
+
+    res.status(200).json({
+      success: true,
+      message: 'OTP sent successfully'
+    });
+  } catch (error) {
+    console.error('Send OTP error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to send OTP'
+    });
+  }
+};
+
+export const verifyEmailOTP = async (req, res) => {
+  try {
+    const { email, otp } = req.body;
+
+    if (!email || !otp) {
+      return res.status(400).json({
+        success: false,
+        message: 'Email and OTP are required'
+      });
+    }
+
+    // Find the OTP document
+    const otpDoc = await OTP.findOne({ email });
+
+    if (!otpDoc) {
+      return res.status(400).json({
+        success: false,
+        message: 'OTP expired or not found'
+      });
+    }
+
+    // Verify OTP
+    if (otpDoc.otp !== otp) {
+      return res.status(400).json({
+        success: false,
+        message: 'Invalid OTP'
+      });
+    }
+
+    // Delete the used OTP
+    await OTP.deleteOne({ email });
+
+    res.status(200).json({
+      success: true,
+      message: 'Email verified successfully'
+    });
+  } catch (error) {
+    console.error('Verify OTP error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to verify OTP'
+    });
+  }
 };
 
 export const Register = async (req, res) => {

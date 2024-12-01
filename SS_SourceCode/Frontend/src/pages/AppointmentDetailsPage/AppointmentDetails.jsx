@@ -1,48 +1,120 @@
-import React from 'react';
-import { useLocation } from 'react-router-dom'; // Import useLocation
-// import "./AppointmentDetails.css"; // Import the updated CSS
+import React, { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { BASE_URL } from '../../config';
+import './AppointmentDetails.css';
 
 export default function AppointmentDetails() {
-  // Get the state passed from the Card component
-  const location = useLocation();
-  const { appointmentId } = location.state || {}; // Extract appointmentId from the state
+  const { appointmentId } = useParams();
+  const navigate = useNavigate();
+  const [appointmentData, setAppointmentData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [formData, setFormData] = useState({
+    status: '',
+    prescription: '',
+    medicines: '',
+    reports: '',
+  });
 
-  // Simulate fetching appointment details based on the appointmentId
-  const initialData = {
-    name: 'John Doe',
-    contact: '123-456-7890',
-    ailment: 'Flu',
-    description: 'Fever and sore throat',
-    date: '2025-01-26',
-    time: '10:00',
-    appointmentId: appointmentId, // Display the appointmentId
+  useEffect(() => {
+    const fetchAppointmentData = async () => {
+      try {
+        if (!appointmentId) {
+          throw new Error('Appointment ID is missing');
+        }
+        const response = await fetch(`${BASE_URL}/api/v1/doctors/appo/${appointmentId}`);
+        if (!response.ok) {
+          throw new Error('Failed to fetch appointment data');
+        }
+        const data = await response.json();
+        setAppointmentData(data.appointment);
+        setFormData({
+          status: data.appointment.status,
+          prescription: data.appointment.prescription || '',
+          medicines: data.appointment.medicines.join(', ') || '',
+          reports: data.appointment.reports.join(', ') || '',
+        });
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchAppointmentData();
+  }, [appointmentId]);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   };
- 
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch(`${BASE_URL}/api/v1/doctors/upd_appo/${appointmentId}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...formData,
+          medicines: formData.medicines.split(',').map(med => med.trim()),
+          reports: formData.reports.split(',').map(rep => rep.trim()),
+          doctorId: appointmentData.doctor._id,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Failed to update appointment');
+      }
+
+      toast.success('Appointment updated successfully');
+      navigate('/doctor/appointments');
+    } catch (err) {
+      toast.error(err.message);
+    }
+  };
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
+
   return (
     <div className="appointment-details">
       <div className="container">
         <h1>Appointment Details</h1>
-        <form>
-          <label htmlFor="name">Name:</label>
-          <input type="text" id="name" name="name" value={initialData.name} disabled />
+        <div className="colored-section blue">
+          <p><strong>Patient Name:</strong> {appointmentData.patient.name}</p>
+          <p><strong>Contact No.:</strong> {appointmentData.patient.contactNo}</p>
+        </div>
+        <div className="colored-section purple">
+          <p><strong>Ailment:</strong> {appointmentData.description}</p>
+          <p><strong>Date:</strong> {new Date(appointmentData.date).toISOString().split('T')[0]}</p>
+          <p><strong>Time:</strong> {appointmentData.time}</p>
+        </div>
+        <form onSubmit={handleSubmit}>
+          <label htmlFor="status">Status:</label>
+          <select id="status" name="status" value={formData.status} onChange={handleChange}>
+            <option value="approved">Approved</option>
+            <option value="completed">Completed</option>
+          </select>
 
-          <label htmlFor="contact">Contact No.:</label>
-          <input type="text" id="contact" name="contact" value={initialData.contact} disabled />
+          <label htmlFor="prescription">Prescription:</label>
+          <textarea id="prescription" name="prescription" value={formData.prescription} onChange={handleChange} />
 
-          <label htmlFor="ailment">Ailment:</label>
-          <input type="text" id="ailment" name="ailment" value={initialData.ailment} disabled />
+          <label htmlFor="medicines">Medicines (comma separated):</label>
+          <input type="text" id="medicines" name="medicines" value={formData.medicines} onChange={handleChange} />
 
-          <label htmlFor="description">Description:</label>
-          <textarea id="description" name="description" value={initialData.description} disabled />
+          <label htmlFor="reports">Reports (comma separated):</label>
+          <input type="text" id="reports" name="reports" value={formData.reports} onChange={handleChange} />
 
-          <label htmlFor="date">Date:</label>
-          <input type="date" id="date" name="date" value={initialData.date} disabled />
-
-          <label htmlFor="time">Time:</label>
-          <input type="time" id="time" name="time" value={initialData.time} disabled />
-
-          {/* <button type="submit" className="btn-danger">Discard Appointment</button>
-          <button type="submit" className="btn-success">Confirm Appointment</button> */}
+          <button type="submit" className="btn-success">Update Appointment</button>
         </form>
       </div>
     </div>

@@ -1,22 +1,21 @@
 import React, { useState } from "react";
-import "./Signup.css";
-import signupImg from "../../assets/images/rmlogo.png";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { BASE_URL } from "../../config";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
-import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { BASE_URL } from "../../config";
+import signupImg from "../../assets/images/rmlogo.png";
+import "./Signup.css";
 
 const Signup = () => {
-  const navigate = useNavigate();   
+  const navigate = useNavigate();
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
   const [otp, setOtp] = useState("");
-  const [generatedOtp, setGeneratedOtp] = useState("");
+  const [isOtpSent, setIsOtpSent] = useState(false);
   const [isVerified, setIsVerified] = useState(false);
   const [loading, setLoading] = useState(false);
+
   const [formData, setFormData] = useState({
     email: "",
     name: "",
@@ -69,82 +68,89 @@ const Signup = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const validateEmailAddress = async () => {
+  const sendOtp = async () => {
+    if (!formData.email) {
+      setErrors({ ...errors, email: 'Email is required' });
+      return;
+    }
+
     try {
-      const response = await fetch(`${BASE_URL}/api/v1/auth/validate-email`, {
+      setLoading(true);
+      const response = await fetch(`${BASE_URL}/api/v1/auth/send-otp`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: formData.email }),
       });
       const data = await response.json();
-  
+      
       if (data.success) {
-        return true;
+        toast.success('OTP sent successfully! Please check your email');
+        setIsOtpSent(true); // Update state to show the verify button
       } else {
-        setErrors({ ...errors, email: data.message });
-        toast.error(data.message);
-        return false;
+        toast.error(data.message || 'Failed to send OTP');
       }
-    } catch (err) {
-      toast.error('Error validating email');
-      return false;
-    }
-  };
-
-  const sendOtp = async () => {
-    if (!formData.email) {
-      setErrors({ ...errors, email: 'Email is required to send OTP' });
-      return;
-    }
-
-    const isEmailValid = await validateEmailAddress();
-
-    if (isEmailValid) {
-      setLoading(true);
-      // Simulate OTP generation 
-      const simulatedOtp = Math.floor(100000 + Math.random() * 900000).toString();
-      setGeneratedOtp(simulatedOtp);
-      toast.success(`OTP sent to ${formData.email} is ${simulatedOtp}`);
+    } catch (error) {
+      toast.error('Error sending OTP');
+    } finally {
       setLoading(false);
     }
   };
 
-  const verifyOtp = () => {
-    if (otp === generatedOtp) {
-      setIsVerified(true);
-      toast.success('Email verified successfully');
-    } else {
-      toast.error('Invalid OTP');
+  const verifyOtp = async () => {
+    try {
+      setLoading(true);
+      const response = await fetch(`${BASE_URL}/api/v1/auth/verify-otp`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+          email: formData.email,
+          otp: otp 
+        }),
+      });
+      const data = await response.json();
+      
+      if (data.success) {
+        setIsVerified(true);
+        toast.success('Email verified successfully');
+      } else {
+        toast.error(data.message || 'Invalid OTP');
+      }
+    } catch (error) {
+      toast.error('Error verifying OTP');
+    } finally {
+      setLoading(false);
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (validateForm()) {
-      if (!isVerified) {
-        toast.error('Please verify your email before submitting');
-        return;
-      }
+    if (!validateForm()) return;
+    
+    if (!isVerified) {
+      toast.error('Please verify your email first');
+      return;
+    }
+
+    try {
       setLoading(true);
-      try {
-        // Implement API call to register user
-        const response = await fetch(`${BASE_URL}/api/v1/auth/register`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(formData),
-        });
-        const data = await response.json();
-        if (data.success) {
-          toast.success('User registered successfully');  
-          navigate('/login');
-        } else {
-          toast.error(data.message || 'Registration failed');
-        }
-      } catch (error) {
-        toast.error('An error occurred during registration');
-      } finally {
-        setLoading(false);
+      const response = await fetch(`${BASE_URL}/api/v1/auth/register`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        toast.success('Registration successful!');
+        navigate('/login');
+      } else {
+        toast.error(data.message || 'Registration failed');
       }
+    } catch (error) {
+      toast.error('Error during registration');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -159,31 +165,48 @@ const Signup = () => {
           <form onSubmit={handleSubmit}>
             <div className="form-group">
               <label htmlFor="email">Email</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value={formData.email}
-                onChange={handleInputChange}
-                required
-              />
-              {errors.email && <span className="error">{errors.email}</span>}
-              <button type="button" onClick={sendOtp} disabled={loading || isVerified}>
-                {isVerified ? 'Verified' : 'Send OTP'}
-              </button>
-            </div>
-
-            {generatedOtp && !isVerified && (
-              <div className="form-group">
-                <label htmlFor="otp">OTP</label>
+              <div className="email-group">
                 <input
-                  type="text"
-                  id="otp"
-                  value={otp}
-                  onChange={(e) => setOtp(e.target.value)}
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  disabled={isVerified}
                   required
                 />
-                <button type="button" onClick={verifyOtp}>Verify OTP</button>
+                <button 
+                  type="button" 
+                  onClick={sendOtp}
+                  disabled={loading || isVerified}
+                  className="otp-button"
+                >
+                  {loading ? 'Sending...' : isVerified ? 'Verified' : 'Send OTP'}
+                </button>
+              </div>
+              {errors.email && <span className="error">{errors.email}</span>}
+            </div>
+
+            {isOtpSent && !isVerified && (
+              <div className="form-group">
+                <label htmlFor="otp">Enter OTP</label>
+                <div className="otp-group">
+                  <input
+                    type="text"
+                    id="otp"
+                    value={otp}
+                    onChange={(e) => setOtp(e.target.value)}
+                    required
+                  />
+                  <button 
+                    type="button" 
+                    onClick={verifyOtp}
+                    disabled={loading}
+                    className="verify-button"
+                  >
+                    {loading ? 'Verifying...' : 'Verify OTP'}
+                  </button>
+                </div>
               </div>
             )}
 
@@ -211,8 +234,12 @@ const Signup = () => {
                   onChange={handleInputChange}
                   required
                 />
-                <button type="button" className="password-toggle" onClick={togglePasswordVisibility}>
-                  {passwordVisible ? <FaEyeSlash /> : <FaEye />}
+                <button 
+                  type="button" 
+                  className="password-toggle" 
+                  onClick={togglePasswordVisibility}
+                >
+                  {passwordVisible ? 'Hide' : 'Show'}
                 </button>
               </div>
               {errors.password && <span className="error">{errors.password}</span>}
@@ -229,8 +256,12 @@ const Signup = () => {
                   onChange={handleInputChange}
                   required
                 />
-                <button type="button" className="password-toggle" onClick={toggleConfirmPasswordVisibility}>
-                  {confirmPasswordVisible ? <FaEyeSlash /> : <FaEye />}
+                <button 
+                  type="button" 
+                  className="password-toggle" 
+                  onClick={toggleConfirmPasswordVisibility}
+                >
+                  {confirmPasswordVisible ? 'Hide' : 'Show'}
                 </button>
               </div>
               {errors.confirmPassword && <span className="error">{errors.confirmPassword}</span>}
@@ -284,43 +315,37 @@ const Signup = () => {
                 onChange={handleInputChange}
                 required
               >
-                <option value="">Select gender</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-                <option value="Other">Other</option>
+                <option value="">Select Gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
               </select>
               {errors.gender && <span className="error">{errors.gender}</span>}
             </div>
 
             <div className="form-group">
               <label htmlFor="bloodGroup">Blood Group</label>
-              <select
+              <input
+                type="text"
                 id="bloodGroup"
                 name="bloodGroup"
                 value={formData.bloodGroup}
                 onChange={handleInputChange}
                 required
-              >
-                <option value="">Select blood group</option>
-                <option value="A+">A+</option>
-                <option value="A-">A-</option>
-                <option value="B+">B+</option>
-                <option value="B-">B-</option>
-                <option value="AB+">AB+</option>
-                <option value="AB-">AB-</option>
-                <option value="O+">O+</option>
-                <option value="O-">O-</option>
-              </select>
+              />
               {errors.bloodGroup && <span className="error">{errors.bloodGroup}</span>}
             </div>
 
-            <button type="submit" disabled={loading || !isVerified}>
+            <button 
+              type="submit" 
+              className="submit-button"
+              disabled={loading || !isVerified}
+            >
               {loading ? 'Registering...' : 'Register'}
             </button>
           </form>
         </div>
       </div>
-      <ToastContainer />
     </div>
   );
 };

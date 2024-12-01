@@ -102,7 +102,7 @@ const Layout = () => {
                 element={<AddMedicalRecord />}
               />
               <Route
-                path="/doctor/appointments/:appointmentID/"
+                path="/doctor/appointments/:appointmentId/"
                 element={<AppointmentDetails />}
               />
               <Route path="/admin/home" element={<AdminHome />} />
