@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "dns": "^0.2.2",
+    "nodemon": "^3.1.7"
+  }
+}

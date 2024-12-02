@@ -1,0 +1,29 @@
+{
+  "all": true,
+  "include": [
+    "Controllers/**/*.js",
+    "auth/**/*.js",
+    "Models/**/*.js",
+    "Routes/**/*.js"
+  ],
+  "exclude": [
+    "tests/**",
+    "coverage/**",
+    "config/**",
+    "node_modules/**"
+  ],
+  "reporter": [
+    "text",
+    "html",
+    "lcov"
+  ],
+  "report-dir": "./coverage",
+  "check-coverage": true,
+  "statements": 80,
+  "branches": 80,
+  "functions": 80,
+  "lines": 80,
+  "clean": true,
+  "sourceMap": true,
+  "instrument": true
+} 
