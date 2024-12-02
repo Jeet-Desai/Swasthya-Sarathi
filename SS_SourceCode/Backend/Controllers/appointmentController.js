@@ -6,6 +6,31 @@ import multer from 'multer';
 import path from 'path';
 
 import fs from 'fs';
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    // Ensure the uploads/reports directory exists
+    const uploadPath = path.join(process.cwd(), 'uploads', 'reports'); // Use process.cwd() for consistent absolute paths
+    if (!fs.existsSync(uploadPath)) {
+      fs.mkdirSync(uploadPath, { recursive: true }); // Create directory recursively if it doesn't exist
+    }
+    cb(null, uploadPath);
+  },
+  filename: (req, file, cb) => {
+    const uniqueName = `${Date.now()}-${file.originalname}`;
+    cb(null, uniqueName);
+  },
+});
+
+
+const upload = multer({
+  storage,
+  limits: { fileSize: 20 * 1024 * 1024 }, // Optional: Limit file size to 20MB per file
+  fileFilter: (req, file, cb) => {
+    // Allow any file type
+    cb(null, true);
+  },
+});
+export default upload;
 
 export const updateAppointment = async (req, res) => {
   const { appointmentId } = req.params;
@@ -28,9 +53,9 @@ export const updateAppointment = async (req, res) => {
     appointment.medicines = medicines || appointment.medicines;
 
     // Handle file uploads
-    if (req.files) {
-      const reportPaths = req.files.map(file => file.path);
-      appointment.reports = appointment.reports.concat(reportPaths);
+    if (req.files && req.files.length > 0) {
+      const reportPaths = req.files.map(file => file.path); // Map file paths
+      appointment.reports = appointment.reports.concat(reportPaths); // Append to existing reports
     }
 
     // Save the updated appointment

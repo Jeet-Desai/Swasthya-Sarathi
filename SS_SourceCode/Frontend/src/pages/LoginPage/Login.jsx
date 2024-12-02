@@ -79,7 +79,7 @@ const submitHandler = async (e) => {
             break;
           case "doctor":
             navigate("/doctor/");
-            window.location.href = "/doctor";
+            window.location.href = "/doctor/";
             break;
           default:
             window.location.href = "/";

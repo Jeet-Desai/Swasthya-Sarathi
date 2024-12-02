@@ -3,6 +3,7 @@ import Hospital from '../Models/HospitalModel.js';
 import multer from 'multer';
 import path from 'path';
 import fs from 'fs';
+import bcrypt from 'bcryptjs';
 
 // Configure multer for file uploads
 const storage = multer.diskStorage({
@@ -74,11 +75,13 @@ export const RegisterDoctor = async (req, res) => {
       }
 
       const photoPath = req.file ? path.relative('./', req.file.path) : '';
+      const salt = await bcrypt.genSalt(10);
+      const hashed_pass = await bcrypt.hash(password, salt);
 
       const doctor = new Doctor({
         email,
         name,
-        password,
+        password:hashed_pass, 
         phone,
         gender,
         specialization,
