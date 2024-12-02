@@ -14,16 +14,14 @@ const teamMembers = [
   {
     name: "Jeet Desai",
 
-    email: "@gmail.com",
-    github: "https//github",
-    contact: "6000649992",
+    email: "202201474@daiict.ac.in",
 
     img: `${jeetPhoto}`,
   },
   {
     name: "Jemini Chaudhari",
 
-    email: "@gmail.com",
+    email: "202201521@daiict.ac.in",
     github: "https//github",
     contact: "6000649992",
     img: `${jeminiPhoto}`,
@@ -31,7 +29,7 @@ const teamMembers = [
   {
     name: "Mayank Parmar",
 
-    email: "@gmail.com",
+    email: "202201464@daiict.ac.in",
     github: "https//github",
     contact: "6000649992",
 
@@ -40,7 +38,7 @@ const teamMembers = [
   {
     name: "Anuj Valambhiya",
 
-    email: "@gmail.com",
+    email: "202201481@daiict.ac.in",
     github: "https//github",
     contact: "6000649992",
 
@@ -49,7 +47,7 @@ const teamMembers = [
   {
     name: "Nandini Mandaviya",
 
-    email: "@gmail.com",
+    email: "202201487@daiict.ac.in",
     github: "https//github",
     contact: "6000649992",
     img: `${nandiniPhoto}`,
@@ -57,7 +55,7 @@ const teamMembers = [
   {
     name: "Harsh Lad",
 
-    email: "@gmail.com",
+    email: "202201493@daiict.ac.in",
     github: "https//github",
     contact: "6000649992",
     img: `${harshPhoto}`,
@@ -65,7 +63,7 @@ const teamMembers = [
   {
     name: "Aryan Patel",
 
-    email: "@gmail.com",
+    email: "202201511@daiict.ac.in",
     github: "https//github",
     contact: "6000649992",
     img: `${aryanPhoto}`,
@@ -73,7 +71,7 @@ const teamMembers = [
   {
     name: "Harsh Popatiya",
 
-    email: "@gmail.com",
+    email: "202201463@daiict.ac.in",
     github: "https//github",
     contact: "6000649992",
     img: `${popatiyaPhoto}`,
@@ -81,7 +79,7 @@ const teamMembers = [
   {
     name: "Jaikrit Sanandiya",
 
-    email: "@gmail.com",
+    email: "202201484@daiict.ac.in",
     github: "https//github",
     contact: "6000649992",
     img: `${jaikritPhoto}`,
@@ -89,7 +87,7 @@ const teamMembers = [
   {
     name: "Arnold Mochahari",
 
-    email: "@gmail.com",
+    email: "202201522@daiict.ac.in",
     github: "https//github",
     contact: "6000649992",
     img: `${arnoldPhoto}`,
@@ -109,8 +107,6 @@ const Contact = () => {
               <img src={member.img} alt={member.name} />
               <h3>{member.name}</h3>
               <p>email:{member.email}</p>
-              <p>github:{member.github}</p>
-              <p>contact:{member.contact}</p>
             </div>
           ))}
         </div>
