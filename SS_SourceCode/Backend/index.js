@@ -20,7 +20,7 @@ const port = process.env.PORT || 8000;
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
-const __dirname = path.resolve();
+const __dirname = path.resolve();   
 
 const corseOption = {
     origin:true
@@ -65,6 +65,7 @@ app.use(express.static(path.join(__dirname,"/Frontend/dist")));
 app.get("*",(req,res)=>{
     res.sendFile(path.resolve(__dirname,"Frontend","dist","index.html"));
 })
+
 
 app.listen(port,()=>{
     connectDB();

@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./DoctorCard.css";
-import { BASE_URL } from '../../config';
+import { BASE_URL } from '../../../config';
 
 const DoctorCard = ({ doctor }) => {
   const { name, photo, specialization, hospital } = doctor;
