@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import { BASE_URL } from '../../config';
 
 import { toast } from "react-toastify";
 import { ThemeProvider, createTheme } from '@mui/material/styles';
@@ -74,7 +75,7 @@ const AddNewDoctor = () => {
 
     try {
       const response = await fetch(
-        "http://localhost:5000/api/v1/hospitals/register-doctor",
+        `${BASE_URL}/api/v1/hospitals/register-doctor`,
         {
           method: "POST",
           headers: {

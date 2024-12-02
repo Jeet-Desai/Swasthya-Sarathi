@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { BASE_URL } from '../../config';
 
 export const useDoctors = () => {
   const [doctors, setDoctors] = useState([]);
@@ -6,7 +7,7 @@ export const useDoctors = () => {
   useEffect(() => {
     const fetchDoctors = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/v1/patients/doctors_fetch');
+        const response = await fetch(`${BASE_URL}/api/v1/patients/doctors_fetch`);
         const data = await response.json();
         if (response.ok) {
           setDoctors(data.doctors);

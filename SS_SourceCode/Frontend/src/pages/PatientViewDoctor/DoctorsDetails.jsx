@@ -35,7 +35,7 @@ const DoctorsDetails = () => {
             <div className="docdetp-doctor-details__container">
                 <div className="docdetp-doctor-details__header">
                     <div className="docdetp-doctor-details__image-container">
-                        <img src={doctor.photo ? `http://localhost:5000/${doctor.photo}` : "default-photo-url"} alt="Doctor profile" className="docdetp-doctor-details__image" />
+                        <img src={doctor.photo ? `${BASE_URL}/${doctor.photo}` : "default-photo-url"} alt="Doctor profile" className="docdetp-doctor-details__image" />
                     </div>
                     <div className="docdetp-doctor-details__info">
                         <h1 className="docdetp-doctor-details__name">Dr. {doctor.name}</h1>

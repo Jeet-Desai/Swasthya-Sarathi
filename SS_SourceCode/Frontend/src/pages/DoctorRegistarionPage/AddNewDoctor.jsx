@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from "react-toastify";
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import './AddNewDoc.css';
+import { BASE_URL } from "../../config";
 
 const theme = createTheme({
   palette: {
@@ -88,7 +89,7 @@ const AddNewDoctor = () => {
 
     try {
       const response = await fetch(
-        "http://localhost:5000/api/v1/hospitals/register-doctor",
+        `${BASE_URL}/api/v1/hospitals/register-doctor`,
         {
           method: "POST",
           body: doctorData,

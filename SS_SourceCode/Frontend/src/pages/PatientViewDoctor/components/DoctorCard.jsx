@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./DoctorCard.css";
+import { BASE_URL } from '../../config';
 
 const DoctorCard = ({ doctor }) => {
   const { name, photo, specialization, hospital } = doctor;
@@ -13,7 +14,7 @@ const DoctorCard = ({ doctor }) => {
   return (
     <div className="dcp-doctor-card" onClick={handleClick}>
       <div className="dcp-doctor-card__image">
-        <img src={photo ? `http://localhost:5000/${photo}` : "default-photo-url"} alt="Doctor profile" />
+        <img src={photo ? `${BASE_URL}/${photo}` : "default-photo-url"} alt="Doctor profile" />
       </div>
       <div className="dcp-doctor-card__info">
         <h3 className="dcp-doctor-card__name">{name}</h3>

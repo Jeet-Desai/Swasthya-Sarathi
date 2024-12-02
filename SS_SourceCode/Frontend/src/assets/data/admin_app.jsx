@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { BASE_URL } from '../../config';
 
 export const getHospitalAppointments = () => {
   const [appointments, setAppointments] = useState([]);
@@ -16,7 +17,7 @@ export const getHospitalAppointments = () => {
           throw new Error('Hospital ID not found');
         }
 
-        const response = await fetch(`http://localhost:5000/api/v1/hospitals/get-hospital-appointments/${hospitalId}`);
+        const response = await fetch(`${BASE_URL}/api/v1/hospitals/get-hospital-appointments/${hospitalId}`);
         
         const data = await response.json();
         console.log(data);
